@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+storage/*
+!storage/.gitkeep
+.env
+.env.*
+*.log
+Dockerfile*
+compose*.yaml
+README_ONBOARDING_SNIPPET.md
