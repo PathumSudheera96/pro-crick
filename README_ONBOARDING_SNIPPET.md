@@ -1,6 +1,6 @@
-# Pro-Crick
+# README Quick-Start Snippet
 
-Pro-Crick is a cricket player agency website and custom CMS built with Next.js, Payload CMS, PostgreSQL, and Tailwind CSS.
+Use this as the local-development section of the final `README.md` after Codex bootstraps the project.
 
 ## Local Development
 
@@ -13,7 +13,7 @@ Prerequisites:
 Clone and start:
 
 ```bash
-git clone git@github.com:PathumSudheera96/pro-crick.git
+git clone <REPOSITORY_URL>
 cd pro-crick
 cp .env.example .env
 docker compose up --build
@@ -32,14 +32,6 @@ Then open:
 - Admin: `http://localhost:3000/admin`
 
 See `DEVELOPMENT_SETUP.md` for migrations, seed data, troubleshooting, and complete onboarding instructions.
-
-Useful checks:
-
-```bash
-docker compose exec app pnpm lint
-docker compose exec app pnpm typecheck
-docker compose exec app pnpm build
-```
 
 ## Contributing
 

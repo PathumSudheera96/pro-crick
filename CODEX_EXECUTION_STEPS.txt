@@ -1,0 +1,2778 @@
+PRO-CRICK — CODEX EXECUTION STEPS
+===================================
+
+Purpose
+-------
+This file contains the recommended Codex execution sequence for the Pro-Crick project.
+
+Project stack:
+- Next.js
+- Payload CMS
+- PostgreSQL
+- TypeScript
+- Tailwind CSS
+- pnpm
+- GitHub
+- Docker Compose for standard local development
+- cPanel production hosting
+- Local persistent storage for normal images/PDFs in V1
+- YouTube/Vimeo embeds for videos
+
+IMPORTANT WORKFLOW RULE
+-----------------------
+Do NOT give Codex this entire file and ask it to execute everything at once.
+
+Use ONE numbered step at a time.
+
+Recommended workflow for every step:
+
+1. Make sure AGENTS.md exists in the repository root.
+2. Open a new Codex task/branch.
+3. Copy ONE prompt from this document.
+4. Let Codex inspect the repository before editing.
+5. Review the implementation plan if requested.
+6. Let Codex implement only that step.
+7. Review the diff.
+8. Run/check:
+   - pnpm lint
+   - pnpm typecheck
+   - pnpm test (if available)
+   - pnpm build
+9. Fix issues before moving to the next step.
+10. Commit/merge the completed step.
+11. Start the next step on the updated codebase.
+
+Do not continue to a later stage while the current stage has known build, migration,
+security, or data-model problems.
+
+======================================================================
+STEP 00 — ARCHITECTURE REVIEW ONLY
+======================================================================
+
+Goal:
+Allow Codex to understand the project before writing application code.
+
+Prompt:
+
+Read AGENTS.md completely before doing anything.
+
+We are beginning development of the Pro-Crick website and custom CMS.
+
+Do NOT write or modify application code in this task.
+
+Inspect the repository and prepare a V1 implementation plan based on AGENTS.md.
+
+The planned stack is:
+
+- Next.js App Router
+- TypeScript
+- Payload CMS
+- PostgreSQL
+- Tailwind CSS
+- pnpm
+- GitHub
+- Docker Compose for standard local development
+- cPanel production hosting
+
+The V1 system needs:
+
+CMS:
+- Users and roles
+- Media
+- Players
+- Playing Roles
+- Countries / Nationalities
+- Clubs / Teams
+- Pages
+- Page blocks
+- Testimonials
+- Enquiries
+- Player Applications
+- Redirects
+- Header
+- Footer
+- Site Settings
+
+Frontend:
+- Homepage
+- Players directory
+- Player profile pages
+- About
+- Services
+- Contact
+- Player application page
+- Privacy / Terms pages
+- CMS-managed navigation and footer
+
+SEO:
+- Meta titles
+- Meta descriptions
+- Canonical URLs
+- Open Graph
+- sitemap.xml
+- robots.txt
+- structured data
+- redirects
+- 404 handling
+
+Prepare a staged implementation plan covering:
+
+1. repository structure
+2. Payload architecture
+3. PostgreSQL data model
+4. authentication and access control
+5. media handling
+6. Players collection
+7. reusable player taxonomies
+8. Pages and blocks
+9. Globals
+10. frontend architecture
+11. player search/filtering
+12. player profiles
+13. enquiries
+14. player applications
+15. SEO
+16. migrations
+17. testing
+18. security
+19. performance
+20. cPanel deployment
+
+Identify any architectural decisions that should be finalized before implementation.
+
+Do not edit files.
+
+======================================================================
+STEP 01 — INITIAL PROJECT BOOTSTRAP
+======================================================================
+
+Goal:
+Create the initial working Next.js + Payload application.
+
+Prompt:
+
+Read AGENTS.md before making changes.
+
+Implement STEP 01 only: initial project bootstrap.
+
+Requirements:
+
+- Use Next.js App Router.
+- Use TypeScript.
+- Use Payload CMS.
+- Use PostgreSQL.
+- Use pnpm.
+- Use Tailwind CSS.
+- Keep Payload CMS and the public frontend in the same Next.js application.
+- Configure PostgreSQL using environment variables.
+- Docker Compose must be the standard local development environment.
+- Create `compose.yaml` with `app` and `db` services.
+- Create `Dockerfile.dev`.
+- Create `.dockerignore`.
+- Configure a pinned PostgreSQL image and database health check.
+- Use a persistent named volume for PostgreSQL development data.
+- Configure a documented persistent local upload path/volume.
+- Use bind-mounted source code for development/hot reload.
+- Do not depend on host `node_modules`.
+- Do not put secrets directly in Compose files.
+- Create a safe .env.example with placeholders only.
+- Do not commit secrets.
+- Establish a clean folder structure consistent with AGENTS.md.
+- Add basic README development instructions if they do not already exist.
+- Do NOT implement Players, Pages, taxonomies, enquiries, applications, or public site features yet.
+
+The main success criteria are:
+
+- `docker compose up --build` can start the local stack
+- the `db` service becomes healthy
+- the app connects to PostgreSQL using the Docker service hostname
+- development server can start
+- Payload loads
+- /admin can be reached
+- PostgreSQL data persists after a normal container restart
+- local uploads use the documented persistent development path
+- TypeScript is valid
+- production build succeeds
+
+Before editing:
+1. Inspect the current repository.
+2. State the implementation plan.
+
+After implementation:
+1. Run available lint/typecheck/build commands.
+2. Review your own diff.
+3. List all files created or changed.
+4. List required environment variables.
+5. Document exact fresh-clone Docker commands in `DEVELOPMENT_SETUP.md`.
+6. Update `CONTRIBUTING.md` if collaboration/setup behavior changed.
+7. Report any unresolved setup issues.
+
+Do not start STEP 01A.
+
+
+======================================================================
+STEP 01A — FRESH-CLONE AND SECOND-DEVELOPER ONBOARDING VALIDATION
+======================================================================
+
+Goal:
+Prove that the repository can be shared with another developer without machine-specific setup.
+
+Prompt:
+
+Read:
+
+- AGENTS.md
+- PROJECT_SPEC.md
+- PLANS.md
+- DEVELOPMENT_SETUP.md
+- CONTRIBUTING.md
+
+Implement/review STEP 01A only: local Docker onboarding validation.
+
+Do not add product features.
+
+Validate the repository as if you are a second developer starting from a fresh clone.
+
+The documented onboarding must require only:
+
+- Git
+- Docker / Docker Compose
+- repository access
+- `.env` values appropriate for development
+
+Validate/document this sequence:
+
+1. clone repository
+2. copy `.env.example` to `.env`
+3. run `docker compose up --build`
+4. verify PostgreSQL health
+5. run required migrations
+6. initialize/create the supported local CMS admin
+7. open the public site
+8. open `/admin`
+9. create/read a basic CMS record
+10. restart the stack
+11. confirm PostgreSQL data persists
+12. run lint/typecheck/tests/build from the app container
+
+Requirements:
+
+- no host PostgreSQL installation
+- no host `node_modules`
+- no dependency on another developer's Docker volumes
+- no production credentials
+- no production database dump
+- no undocumented manual setup
+
+Review:
+
+- compose.yaml
+- Dockerfile.dev
+- .dockerignore
+- .gitignore
+- .env.example
+- DEVELOPMENT_SETUP.md
+- CONTRIBUTING.md
+
+Fix setup/documentation issues that prevent reliable onboarding.
+
+Do not implement Players, Pages, or other product functionality.
+
+At completion, report PASS / FAIL for each onboarding step.
+
+Do not start STEP 02.
+
+======================================================================
+STEP 02 — DATABASE CONNECTION AND MIGRATION FOUNDATION
+======================================================================
+
+Goal:
+Ensure PostgreSQL and migrations are handled correctly from the beginning.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 02 only: PostgreSQL and migration foundation.
+
+Requirements:
+
+- Confirm Payload is configured with its PostgreSQL adapter.
+- Keep DATABASE_URI in environment variables.
+- Establish the migrations directory and migration workflow.
+- Add scripts needed for creating/running migrations if appropriate for the installed Payload version.
+- Update README with development and production migration instructions.
+- Do not hard-code cPanel credentials or paths.
+- Do not reset or destroy databases.
+- Do not create application collections yet beyond anything Payload requires.
+
+Document:
+
+- how a developer creates a migration from the Docker `app` service
+- how a migration is applied locally through Docker Compose
+- how migrations will be applied during cPanel deployment
+- what must NEVER be run casually against production
+
+Run relevant checks and build.
+
+Do not start STEP 03.
+
+======================================================================
+STEP 03 — USERS, AUTHENTICATION, AND ROLES
+======================================================================
+
+Goal:
+Create secure CMS authentication and initial roles.
+
+Prompt:
+
+Read AGENTS.md carefully.
+
+Implement STEP 03 only: Users, authentication, and access control.
+
+Create a Users collection using Payload authentication.
+
+Roles:
+
+1. administrator
+2. editor
+
+Administrator should have full CMS access.
+
+Editor should be allowed to manage normal content such as:
+
+- Players
+- Pages
+- Testimonials
+- Media
+- Enquiries
+- Player Applications
+
+Editor must NOT be allowed to:
+
+- manage administrator accounts
+- change sensitive system configuration
+- access secrets
+- bypass protected access rules
+
+Requirements:
+
+- enforce permissions server-side
+- do not rely only on hidden admin UI
+- make role handling reusable for future collections
+- keep the implementation simple
+- add tests for important access rules if the project test setup supports it
+
+Do not build player/customer/club login functionality.
+
+Before implementation, show the intended permission model.
+
+After implementation:
+- run lint
+- run typecheck
+- run tests if available
+- run build
+- summarize security impact
+
+Do not start STEP 04.
+
+======================================================================
+STEP 04 — MEDIA COLLECTION
+======================================================================
+
+Goal:
+Create safe image/PDF management.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 04 only: Media.
+
+Create a Payload Media collection supporting:
+
+- image uploads
+- PDFs
+- title
+- alt text
+- caption where useful
+- MIME/type restrictions
+- file metadata where Payload provides it
+
+V1 storage assumptions:
+
+- normal website images can use persistent local server storage
+- player photos can use persistent local server storage
+- player CV PDFs can use persistent local server storage
+- large video uploads are NOT supported
+- videos will use YouTube/Vimeo URLs
+
+Requirements:
+
+- reject dangerous/unnecessary upload types
+- do not expose private server filesystem paths
+- keep the storage implementation compatible with later migration to object storage if needed
+- document the persistent-upload requirement for cPanel
+
+Do not implement player fields yet.
+
+Run all relevant checks.
+
+Do not start STEP 05.
+
+======================================================================
+STEP 05 — REUSABLE PLAYER TAXONOMIES
+======================================================================
+
+Goal:
+Create structured reusable entities needed for player filtering.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 05 only: reusable player taxonomy collections.
+
+Create collections for:
+
+1. PlayingRoles
+2. Countries
+3. Clubs
+
+Each should have, where appropriate:
+
+- name
+- slug
+- active/status field if useful
+- created/updated timestamps
+- clean admin labels
+
+Requirements:
+
+- slugs must be unique
+- relationships should be suitable for the future Players collection
+- frequently queried fields should be structured/indexable where appropriate
+- do not introduce unnecessary complexity
+- do not create frontend filters yet
+- do not use uncontrolled free text for values that will later be used as player filters
+
+Run lint, typecheck, tests if available, and build.
+
+Do not start STEP 06.
+
+======================================================================
+STEP 06 — REUSABLE SEO FIELD GROUP
+======================================================================
+
+Goal:
+Build a reusable SEO schema before Pages and Players use it.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 06 only: reusable SEO field group/utilities.
+
+Create reusable CMS fields for:
+
+- metaTitle
+- metaDescription
+- canonicalUrl
+- ogTitle
+- ogDescription
+- ogImage
+- index
+- follow
+
+Requirements:
+
+- this field group will later be reused by Pages and Players
+- use sensible defaults for index/follow
+- keep field names stable
+- add validation where appropriate
+- do not build sitemap or frontend metadata generation yet
+- do not duplicate SEO field definitions in multiple collections
+
+If helper utilities are appropriate, create them cleanly.
+
+Run checks and build.
+
+Do not start STEP 07.
+
+======================================================================
+STEP 07 — PLAYERS COLLECTION
+======================================================================
+
+Goal:
+Create the main business data model.
+
+Prompt:
+
+Read AGENTS.md carefully.
+
+Implement STEP 07 only: Players collection.
+
+Players are the core business entity.
+
+Create structured fields for:
+
+IDENTITY
+- fullName
+- slug
+- profileImage
+- heroImage
+- gallery
+- shortIntroduction
+- biography
+
+PERSONAL INFORMATION
+- dateOfBirth
+- nationality
+- gender
+- currentLocation
+
+CRICKET INFORMATION
+- primaryRole
+- battingStyle
+- bowlingStyle
+- currentClub
+- previousClubs
+- teamsRepresented
+
+AVAILABILITY
+- playerStatus
+- availabilityDate
+- eligibleCountries
+
+Suggested player statuses:
+- available
+- contracted
+- unavailable
+
+CAREER
+- careerHighlights
+- achievements
+- playingExperience
+
+STATISTICS
+- matches
+- runs
+- battingAverage
+- highestScore
+- hundreds
+- fifties
+- wickets
+- bowlingAverage
+- bestBowling
+- economyRate
+
+EXTERNAL PROFILES / MEDIA
+- youtubeVideos
+- vimeoVideos
+- instagramUrl
+- espnCricinfoUrl
+- cricbuzzUrl
+- playerCv
+
+ADMINISTRATION
+- featured
+- sortOrder
+- publishing status
+
+SEO
+- reuse the SEO field group already created
+
+Requirements:
+
+- use PlayingRoles, Countries, and Clubs relationships where appropriate
+- use structured fields for filter-critical values
+- do not create a full cricket scoring engine
+- avoid unnecessary nested complexity
+- make admin groups/tabs easy to use
+- add useful validation
+- make slugs stable and unique
+- consider future frontend query/filter performance
+- do not build the public player page yet
+
+If this schema change requires a migration, create it using the established migration process.
+
+Run all checks and build.
+
+Do not start STEP 08.
+
+======================================================================
+STEP 08 — PLAYER SEED / DEVELOPMENT SAMPLE DATA
+======================================================================
+
+Goal:
+Create realistic development content for frontend work.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 08 only: development sample data.
+
+Create a safe development-only way to add several sample Players with varied data.
+
+Include different examples of:
+
+- playing roles
+- nationalities
+- availability statuses
+- clubs
+- eligible countries
+- batting/bowling statistics
+- featured/non-featured players
+
+Requirements:
+
+- sample data must NEVER run automatically in production
+- do not place development seed data into production migrations
+- make the seed process explicit
+- document how to run it locally
+- use placeholder media safely if needed
+
+Do not build frontend pages yet.
+
+Run relevant checks.
+
+Do not start STEP 09.
+
+======================================================================
+STEP 09 — TESTIMONIALS COLLECTION
+======================================================================
+
+Goal:
+Create reusable testimonials for marketing pages.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 09 only: Testimonials collection.
+
+Suggested fields:
+
+- name
+- role/title
+- organization/club
+- quote
+- photo
+- optional country
+- featured
+- sortOrder
+- publishing status
+
+Requirements:
+
+- keep it reusable by page blocks
+- reuse Media relationships where appropriate
+- do not over-engineer
+- include access control consistent with Users roles
+
+Run relevant checks.
+
+Do not start STEP 10.
+
+======================================================================
+STEP 10 — PAGE BLOCK SCHEMAS
+======================================================================
+
+Goal:
+Create a controlled CMS page builder.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 10 only: page block schemas.
+
+Create reusable Payload blocks for:
+
+1. Hero
+2. RichText
+3. ImageText
+4. FeaturedPlayers
+5. Stats
+6. Testimonials
+7. FAQ
+8. CTA
+9. Contact
+
+Requirements:
+
+- this is a controlled page builder, NOT an Elementor clone
+- administrators can reorder approved blocks
+- avoid arbitrary HTML/JS fields
+- each block must have a clean stable schema
+- reuse relationships to Players, Media, and Testimonials where appropriate
+- provide validation and sensible admin descriptions
+- avoid giving editors low-level design controls unless necessary
+
+Do not build frontend rendering yet.
+
+Run checks and build.
+
+Do not start STEP 11.
+
+======================================================================
+STEP 11 — PAGES COLLECTION
+======================================================================
+
+Goal:
+Create CMS-manageable website pages.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 11 only: Pages collection.
+
+Create fields for:
+
+- title
+- slug
+- publishing status
+- page layout using the approved blocks
+- reusable SEO fields
+
+Requirements:
+
+- slugs must be stable and unique
+- support Draft / Published / Archived or the established publishing model
+- editors must be able to manage pages
+- do not allow arbitrary executable code
+- consider routing conflicts with reserved application routes such as /players and /apply
+- do not render frontend pages yet
+
+Create a migration if needed.
+
+Run all relevant checks.
+
+Do not start STEP 12.
+
+======================================================================
+STEP 12 — GLOBAL SITE SETTINGS
+======================================================================
+
+Goal:
+Move site-wide editable values into CMS globals.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 12 only: global site configuration.
+
+Create Payload globals for:
+
+1. SiteSettings
+2. Header
+3. Footer
+
+SiteSettings should support:
+
+- siteName
+- companyName
+- logo
+- favicon
+- defaultMetaTitle
+- defaultMetaDescription
+- defaultOgImage
+- email
+- phone
+- WhatsApp
+- address
+- Facebook
+- Instagram
+- LinkedIn
+- YouTube
+- TikTok where useful
+
+Header should support:
+
+- logo override if needed
+- navigation items
+- optional CTA
+
+Footer should support:
+
+- description
+- navigation groups
+- contact details
+- social links
+- copyright text
+
+Requirements:
+
+- do not store database credentials or private API secrets here
+- do not hard-code information that should be CMS-managed
+- enforce appropriate access permissions
+
+Do not build frontend Header/Footer yet.
+
+Run checks and build.
+
+Do not start STEP 13.
+
+======================================================================
+STEP 13 — FRONTEND DESIGN FOUNDATION
+======================================================================
+
+Goal:
+Create the visual system before complete pages.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 13 only: public frontend design foundation.
+
+Brand direction:
+
+Pro-Crick is a premium professional international cricket player agency.
+
+Visual direction:
+- white-dominant
+- black typography/details
+- cricket-ball red accent
+- premium
+- modern
+- clean
+- strong player photography
+- generous whitespace
+- sports agency, NOT a cricket club theme
+
+Create reusable frontend foundations for:
+
+- typography
+- container widths
+- spacing
+- buttons
+- links
+- cards
+- badges
+- form controls
+- responsive breakpoints
+- accessibility/focus states
+- basic animation rules
+- section spacing
+
+Requirements:
+
+- use Tailwind consistently
+- mobile-first
+- accessible semantic HTML
+- avoid unnecessary client components
+- avoid excessive animation
+- do not build full individual pages yet
+- do not hard-code CMS content into shared design components
+
+Run build and relevant checks.
+
+Do not start STEP 14.
+
+======================================================================
+STEP 14 — HEADER AND FOOTER FRONTEND
+======================================================================
+
+Goal:
+Connect CMS-managed site navigation to the public frontend.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 14 only: public Header and Footer.
+
+Requirements:
+
+- read data from Payload Header/Footer/SiteSettings globals
+- responsive desktop navigation
+- responsive mobile navigation
+- accessible menu interactions
+- logo
+- navigation
+- CTA if configured
+- footer navigation
+- contact details
+- social links
+- copyright
+
+Do not duplicate CMS-managed values in hard-coded frontend constants.
+
+Handle missing optional data gracefully.
+
+Run accessibility-minded checks and build.
+
+Do not start STEP 15.
+
+======================================================================
+STEP 15 — GENERIC CMS PAGE RENDERER
+======================================================================
+
+Goal:
+Render Payload Pages and blocks on public routes.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 15 only: CMS page rendering.
+
+Requirements:
+
+- create frontend renderers for the approved page blocks
+- render CMS Pages by slug
+- use Server Components where practical
+- handle Draft/Published behavior correctly
+- normal public visitors must not receive unpublished pages
+- render responsive sections
+- handle missing pages with proper 404 behavior
+- avoid unsafe rendering of uncontrolled content
+- do not implement Player directory/profile routes in this step
+
+Supported blocks:
+
+- Hero
+- RichText
+- ImageText
+- FeaturedPlayers
+- Stats
+- Testimonials
+- FAQ
+- CTA
+- Contact
+
+Run lint, typecheck, tests if available, and build.
+
+Do not start STEP 16.
+
+======================================================================
+STEP 16 — HOMEPAGE
+======================================================================
+
+Goal:
+Build the public homepage using CMS data.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 16 only: Homepage.
+
+Build the homepage using the existing CMS page/block system and design system.
+
+Expected homepage content capability:
+
+- Hero
+- agency introduction
+- featured players
+- services / what we do
+- statistics / counters
+- testimonials
+- CTA
+
+Requirements:
+
+- content should come from Payload rather than being permanently hard-coded
+- maintain the Pro-Crick brand direction
+- mobile responsive
+- optimized images
+- accessible markup
+- do not duplicate block logic unnecessarily
+
+If the existing Pages architecture already supports homepage selection cleanly,
+use it rather than introducing a second page system.
+
+Run all checks and build.
+
+Do not start STEP 17.
+
+======================================================================
+STEP 17 — PLAYER DIRECTORY DATA QUERY LAYER
+======================================================================
+
+Goal:
+Build efficient server-side player querying before the UI.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 17 only: player directory query layer.
+
+Create reusable server-side query logic supporting:
+
+- keyword search
+- playing role
+- nationality
+- availability
+- eligible country
+- gender if the current schema/business requirements include it
+- pagination
+- sorting
+
+Requirements:
+
+- do not fetch the entire player database to filter in the browser
+- use structured Payload/PostgreSQL queries
+- keep query parameters validated
+- make query behavior reusable by the player directory page
+- consider indexes/performance for commonly filtered fields
+- handle invalid filter values safely
+- do not build the final visual page yet
+
+Add tests for query behavior if practical.
+
+Run all checks.
+
+Do not start STEP 18.
+
+======================================================================
+STEP 18 — PLAYER DIRECTORY FRONTEND
+======================================================================
+
+Goal:
+Build /players.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 18 only: public Players directory.
+
+Route:
+- /players
+
+Requirements:
+
+- premium responsive player grid
+- player cards
+- player photo
+- player name
+- primary role
+- nationality
+- availability badge
+- View Profile CTA
+- keyword search
+- Playing Role filter
+- Nationality filter
+- Availability filter
+- Eligible Country filter
+- pagination
+- empty results state
+- loading behavior where relevant
+- preserve useful filter state in the URL/query string
+- use the query layer created in the previous step
+- do not load all records client-side
+
+Accessibility:
+- proper labels
+- keyboard usable filters
+- semantic navigation/pagination
+
+Performance:
+- optimized images
+- efficient queries
+- avoid unnecessary client-side JavaScript
+
+Run all checks and build.
+
+Do not start STEP 19.
+
+======================================================================
+STEP 19 — PLAYER PROFILE QUERY AND ROUTING
+======================================================================
+
+Goal:
+Create safe player routing/data access.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 19 only: player profile data/query layer and route foundation.
+
+Route:
+- /players/[slug]
+
+Requirements:
+
+- retrieve a Player by slug
+- published public players only
+- unpublished/missing players must resolve safely
+- use proper 404 behavior
+- create reusable player query/helper logic
+- retrieve only fields needed by the public page where practical
+- prepare related-player querying based on structured attributes
+- do not build the complete visual profile yet
+
+Run checks.
+
+Do not start STEP 20.
+
+======================================================================
+STEP 20 — PLAYER PROFILE FRONTEND
+======================================================================
+
+Goal:
+Build complete player profile pages.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 20 only: Player profile frontend.
+
+Route:
+- /players/[slug]
+
+Build sections for:
+
+- player hero
+- name
+- photo
+- role
+- nationality
+- availability
+- short introduction
+- biography
+- cricket information
+- current/previous clubs
+- career highlights
+- achievements
+- statistics
+- videos
+- image gallery
+- player CV download if available
+- Enquire About Player CTA
+- related players
+
+Requirements:
+
+- only display sections that have meaningful data
+- responsive
+- accessible
+- video embeds must use YouTube/Vimeo URLs rather than local video files
+- optimized images
+- clean premium agency design
+- do not hard-code individual player content
+
+Run all checks and build.
+
+Do not start STEP 21.
+
+======================================================================
+STEP 21 — ENQUIRIES COLLECTION
+======================================================================
+
+Goal:
+Store website/player enquiries in the CMS.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 21 only: Enquiries collection.
+
+Fields:
+
+- referenceNumber
+- relatedPlayer
+- name
+- clubOrOrganization
+- country
+- email
+- phone
+- message
+- status
+- createdAt
+
+Statuses:
+- new
+- contacted
+- in_progress
+- closed
+
+Requirements:
+
+- admin/editor workflow consistent with AGENTS.md
+- public users must not get unrestricted collection write access
+- do not expose sensitive internal CMS data
+- make reference numbers stable/readable
+- prepare the collection for a controlled public form endpoint in the next step
+
+Run all checks.
+
+Do not start STEP 22.
+
+======================================================================
+STEP 22 — PUBLIC ENQUIRY FORMS
+======================================================================
+
+Goal:
+Connect public forms safely to Enquiries.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 22 only: public enquiry forms.
+
+Support:
+
+1. general website enquiry
+2. player-specific enquiry
+
+Requirements:
+
+- server-side validation
+- email validation
+- required-field validation
+- controlled errors
+- no stack traces to public users
+- basic abuse/spam protection appropriate to our hosting
+- related Player relationship when submitted from a player profile
+- successful submissions stored in Enquiries
+- do not expose Payload admin APIs unnecessarily
+- good UX for loading/success/error states
+- accessible form labels/messages
+
+If email notifications are NOT yet configured, keep submission storage working and
+document email notifications as a later optional integration rather than inventing credentials.
+
+Run security-focused checks and build.
+
+Do not start STEP 23.
+
+======================================================================
+STEP 23 — PLAYER APPLICATIONS COLLECTION
+======================================================================
+
+Goal:
+Create a separate player recruitment/application workflow.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 23 only: PlayerApplications collection.
+
+Suggested fields:
+
+- applicantName
+- email
+- phone
+- nationality
+- dateOfBirth
+- currentLocation
+- primaryRole
+- battingStyle
+- bowlingStyle
+- currentClub
+- teams / playing experience
+- cricket statistics
+- biography
+- profilePhoto
+- video links
+- playerCv
+- applicationStatus
+
+Statuses:
+- new
+- under_review
+- approved
+- rejected
+
+Requirements:
+
+- this is separate from Enquiries
+- approved applications must NOT automatically become public players
+- structure fields so a future Convert Application -> Player workflow is practical
+- secure access controls
+- safe file relationships/uploads
+- do not implement conversion yet
+
+Run checks and migrations if needed.
+
+Do not start STEP 24.
+
+======================================================================
+STEP 24 — PUBLIC PLAYER APPLICATION FORM
+======================================================================
+
+Goal:
+Build /apply.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 24 only: public player application experience.
+
+Route:
+- /apply
+
+Requirements:
+
+- application form matching the PlayerApplications schema
+- clear field grouping
+- mobile responsive
+- accessible
+- server-side validation
+- safe file handling
+- controlled upload types/sizes
+- video links should be URLs rather than video uploads
+- success/error states
+- basic spam/abuse protection
+- do not automatically create a public Player
+- do not expose internal errors
+
+Run security-focused checks and build.
+
+Do not start STEP 25.
+
+======================================================================
+STEP 25 — CONVERT APPLICATION TO PLAYER
+======================================================================
+
+Goal:
+Reduce duplicate admin data entry.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 25 only: Convert Player Application to Player.
+
+Requirements:
+
+- available only to authorized CMS users
+- convert/copy an application into a NEW Player draft
+- map compatible fields safely
+- do not publish automatically
+- preserve the original application
+- prevent accidental duplicate conversion where practical
+- record/link the created Player to the originating application if useful
+- show clear admin feedback
+- do not overwrite an existing Player
+
+Before implementing, describe the field mapping.
+
+Add tests for important conversion behavior if practical.
+
+Run all checks.
+
+Do not start STEP 26.
+
+======================================================================
+STEP 26 — SEO METADATA GENERATION
+======================================================================
+
+Goal:
+Connect CMS SEO fields to Next.js metadata.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 26 only: metadata generation.
+
+Use the existing reusable SEO fields.
+
+Implement metadata for:
+
+- CMS Pages
+- Player profiles
+- important static routes where needed
+
+Fallback behavior:
+
+- metaTitle should fall back to content title/player name plus Pro-Crick branding
+- metaDescription should fall back to meaningful summary content where available
+- canonical URL should default correctly
+- ogTitle falls back to metaTitle
+- ogDescription falls back to metaDescription
+- ogImage falls back to the site default
+- published public content should index/follow by default
+
+Requirements:
+
+- use the supported Next.js metadata APIs
+- avoid duplicated metadata logic
+- do not generate misleading descriptions
+- unpublished/private content must not accidentally become indexable
+
+Run checks and build.
+
+Do not start STEP 27.
+
+======================================================================
+STEP 27 — SITEMAP, ROBOTS, CANONICALS, AND STRUCTURED DATA
+======================================================================
+
+Goal:
+Complete core technical SEO.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 27 only: technical SEO foundations.
+
+Implement:
+
+- sitemap.xml
+- robots.txt
+- canonical URLs
+- breadcrumb structured data where appropriate
+- Organization structured data
+- WebSite structured data where appropriate
+- profile/person/player-related structured data only where technically appropriate and truthful
+- clean 404 behavior
+- noindex handling for content configured as noindex
+
+Requirements:
+
+- include published Pages
+- include published Players
+- exclude drafts/private/admin routes
+- do not invent unsupported structured-data claims
+- avoid duplicate canonicals
+- keep implementation maintainable
+
+Run all checks and build.
+
+Do not start STEP 28.
+
+======================================================================
+STEP 28 — REDIRECTS COLLECTION
+======================================================================
+
+Goal:
+Give administrators basic SEO-safe URL redirect management.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 28 only: Redirects.
+
+Create a Redirects collection with:
+
+- fromPath
+- toPath
+- redirectType
+- enabled
+
+Supported types:
+- 301
+- 302
+
+Requirements:
+
+- validate fromPath/toPath
+- prevent obvious self-redirects
+- prevent obvious redirect loops where practical
+- only authorized CMS users can manage redirects
+- do not support arbitrary executable redirect logic
+
+Do not connect it to frontend routing yet.
+
+Run checks.
+
+Do not start STEP 29.
+
+======================================================================
+STEP 29 — REDIRECT RUNTIME
+======================================================================
+
+Goal:
+Apply CMS redirects safely.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement STEP 29 only: redirect runtime.
+
+Requirements:
+
+- use enabled redirect records
+- support 301 and 302
+- avoid turning every request into an inefficient full-table query if a better safe approach exists
+- prevent redirect loops
+- preserve query strings where appropriate
+- ensure admin/API/internal routes are not accidentally hijacked
+- handle invalid redirect data safely
+- consider caching only if justified and safe
+
+Add tests for:
+
+- valid 301
+- valid 302
+- disabled redirect
+- self redirect
+- unknown path
+
+Run all checks and build.
+
+Do not start STEP 30.
+
+======================================================================
+STEP 30 — SEARCH / FILTER PERFORMANCE REVIEW
+======================================================================
+
+Goal:
+Review player filtering before production data grows.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not add new product features.
+
+Review the Players schema and /players querying for PostgreSQL performance.
+
+Inspect:
+
+- keyword search behavior
+- playing role filtering
+- nationality filtering
+- availability filtering
+- eligible-country filtering
+- pagination
+- sorting
+- relationship depth
+- query field selection
+- likely indexes
+- N+1 query risks
+
+First provide a prioritized performance report.
+
+Then implement only safe P0/P1 improvements that do not require changing public behavior.
+
+If a database index or schema change is required:
+- explain it
+- create the appropriate migration
+- do not perform destructive changes
+
+Run relevant checks.
+
+Do not start STEP 31.
+
+======================================================================
+STEP 31 — ACCESSIBILITY REVIEW
+======================================================================
+
+Goal:
+Perform a focused accessibility pass.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not add new features.
+
+Perform an accessibility review of the public site.
+
+Review:
+
+- semantic headings
+- navigation
+- mobile menu
+- keyboard navigation
+- focus visibility
+- forms
+- error messages
+- labels
+- filters
+- pagination
+- image alt handling
+- color contrast
+- interactive controls
+- video embeds
+- skip navigation if appropriate
+
+First produce a prioritized issue list.
+
+Then fix clear P0/P1 accessibility issues.
+
+Do not redesign unrelated visual elements.
+
+Run all relevant checks.
+
+Do not start STEP 32.
+
+======================================================================
+STEP 32 — RESPONSIVE UI REVIEW
+======================================================================
+
+Goal:
+Polish mobile/tablet/desktop behavior.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not add new functionality.
+
+Review the public site at representative responsive sizes.
+
+Focus on:
+
+- Header
+- mobile navigation
+- Homepage
+- Players filters
+- Player grid
+- Player profile
+- CMS page blocks
+- enquiry forms
+- application form
+- Footer
+
+Fix:
+
+- overflow
+- broken spacing
+- unusable tap targets
+- clipped content
+- awkward images
+- table/stat layout problems
+- mobile filter UX
+- form layout issues
+
+Preserve the established design system.
+
+Run checks and build.
+
+Do not start STEP 33.
+
+======================================================================
+STEP 33 — SECURITY REVIEW
+======================================================================
+
+Goal:
+Perform a production security audit.
+
+Prompt:
+
+Read AGENTS.md carefully.
+
+Do NOT add product features.
+
+Perform a security review covering:
+
+- Payload authentication
+- role permissions
+- collection access
+- public form endpoints
+- server-side validation
+- file uploads
+- secrets
+- environment variables
+- error responses
+- redirect handling
+- XSS risks
+- unsafe HTML
+- injection risks
+- database access
+- unpublished content exposure
+- admin route protection
+- CSRF considerations where relevant
+- rate-limit/spam protection
+- dependency risk
+
+First return findings grouped as:
+
+P0 Critical
+P1 High
+P2 Medium
+P3 Low
+
+Do NOT fix anything in the first response/task unless explicitly instructed.
+
+======================================================================
+STEP 34 — SECURITY FIXES
+======================================================================
+
+Goal:
+Fix serious findings from Step 33.
+
+Prompt:
+
+Read AGENTS.md.
+
+Use the security review findings from the previous completed step.
+
+Fix P0 and P1 security findings only.
+
+Requirements:
+
+- do not introduce unrelated refactors
+- preserve expected business behavior
+- add tests where practical
+- document any deployment/environment changes
+- if a fix requires a breaking schema/database change, explain it before applying it
+- verify public forms, file uploads, and CMS permissions after changes
+
+Run:
+- lint
+- typecheck
+- tests
+- build
+
+Summarize each security issue fixed.
+
+Do not start STEP 35.
+
+======================================================================
+STEP 35 — ERROR HANDLING AND EMPTY STATES
+======================================================================
+
+Goal:
+Ensure polished behavior when data is missing or systems fail.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement/review production-grade empty and error states.
+
+Cover:
+
+- no Players found
+- invalid player slug
+- missing player image
+- optional statistics missing
+- no related players
+- empty page blocks
+- form validation failures
+- server submission failure
+- CMS data unavailable
+- 404 page
+- invalid redirect
+- unavailable optional settings
+
+Requirements:
+
+- no raw stack traces
+- no broken layouts
+- meaningful user messages
+- graceful degradation
+- log server issues appropriately without exposing secrets
+
+Do not add unrelated features.
+
+Run checks and build.
+
+Do not start STEP 36.
+
+======================================================================
+STEP 36 — AUTOMATED TESTING PASS
+======================================================================
+
+Goal:
+Add useful tests for critical business behavior.
+
+Prompt:
+
+Read AGENTS.md.
+
+Review the existing test coverage.
+
+Add or improve automated tests for critical V1 flows where practical:
+
+- Users role access
+- Player query/filtering
+- Player slug routing
+- unpublished Player access
+- enquiry validation
+- Player Application validation
+- Convert Application -> Player
+- SEO metadata fallback behavior
+- redirects
+- CMS access control
+
+Requirements:
+
+- prioritize business-critical behavior
+- avoid brittle tests tied to cosmetic HTML details
+- do not create fake passing tests
+- do not use production credentials/data
+- document how tests are run
+
+Run the complete test suite and build.
+
+Do not start STEP 37.
+
+======================================================================
+STEP 37 — PRODUCTION READINESS AUDIT
+======================================================================
+
+Goal:
+Perform a complete review before deployment.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do NOT add new product features.
+
+Perform a production-readiness audit of the complete Pro-Crick application.
+
+Review:
+
+1. build
+2. TypeScript
+3. lint
+4. automated tests
+5. Payload configuration
+6. PostgreSQL migrations
+7. authentication
+8. authorization
+9. Players data model
+10. Pages
+11. Media
+12. Enquiries
+13. Player Applications
+14. public forms
+15. redirects
+16. SEO
+17. sitemap/robots
+18. accessibility
+19. responsive design
+20. performance
+21. image handling
+22. errors/404s
+23. secrets
+24. environment configuration
+25. cPanel assumptions
+
+Return a prioritized report:
+
+P0 - blocks deployment
+P1 - should fix before launch
+P2 - desirable
+P3 - future improvement
+
+Do not fix items during this audit task.
+
+======================================================================
+STEP 38 — PRODUCTION READINESS FIXES
+======================================================================
+
+Goal:
+Resolve launch blockers.
+
+Prompt:
+
+Read AGENTS.md.
+
+Use the completed production-readiness audit.
+
+Fix P0 and P1 findings only.
+
+Do not introduce new features.
+
+For each fix:
+
+- explain what was wrong
+- implement the smallest safe correction
+- add/update tests where useful
+- preserve existing URLs/content
+- create safe migrations where needed
+
+At completion run:
+
+- pnpm lint
+- pnpm typecheck
+- pnpm test if configured
+- pnpm build
+
+Return a launch-blocker checklist with PASS/FAIL status.
+
+Do not deploy to cPanel in this step.
+
+======================================================================
+STEP 39 — CPANEL DEPLOYMENT RUNBOOK
+======================================================================
+
+Goal:
+Prepare exact deployment documentation before touching production.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do NOT deploy anything.
+
+Prepare a cPanel deployment runbook for this exact repository.
+
+Important:
+- Local development uses Docker Compose.
+- Do not assume cPanel production uses Docker.
+- Explain the difference between local container networking (`db`) and the production PostgreSQL host.
+
+Our production target is:
+
+- cPanel
+- Node.js application hosting
+- PostgreSQL
+- persistent filesystem
+- environment variables configured on the server
+
+Inspect package.json and the actual repository before writing commands.
+
+Document:
+
+1. required Node.js version
+2. package manager/version
+3. production environment variables
+4. PostgreSQL database/user requirements
+5. application root assumptions
+6. install command
+7. migration command
+8. build command
+9. application start command
+10. cPanel startup configuration
+11. persistent media/upload directory
+12. file permissions considerations
+13. staging-domain setup
+14. SSL/domain considerations
+15. application restart process
+16. smoke tests
+17. database backup procedure
+18. rollback procedure
+19. code rollback
+20. migration rollback considerations
+
+Do not invent cPanel paths, usernames, database names, or commands that cannot be inferred.
+
+Clearly mark every value I must obtain from cPanel as:
+
+[REQUIRED FROM CPANEL]
+
+Do not modify application code unless a tiny documentation-only change is required.
+
+======================================================================
+STEP 40 — DEPLOYMENT CONFIGURATION REVIEW
+======================================================================
+
+Goal:
+Validate real cPanel values once the developer supplies them.
+
+Prompt:
+
+Read AGENTS.md and the cPanel deployment runbook.
+
+I will provide the real cPanel configuration values separately.
+
+Do not deploy yet.
+
+Review the provided values for compatibility with the application:
+
+- Node.js version
+- application root
+- application URL
+- startup file/command
+- PostgreSQL host
+- PostgreSQL database
+- PostgreSQL username
+- environment variable support
+- upload storage path
+- memory/process limits
+
+Return:
+
+PASS
+WARNING
+BLOCKER
+
+for each item.
+
+Identify any code/config changes required before staging deployment.
+
+Do not change production.
+
+======================================================================
+STEP 41 — STAGING DEPLOYMENT PREPARATION
+======================================================================
+
+Goal:
+Prepare the repository for the first staging deployment.
+
+Prompt:
+
+Read AGENTS.md and the deployment runbook.
+
+Prepare the repository for staging deployment only.
+
+Requirements:
+
+- verify production build
+- verify migration scripts
+- verify .env.example
+- verify no secrets are committed
+- verify production start command
+- verify persistent upload configuration
+- verify sitemap/robots behavior for staging
+- staging should NOT accidentally be indexed by search engines
+- document exact manual cPanel actions required
+
+Do not deploy automatically unless I explicitly ask and the available tools/environment support it.
+
+Run all checks.
+
+======================================================================
+STEP 42 — STAGING SMOKE TEST CHECKLIST
+======================================================================
+
+Goal:
+Provide a practical staging acceptance checklist.
+
+Prompt:
+
+Read AGENTS.md.
+
+Create a staging smoke-test checklist for Pro-Crick.
+
+Include checks for:
+
+CMS:
+- admin login
+- editor login
+- permissions
+- create/edit player
+- upload image
+- upload PDF
+- create/edit page
+- navigation
+- settings
+- enquiry workflow
+- player application workflow
+- redirect workflow
+
+Frontend:
+- homepage
+- pages
+- player directory
+- player filters
+- pagination
+- player profile
+- gallery
+- videos
+- CV
+- enquiry form
+- application form
+- mobile navigation
+- 404
+
+SEO:
+- staging noindex
+- canonical behavior
+- metadata
+- sitemap behavior
+- robots.txt
+
+Infrastructure:
+- PostgreSQL persistence
+- uploads persist after app restart
+- application restart
+- error logs
+- SSL
+- environment variables
+
+Do not change code.
+
+======================================================================
+STEP 43 — CLIENT CONTENT / PRODUCTION DATA PREPARATION
+======================================================================
+
+Goal:
+Prepare for real content without corrupting production.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not change architecture.
+
+Review the current CMS fields and produce a content-entry template/checklist for the client/team.
+
+Cover:
+
+Players:
+- required fields
+- optional fields
+- image requirements
+- statistics
+- videos
+- CV
+- SEO
+
+Pages:
+- page title
+- blocks
+- images
+- CTA
+- SEO
+
+Business:
+- logo
+- favicon
+- phone
+- email
+- WhatsApp
+- address
+- social links
+
+Testimonials
+
+Legal:
+- Privacy Policy
+- Terms
+
+SEO:
+- default title
+- default description
+- default OG image
+
+Also identify which fields should be mandatory before a Player can be published.
+
+Do not modify code unless I explicitly ask after reviewing the checklist.
+
+======================================================================
+STEP 44 — FINAL SEO AUDIT
+======================================================================
+
+Goal:
+Audit SEO after real content is entered.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not add unrelated features.
+
+Perform a final technical/on-page SEO implementation audit using the current repository and CMS model.
+
+Review:
+
+- page titles
+- player meta titles
+- descriptions
+- canonicals
+- OG metadata
+- image alt data availability
+- sitemap
+- robots
+- redirects
+- 404 behavior
+- heading structure
+- internal linking
+- player URLs
+- page URLs
+- structured data
+- duplicate-content risks
+- noindex handling
+
+Return a prioritized list first.
+
+Then, only if explicitly instructed, implement technical fixes.
+
+Do not rewrite client marketing content unless asked.
+
+======================================================================
+STEP 45 — FINAL PERFORMANCE AUDIT
+======================================================================
+
+Goal:
+Check production performance before launch.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not redesign the site or add features.
+
+Audit application performance.
+
+Review:
+
+- client JavaScript
+- unnecessary client components
+- player queries
+- relationship depth
+- pagination
+- image optimization
+- fonts
+- route rendering strategy
+- caching behavior
+- expensive CMS queries
+- N+1 queries
+- large page payloads
+- video embeds
+- database indexes
+
+Return:
+
+P0
+P1
+P2
+P3
+
+recommendations.
+
+Implement only P0/P1 fixes after clearly describing them.
+
+Run build after fixes.
+
+======================================================================
+STEP 46 — PRE-LAUNCH CHECK
+======================================================================
+
+Goal:
+Final go/no-go review.
+
+Prompt:
+
+Read AGENTS.md.
+
+Perform the final pre-launch review.
+
+Do not add features.
+
+Return a checklist with PASS / FAIL / NEEDS MANUAL VERIFICATION for:
+
+APPLICATION
+- production build
+- lint
+- typecheck
+- tests
+- migrations
+
+CMS
+- admin login
+- editor permissions
+- Players
+- Pages
+- Media
+- Enquiries
+- Player Applications
+- Redirects
+- Settings
+
+FRONTEND
+- homepage
+- navigation
+- footer
+- Players directory
+- filters
+- player profile
+- forms
+- mobile
+- tablet
+- desktop
+- 404
+
+SEO
+- production indexing settings
+- sitemap
+- robots
+- metadata
+- canonicals
+- redirects
+- structured data
+
+SECURITY
+- secrets
+- uploads
+- form validation
+- access control
+- error exposure
+
+INFRASTRUCTURE
+- PostgreSQL backup
+- environment variables
+- persistent uploads
+- SSL
+- Node application restart
+- rollback plan
+
+Do not make production changes.
+
+======================================================================
+STEP 47 — PRODUCTION LAUNCH RUNBOOK
+======================================================================
+
+Goal:
+Create exact launch-day instructions.
+
+Prompt:
+
+Read AGENTS.md and the existing cPanel deployment documentation.
+
+Do not make changes automatically.
+
+Prepare the exact production launch sequence for the current Pro-Crick application.
+
+Order the steps safely, including:
+
+1. maintenance/launch window preparation
+2. production database backup
+3. existing website backup if applicable
+4. code version/tag to deploy
+5. environment variables
+6. PostgreSQL migration
+7. install/build
+8. application restart
+9. persistent uploads verification
+10. domain/SSL
+11. production robots/index settings
+12. sitemap verification
+13. player page tests
+14. forms
+15. redirects
+16. 404
+17. Search Console/analytics manual tasks
+18. logs
+19. rollback trigger conditions
+20. rollback steps
+
+Use actual repository commands.
+Do not invent hosting values.
+
+======================================================================
+STEP 48 — POST-LAUNCH HEALTH CHECK
+======================================================================
+
+Goal:
+Verify the application immediately after going live.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not add features.
+
+Perform/prepare a post-launch health check for the production release.
+
+Check:
+
+- home page
+- key CMS pages
+- admin authentication
+- published Pages
+- Players listing
+- representative Player profiles
+- filtering
+- enquiry submission
+- Player Application submission
+- image/PDF serving
+- sitemap
+- robots
+- canonical URLs
+- metadata
+- redirects
+- 404
+- production logs
+- database connectivity
+- application memory/errors if observable
+
+Classify findings:
+
+CRITICAL
+HIGH
+MEDIUM
+LOW
+
+Only fix CRITICAL/HIGH issues after explaining the proposed change.
+
+======================================================================
+STEP 49 — POST-LAUNCH CLEANUP
+======================================================================
+
+Goal:
+Clean the project after successful launch.
+
+Prompt:
+
+Read AGENTS.md.
+
+The production launch has been confirmed successful.
+
+Perform a post-launch repository cleanup review.
+
+Focus only on:
+
+- obsolete temporary development code
+- unused test fixtures
+- sample development seed safeguards
+- staging-only configuration
+- documentation accuracy
+- deployment documentation
+- known TODOs
+- dependency warnings
+- dead code introduced during implementation
+
+Do NOT remove useful diagnostics, migrations, tests, or rollback documentation.
+
+Do NOT perform large refactors.
+
+Run all checks after any cleanup.
+
+======================================================================
+OPTIONAL STEP 50 — EMAIL NOTIFICATIONS
+======================================================================
+
+Use only if the client wants automatic email notifications.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement email notifications without changing existing form storage behavior.
+
+Requirements:
+
+- enquiry confirmation/notification where required
+- Player Application notification where required
+- environment-variable based SMTP/provider configuration
+- never store SMTP passwords in CMS or Git
+- form submission must still be stored even if email delivery fails, unless requirements explicitly say otherwise
+- log delivery errors safely
+- do not expose provider errors publicly
+- provide .env.example placeholders
+- document cPanel/production configuration
+
+Run tests and build.
+
+======================================================================
+OPTIONAL STEP 51 — GOOGLE ANALYTICS / TAG MANAGER
+======================================================================
+
+Use only when actual measurement IDs are available.
+
+Prompt:
+
+Read AGENTS.md.
+
+Implement analytics integration using environment/CMS configuration consistent with the existing architecture.
+
+Requirements:
+
+- support the approved Google Analytics or Google Tag Manager ID
+- do not hard-code a client ID if it should be configurable
+- load scripts using recommended Next.js patterns
+- do not block core rendering unnecessarily
+- do not add duplicate tracking tags
+- document exactly where the production ID is configured
+
+Do not invent analytics IDs.
+
+Run build.
+
+======================================================================
+OPTIONAL STEP 52 — SEARCH CONSOLE / VERIFICATION SUPPORT
+======================================================================
+
+Prompt:
+
+Read AGENTS.md.
+
+Add only the technical website changes required for the provided search-engine verification method.
+
+Do not invent verification tokens.
+
+Preserve:
+- metadata
+- canonicals
+- sitemap
+- robots
+
+Document the manual Search Console steps separately.
+
+======================================================================
+OPTIONAL STEP 53 — FUTURE PLAYER / CLUB LOGIN ARCHITECTURE
+======================================================================
+
+IMPORTANT:
+This is planning only unless explicitly approved as a new project phase.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not implement code.
+
+Prepare an architecture proposal for a future authenticated platform supporting:
+
+- Player accounts
+- Club accounts
+- player self-service profile updates
+- approval workflow
+- club shortlists
+- private opportunities
+- agent/admin moderation
+
+Explain:
+
+- authentication model
+- roles
+- permissions
+- database changes
+- profile ownership
+- approval workflow
+- privacy/security
+- migration from the current public Players model
+- estimated implementation phases
+
+Do not modify the V1 architecture yet.
+
+======================================================================
+OPTIONAL STEP 54 — FUTURE CRM ENHANCEMENTS
+======================================================================
+
+Planning only unless approved.
+
+Prompt:
+
+Read AGENTS.md.
+
+Do not write code.
+
+Propose a future lightweight CRM expansion for:
+
+- enquiry assignment
+- internal notes
+- follow-up dates
+- contact history
+- enquiry source
+- opportunity status
+- agent ownership
+- reminders
+
+Keep it integrated with the current Payload CMS architecture.
+
+Do not propose a full enterprise CRM unless justified.
+
+======================================================================
+STANDARD CODEX REVIEW PROMPT
+======================================================================
+
+Use this after any major implementation step:
+
+Read AGENTS.md.
+
+Review the changes in the current branch/PR.
+
+Focus on:
+
+- correctness
+- TypeScript
+- Payload patterns
+- PostgreSQL/data integrity
+- access control
+- security
+- migration safety
+- SEO impact
+- performance
+- maintainability
+- accidental unrelated changes
+
+Return findings grouped as:
+
+P0 Critical
+P1 High
+P2 Medium
+P3 Low
+
+Do not make changes unless I explicitly ask you to fix the findings.
+
+======================================================================
+STANDARD CODEX FIX PROMPT
+======================================================================
+
+Use this after reviewing findings:
+
+Read AGENTS.md.
+
+Fix only the P0 and P1 findings from the previous review.
+
+Do not add features.
+Do not perform unrelated refactors.
+
+After fixing:
+
+- run lint
+- run typecheck
+- run tests if available
+- run build
+- review the diff
+
+Summarize:
+- issue
+- fix
+- files changed
+- tests/checks performed
+- any remaining risk
+
+======================================================================
+STANDARD "DO NOT CODE YET" PROMPT
+======================================================================
+
+Use this when you want Codex to inspect an idea first:
+
+Read AGENTS.md.
+
+Do not edit code yet.
+
+Inspect the existing implementation and explain how you would implement the following requirement:
+
+[PASTE REQUIREMENT]
+
+Your response must include:
+
+1. affected files/modules
+2. data-model impact
+3. migration impact
+4. frontend impact
+5. CMS impact
+6. security impact
+7. SEO impact
+8. testing requirements
+9. risks
+10. implementation sequence
+
+Wait for approval before editing code.
+
+======================================================================
+STANDARD FEATURE IMPLEMENTATION PROMPT
+======================================================================
+
+Read AGENTS.md.
+
+Implement only this approved requirement:
+
+[PASTE REQUIREMENT]
+
+Before editing:
+- inspect relevant code
+- state a short plan
+- identify schema/migration/security/SEO impact
+
+Implementation requirements:
+- make the smallest coherent change
+- preserve existing behavior unless the requirement says otherwise
+- do not refactor unrelated modules
+- do not commit secrets
+- add/update tests where practical
+- create safe migrations if schema changes
+
+After implementation:
+- run lint
+- run typecheck
+- run tests if available
+- run build
+- review your own diff
+- summarize files changed
+- list manual deployment steps
+- report remaining risks
+
+======================================================================
+RECOMMENDED PROJECT ORDER
+======================================================================
+
+Run the steps in approximately this order:
+
+00  Architecture review
+01  Bootstrap + Docker local environment
+01A Fresh-clone / second-developer onboarding validation
+02  PostgreSQL/migrations
+03  Users/auth
+04  Media
+05  Taxonomies
+06  SEO field group
+07  Players
+08  Development sample data
+09  Testimonials
+10  Page blocks
+11  Pages
+12  Site globals
+13  Design foundation
+14  Header/Footer
+15  CMS page renderer
+16  Homepage
+17  Player query/filter layer
+18  Player directory
+19  Player profile query
+20  Player profile frontend
+21  Enquiries collection
+22  Public enquiry forms
+23  Player Applications collection
+24  Public application form
+25  Application -> Player
+26  SEO metadata
+27  Sitemap/robots/schema
+28  Redirects collection
+29  Redirect runtime
+30  Query performance review
+31  Accessibility review
+32  Responsive review
+33  Security audit
+34  Security fixes
+35  Error/empty states
+36  Automated test pass
+37  Production readiness audit
+38  Launch-blocker fixes
+39  cPanel deployment runbook
+40  Real cPanel configuration review
+41  Staging deployment preparation
+42  Staging smoke-test checklist
+43  Content/data preparation
+44  Final SEO audit
+45  Final performance audit
+46  Pre-launch check
+47  Production launch runbook
+48  Post-launch health check
+49  Post-launch cleanup
+
+Optional:
+50  Email
+51  Analytics/GTM
+52  Search Console verification
+53  Player/Club accounts planning
+54  CRM planning
+
+======================================================================
+IMPORTANT PROJECT PRINCIPLES
+======================================================================
+
+1. AGENTS.md is the permanent development rulebook.
+2. DEVELOPMENT_SETUP.md is the standard local Docker/onboarding guide.
+3. CONTRIBUTING.md defines collaboration and developer handoff.
+4. This file is the execution checklist.
+3. Never ask Codex to implement the entire project in one prompt.
+4. Keep each task reviewable.
+5. Merge a working stage before starting the next major stage.
+6. Never let Codex casually reset/drop the production database.
+7. Never commit production database credentials.
+8. Never edit parent/framework code when a proper application-level solution exists.
+9. Use migrations for production schema changes.
+10. Staging must be tested before production.
+11. CMS permissions are security rules, not just UI preferences.
+12. Public forms must always validate server-side.
+13. Player filtering must use structured database fields.
+14. Do not turn the CMS into an unrestricted visual page builder.
+15. Keep videos external (YouTube/Vimeo) for V1.
+16. Preserve stable player/page URLs for SEO.
+17. Add redirects when URLs genuinely need to change.
+18. Make SEO defaults automatic wherever possible.
+19. Keep infrastructure simple until traffic/business requirements justify more.
+20. Review every major Codex diff before merging.
+
+END OF FILE
