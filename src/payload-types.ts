@@ -121,6 +121,10 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  /**
+   * Administrators can manage users and protected system settings. Editors can manage normal CMS content as future collections are added.
+   */
+  role: 'administrator' | 'editor';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -214,6 +218,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
