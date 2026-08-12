@@ -247,8 +247,9 @@ Never share real production enquiry/application data simply for development conv
 
 - Use the private GitHub repository as the collaboration source of truth.
 - Keep `main` stable.
-- Use one logical feature/fix per branch.
-- Use pull requests for review before merging significant changes.
+- Use one logical feature/fix/docs/setup/deployment task per branch.
+- Push each active branch to GitHub before handoff.
+- Use pull requests for review before merging work to `main`.
 - Do not commit generated runtime data.
 - Document new environment variables in `.env.example` and `DEVELOPMENT_SETUP.md`.
 - If a migration is added, the pull request must explain how another developer applies it.
@@ -834,14 +835,16 @@ Do not invent cPanel paths or commands. Read the actual hosting configuration fi
 For every non-trivial task:
 
 1. Read this AGENTS.md.
-2. Inspect the relevant existing code.
-3. State a short implementation plan.
-4. Identify schema, routing, security, SEO, and migration impact.
-5. Make the smallest coherent change.
-6. Run relevant checks.
-7. Review the diff.
-8. Summarize what changed.
-9. Report any unresolved risks or manual deployment steps.
+2. Confirm or create the correct task branch before editing.
+3. Inspect the relevant existing code.
+4. State a short implementation plan.
+5. Identify schema, routing, security, SEO, and migration impact.
+6. Make the smallest coherent change.
+7. Run relevant checks.
+8. Review the diff.
+9. Commit and push the branch when the work is ready for handoff.
+10. Summarize what changed.
+11. Report any unresolved risks or manual deployment steps.
 
 Do not start by rewriting existing architecture.
 
@@ -894,6 +897,10 @@ A feature is done only when:
 ## Git rules
 
 Prefer one logical task per branch / pull request.
+
+Create or confirm a dedicated branch before non-trivial edits. Codex-generated branches should use a `codex/` prefix unless the user asks for a different branch.
+
+Push completed branches to GitHub. If work cannot be pushed, report the reason and the exact local branch name.
 
 Do not:
 - force-push shared branches unless explicitly asked

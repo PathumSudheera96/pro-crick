@@ -342,7 +342,7 @@ Before new work:
 
 ```bash
 git checkout main
-git pull
+git pull --ff-only origin main
 ```
 
 Create a branch:
@@ -350,6 +350,14 @@ Create a branch:
 ```bash
 git checkout -b feature/example
 ```
+
+Push the branch to GitHub when work starts or before the first handoff:
+
+```bash
+git push -u origin feature/example
+```
+
+Use one branch per feature, fix, documentation task, setup change, or deployment change. Do not develop directly on `main` unless the repository owner explicitly approves it.
 
 If pulled changes include migrations:
 
@@ -365,7 +373,26 @@ docker compose up -d --build
 
 ---
 
-# 12. Sharing With Another Developer
+# 12. Daily Professional Workflow
+
+Use this rhythm for normal development:
+
+1. read `AGENTS.md`, `PROJECT_SPEC.md`, `PLANS.md`, and the relevant feature notes
+2. update `main` with `git pull --ff-only origin main`
+3. create a focused branch such as `feature/player-filters`, `fix/enquiry-validation`, or `docs/deployment-runbook`
+4. push the branch to GitHub with `git push -u origin <branch>`
+5. make the requested change
+6. run the relevant Docker/project checks
+7. review `git status` and `git diff`
+8. commit with a clear message
+9. push the completed branch
+10. open or update the pull request with checks, migration notes, environment changes, and deployment notes
+
+For Codex work, use a `codex/` branch name unless the user asks for a different branch.
+
+---
+
+# 13. Sharing With Another Developer
 
 Preferred method:
 
@@ -373,10 +400,11 @@ Preferred method:
 2. Do not share production secrets through Git.
 3. Developer clones the repository.
 4. Developer creates `.env` from `.env.example`.
-5. Share development-only values through an approved secure channel if they cannot be generated locally.
-6. Developer starts Docker Compose.
-7. Developer runs migrations.
-8. Developer optionally runs development seed data.
+5. Developer creates a feature branch and pushes it to GitHub.
+6. Share development-only values through an approved secure channel if they cannot be generated locally.
+7. Developer starts Docker Compose.
+8. Developer runs migrations.
+9. Developer optionally runs development seed data.
 
 Do not send:
 

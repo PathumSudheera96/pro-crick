@@ -35,6 +35,19 @@ Then open:
 
 See `DEVELOPMENT_SETUP.md` for migrations, seed data, troubleshooting, and complete onboarding instructions.
 
+## Development Workflow
+
+Every feature, fix, documentation task, setup change, and deployment change should use its own branch and be pushed to GitHub:
+
+```bash
+git checkout main
+git pull --ff-only origin main
+git checkout -b feature/example
+git push -u origin feature/example
+```
+
+Codex work should use a `codex/` branch. Open or update a pull request before merging work into `main`.
+
 Useful checks:
 
 ```bash
