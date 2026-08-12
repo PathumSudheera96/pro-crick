@@ -5,6 +5,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { Media } from './src/collections/Media'
 import { Users } from './src/collections/Users'
 import { migrations } from './src/migrations'
 
@@ -19,7 +20,7 @@ export default buildConfig({
       importMapFile: path.resolve(dirname, 'src/app/(payload)/admin/importMap.js'),
     },
   },
-  collections: [Users],
+  collections: [Users, Media],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',

@@ -47,11 +47,11 @@ Planned stack:
 
 # 2. Current Project Phase
 
-**Current Phase:** Phase 2 - Database and Authentication
+**Current Phase:** Phase 3 - Media and Shared Data
 
-**Current Status:** STEP 03 users/authentication/roles completed. Users now have `administrator` and `editor` roles, reusable access helpers, server-side user access rules, and a safe migration for the role field.
+**Current Status:** STEP 04 Media completed locally. Payload Media now supports persistent local image/PDF uploads, title/alt/caption fields, file-type restrictions, public media reads, editor/admin write access, generated types, and an additive migration.
 
-**Next Main Task:** STEP 04 - Media
+**Next Main Task:** STEP 05 - Player Taxonomies
 
 ---
 
@@ -123,11 +123,11 @@ Legend:
 
 ## Phase 3 — Media and Shared Data
 
-- [ ] Create Media collection
-- [ ] Configure image uploads
-- [ ] Configure PDF uploads
-- [ ] Add alt text
-- [ ] Add file-type restrictions
+- [x] Create Media collection
+- [x] Configure image uploads
+- [x] Configure PDF uploads
+- [x] Add alt text
+- [x] Add file-type restrictions
 - [ ] Create Playing Roles collection
 - [ ] Create Countries collection
 - [ ] Create Clubs collection
@@ -546,20 +546,19 @@ Notes:
 
 Complete:
 
-**STEP 03 - Users / Authentication / Roles**
+**STEP 04 - Media**
 
 Next:
 
-**STEP 04 - Media**
+**STEP 05 - Player Taxonomies**
 
 ---
 
 # 8. Next Tasks
 
-1. STEP 04 - Media
-2. STEP 05 - Player Taxonomies
-3. STEP 06 - SEO Field Group
-4. STEP 07 - Players Collection
+1. STEP 05 - Player Taxonomies
+2. STEP 06 - SEO Field Group
+3. STEP 07 - Players Collection
 
 Do not jump ahead to frontend design until the core CMS data model is stable.
 
