@@ -25,6 +25,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     prodMigrations: migrations,
+    push: false,
   }),
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
