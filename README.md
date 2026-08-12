@@ -17,7 +17,7 @@ git clone git@github.com:PathumSudheera96/pro-crick.git
 cd pro-crick
 cp .env.example .env
 docker compose up --build
-docker compose exec app pnpm payload migrate
+docker compose run --rm app pnpm migrate
 ```
 
 On PowerShell:
@@ -25,7 +25,7 @@ On PowerShell:
 ```powershell
 Copy-Item .env.example .env
 docker compose up --build
-docker compose exec app pnpm payload migrate
+docker compose run --rm app pnpm migrate
 ```
 
 Then open:
@@ -59,10 +59,19 @@ docker compose exec app pnpm build
 Migration commands:
 
 ```bash
-docker compose exec app pnpm payload migrate:status
-docker compose exec app pnpm payload migrate:create descriptive-name
-docker compose exec app pnpm payload migrate
+docker compose run --rm app pnpm migrate:status
+docker compose run --rm app pnpm migrate:create descriptive-name
+docker compose run --rm app pnpm migrate
 ```
+
+For cPanel deployment, run migrations from the configured application root only after production environment variables are set and the database has been backed up:
+
+```bash
+pnpm migrate:status
+pnpm migrate
+```
+
+Never run destructive reset/down/fresh migration commands against production without an approved rollback plan.
 
 ## Contributing
 

@@ -17,6 +17,7 @@ git clone <REPOSITORY_URL>
 cd pro-crick
 cp .env.example .env
 docker compose up --build
+docker compose run --rm app pnpm migrate
 ```
 
 On PowerShell:
@@ -24,6 +25,7 @@ On PowerShell:
 ```powershell
 Copy-Item .env.example .env
 docker compose up --build
+docker compose run --rm app pnpm migrate
 ```
 
 Then open:
