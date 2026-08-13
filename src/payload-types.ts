@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'playing-roles': PlayingRole;
+    countries: Country;
+    clubs: Club;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +81,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'playing-roles': PlayingRolesSelect<false> | PlayingRolesSelect<true>;
+    countries: CountriesSelect<false> | CountriesSelect<true>;
+    clubs: ClubsSelect<false> | ClubsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -204,6 +210,68 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "playing-roles".
+ */
+export interface PlayingRole {
+  id: number;
+  /**
+   * Reusable cricket role shown on player profiles and filters.
+   */
+  name: string;
+  /**
+   * Stable URL/filter value generated from the role name when left empty.
+   */
+  slug: string;
+  status: 'active' | 'inactive';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: number;
+  /**
+   * Country or nationality label used for player profiles and filters.
+   */
+  name: string;
+  /**
+   * Stable URL/filter value generated from the country name when left empty.
+   */
+  slug: string;
+  /**
+   * Optional ISO-style country code, such as LK, AU, or GB.
+   */
+  countryCode?: string | null;
+  status: 'active' | 'inactive';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clubs".
+ */
+export interface Club {
+  id: number;
+  /**
+   * Club, team, or organization name used by player records.
+   */
+  name: string;
+  /**
+   * Stable URL/filter value generated from the club name when left empty.
+   */
+  slug: string;
+  /**
+   * Optional country for filtering and context.
+   */
+  country?: (number | null) | Country;
+  status: 'active' | 'inactive';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -233,6 +301,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'playing-roles';
+        value: number | PlayingRole;
+      } | null)
+    | ({
+        relationTo: 'countries';
+        value: number | Country;
+      } | null)
+    | ({
+        relationTo: 'clubs';
+        value: number | Club;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -352,6 +432,41 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "playing-roles_select".
+ */
+export interface PlayingRolesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries_select".
+ */
+export interface CountriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  countryCode?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clubs_select".
+ */
+export interface ClubsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  country?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

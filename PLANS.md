@@ -49,9 +49,9 @@ Planned stack:
 
 **Current Phase:** Phase 3 - Media and Shared Data
 
-**Current Status:** STEP 04 Media completed locally. Payload Media now supports persistent local image/PDF uploads, title/alt/caption fields, file-type restrictions, public media reads, editor/admin write access, generated types, and an additive migration.
+**Current Status:** STEP 05 Player Taxonomies completed locally. Playing Roles, Countries, and Clubs are modeled as reusable structured Payload collections with unique slugs, active/inactive status, editor/admin write access, public reads, and an additive migration.
 
-**Next Main Task:** STEP 05 - Player Taxonomies
+**Next Main Task:** STEP 06 - SEO Field Group
 
 ---
 
@@ -128,9 +128,9 @@ Legend:
 - [x] Configure PDF uploads
 - [x] Add alt text
 - [x] Add file-type restrictions
-- [ ] Create Playing Roles collection
-- [ ] Create Countries collection
-- [ ] Create Clubs collection
+- [x] Create Playing Roles collection
+- [x] Create Countries collection
+- [x] Create Clubs collection
 - [ ] Create reusable SEO field group
 
 ## Phase 4 — Player CMS
@@ -546,19 +546,18 @@ Notes:
 
 Complete:
 
-**STEP 04 - Media**
+**STEP 05 - Player Taxonomies**
 
 Next:
 
-**STEP 05 - Player Taxonomies**
+**STEP 06 - SEO Field Group**
 
 ---
 
 # 8. Next Tasks
 
-1. STEP 05 - Player Taxonomies
-2. STEP 06 - SEO Field Group
-3. STEP 07 - Players Collection
+1. STEP 06 - SEO Field Group
+2. STEP 07 - Players Collection
 
 Do not jump ahead to frontend design until the core CMS data model is stable.
 
