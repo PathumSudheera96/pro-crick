@@ -221,13 +221,31 @@ There is no `test` script yet.
 
 # 7. Database Migrations
 
-Migration setup is intentionally deferred to STEP 02.
+Payload migrations are committed under:
 
-Until STEP 02 defines the exact Payload migration workflow, do not run ad hoc destructive database commands. The general container pattern will be:
+```text
+src/migrations/
+```
+
+Check migration status:
 
 ```bash
-docker compose exec app pnpm <migration-command>
+docker compose exec app pnpm payload migrate:status
 ```
+
+Create a migration after an intentional schema change:
+
+```bash
+docker compose exec app pnpm payload migrate:create descriptive-name
+```
+
+Apply pending migrations:
+
+```bash
+docker compose exec app pnpm payload migrate
+```
+
+The app is configured with Payload schema push disabled, so local and production databases use committed migrations instead of ad hoc schema synchronization.
 
 Rules:
 
@@ -236,8 +254,7 @@ Rules:
 - another developer must be able to apply migrations after pulling the branch
 - do not reset the production database
 - do not run development seed/reset commands against production
-
-When STEP 02 adds migration scripts, update this file with the exact commands.
+- do not run `migrate:fresh`, `migrate:reset`, `migrate:refresh`, or `migrate:down` against production unless an explicit rollback plan has been approved
 
 ---
 

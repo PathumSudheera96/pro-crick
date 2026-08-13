@@ -17,6 +17,7 @@ git clone git@github.com:PathumSudheera96/pro-crick.git
 cd pro-crick
 cp .env.example .env
 docker compose up --build
+docker compose exec app pnpm payload migrate
 ```
 
 On PowerShell:
@@ -24,6 +25,7 @@ On PowerShell:
 ```powershell
 Copy-Item .env.example .env
 docker compose up --build
+docker compose exec app pnpm payload migrate
 ```
 
 Then open:
@@ -39,6 +41,14 @@ Useful checks:
 docker compose exec app pnpm lint
 docker compose exec app pnpm typecheck
 docker compose exec app pnpm build
+```
+
+Migration commands:
+
+```bash
+docker compose exec app pnpm payload migrate:status
+docker compose exec app pnpm payload migrate:create descriptive-name
+docker compose exec app pnpm payload migrate
 ```
 
 ## Contributing

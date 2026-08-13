@@ -47,11 +47,11 @@ Planned stack:
 
 # 2. Current Project Phase
 
-**Current Phase:** Phase 0 â€” Architecture and Project Setup
+**Current Phase:** Phase 2 - Database and Authentication
 
-**Current Status:** Application foundation created; Docker runtime verification blocked on host Docker CLI availability
+**Current Status:** STEP 01A fresh-clone onboarding validation completed. Initial Payload/PostgreSQL migration workflow is established and should be formally reviewed as STEP 02 before continuing to roles.
 
-**Next Main Task:** Complete STEP 01 Docker runtime verification on a machine with Docker available, then run STEP 01A
+**Next Main Task:** STEP 02 - Database / Migration Foundation review and close-out, then STEP 03 - Users / Authentication / Roles
 
 ---
 
@@ -70,7 +70,7 @@ Legend:
 - [x] Choose Next.js + Payload CMS + PostgreSQL
 - [x] Confirm PostgreSQL is available in cPanel
 - [x] Review basic cPanel resource limits
-- [ ] Confirm available Node.js version in cPanel
+- [x] Confirm available Node.js version in cPanel
 - [x] Create `AGENTS.md`
 - [x] Create `CODEX_EXECUTION_STEPS.txt`
 - [x] Create `PROJECT_SPEC.md`
@@ -96,7 +96,7 @@ Legend:
 - [x] Add persistent PostgreSQL named volume
 - [x] Add persistent local upload path/volume
 - [!] Verify hot reload
-- [!] Verify fresh-clone Docker startup
+- [x] Verify fresh-clone Docker startup
 - [x] Initialize Next.js App Router
 - [x] Add TypeScript
 - [x] Add Tailwind CSS
@@ -104,17 +104,17 @@ Legend:
 - [x] Configure PostgreSQL
 - [x] Add `.env.example`
 - [x] Establish project folder structure
-- [!] Confirm `/admin` loads
-- [!] Confirm development build works
+- [x] Confirm `/admin` loads
+- [x] Confirm development build works
 - [x] Confirm production build works
-- [ ] Verify second-developer onboarding from a clean clone
-- [ ] Verify documented Docker lint/typecheck/test/build commands
+- [x] Verify second-developer onboarding from a clean clone
+- [x] Verify documented Docker lint/typecheck/build commands
 
 ## Phase 2 â€” Database and Authentication
 
-- [ ] Establish migration workflow
-- [ ] Document migration commands
-- [ ] Create Users collection
+- [x] Establish migration workflow
+- [x] Document migration commands
+- [x] Create Users collection
 - [ ] Add Administrator role
 - [ ] Add Editor role
 - [ ] Enforce server-side access control
@@ -530,15 +530,13 @@ These items should be confirmed before or during early implementation.
 
 Current known blocker:
 
-**Confirm cPanel Node.js version and Node application support details before final deployment planning.**
+None for local foundation work.
 
-Local development is not blocked because the project will use Docker Compose.
+Notes:
 
-This does not prevent local development from starting.
-
-STEP 01 runtime verification blocker:
-
-**Docker CLI is not installed or not available on PATH in the current execution environment.** The project files, dependency install, lint, typecheck, and production build were completed, but `docker compose up --build`, database health, `/admin` runtime access, hot reload, and persistence verification must be run on a host with Docker available.
+- cPanel Node.js application support has been confirmed with Node.js 22.23.0.
+- Docker-based fresh-clone onboarding has been validated on the current host.
+- Hot reload still needs an explicit verification pass during frontend work.
 
 ---
 
@@ -546,28 +544,26 @@ STEP 01 runtime verification blocker:
 
 Complete:
 
-**STEP 01 — Initial Project Bootstrap**
+**STEP 01A - Fresh-clone / second-developer onboarding validation**
 
-Remaining verification requires Docker CLI availability on the host.
+Next:
+
+**STEP 02 - Database / Migration Foundation review and close-out**
 
 ---
 
 # 8. Next Tasks
 
-After STEP 01 Docker runtime verification is completed:
-
-1. STEP 01A — Fresh-clone / second-developer onboarding validation
-2. STEP 02 — Database / Migration Foundation
-3. STEP 03 — Users / Authentication / Roles
-4. STEP 04 — Media
-5. STEP 05 — Player Taxonomies
-6. STEP 06 — SEO Field Group
-7. STEP 07 — Players Collection
+1. STEP 02 - Database / Migration Foundation review and close-out
+2. STEP 03 - Users / Authentication / Roles
+3. STEP 04 - Media
+4. STEP 05 - Player Taxonomies
+5. STEP 06 - SEO Field Group
+6. STEP 07 - Players Collection
 
 Do not jump ahead to frontend design until the core CMS data model is stable.
 
 ---
-
 # 9. Branch / PR Strategy
 
 Recommended:
