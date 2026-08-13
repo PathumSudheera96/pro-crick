@@ -41,7 +41,23 @@ Do not keep important approved requirements only in private messages or local no
 
 Keep `main` stable.
 
-Use one logical task per branch.
+Every feature, fix, documentation task, setup change, and deployment change must use its own branch.
+
+Start new work from an up-to-date `main` unless the work is intentionally stacked on another active branch:
+
+```bash
+git checkout main
+git pull --ff-only origin main
+git checkout -b feature/example
+```
+
+Push the branch to GitHub early so the work is backed up and visible to the team:
+
+```bash
+git push -u origin feature/example
+```
+
+Use one logical task per branch. Do not develop directly on `main` unless the repository owner explicitly approves an emergency change.
 
 Examples:
 
@@ -54,13 +70,33 @@ docs/deployment-runbook
 codex/player-profile
 ```
 
-Avoid branches containing unrelated changes.
+Branch names should be lowercase, hyphen-separated, and specific to the work. Avoid branches containing unrelated changes.
 
 ---
 
-# 4. Pull Requests
+# 4. Professional Development Checklist
 
-A significant change should be reviewed through a pull request.
+For every task:
+
+1. confirm the current stage in `PLANS.md`
+2. create or switch to the correct feature branch before editing
+3. inspect the relevant files before changing them
+4. make the smallest coherent change
+5. update docs, migrations, and `.env.example` when required
+6. run relevant checks from `package.json`
+7. review `git status` and `git diff`
+8. commit with a clear message
+9. push the branch to GitHub
+10. open or update the pull request
+11. record blockers, deployment notes, and manual QA results
+
+Do not hand off important work that exists only on one local machine.
+
+---
+
+# 5. Pull Requests
+
+All feature branches should be reviewed through a pull request before merging to `main`. Very small documentation-only changes may be merged directly only with repository-owner approval.
 
 PR description should include:
 
@@ -80,7 +116,7 @@ If the PR changes setup, verify the fresh-clone onboarding process.
 
 ---
 
-# 5. Required Checks
+# 6. Required Checks
 
 Use scripts actually defined in `package.json`.
 
@@ -98,7 +134,7 @@ Do not claim a check passed if it was not run.
 
 ---
 
-# 6. Database Changes
+# 7. Database Changes
 
 If a branch changes the production schema:
 
@@ -115,7 +151,7 @@ Never:
 
 ---
 
-# 7. Environment Variables
+# 8. Environment Variables
 
 If adding a variable:
 
@@ -126,7 +162,7 @@ If adding a variable:
 
 ---
 
-# 8. Local Data
+# 9. Local Data
 
 Do not commit:
 
@@ -145,7 +181,7 @@ Use sanitized exports only when necessary.
 
 ---
 
-# 9. Frontend Changes
+# 10. Frontend Changes
 
 Review meaningful UI work at:
 
@@ -166,7 +202,7 @@ Include screenshots in PRs where practical.
 
 ---
 
-# 10. Security-sensitive Changes
+# 11. Security-sensitive Changes
 
 Give extra review attention to:
 
@@ -184,27 +220,30 @@ Follow `AGENTS.md`.
 
 ---
 
-# 11. Codex Collaboration
+# 12. Codex Collaboration
 
 Codex should:
 
 1. read `AGENTS.md`
 2. read relevant project/spec/plan files
-3. inspect existing code before editing
-4. implement only the requested bounded task
-5. run relevant checks
-6. review its own diff
-7. summarize migration/security/SEO impact
+3. create or confirm a `codex/` branch before editing
+4. inspect existing code before editing
+5. implement only the requested bounded task
+6. run relevant checks
+7. review its own diff
+8. commit and push the branch when asked to publish work
+9. summarize migration/security/SEO impact
 
 Human developers still review Codex output before merge.
 
 ---
 
-# 12. Handoff Between Developers
+# 13. Handoff Between Developers
 
 Before handing an in-progress branch to another developer:
 
 - push intended commits
+- confirm the branch exists on GitHub
 - do not leave the only copy of work uncommitted locally
 - update PR/task notes
 - explain incomplete work
@@ -216,7 +255,7 @@ A developer must not need another developer's local Docker volume to continue.
 
 ---
 
-# 13. Review Priority
+# 14. Review Priority
 
 Review in this order:
 
@@ -231,7 +270,7 @@ Review in this order:
 
 ---
 
-# 14. Merge Criteria
+# 15. Merge Criteria
 
 Do not merge significant work when:
 
@@ -245,7 +284,7 @@ Do not merge significant work when:
 
 ---
 
-# 15. Documentation Updates
+# 16. Documentation Updates
 
 Update:
 
