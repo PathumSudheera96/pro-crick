@@ -73,6 +73,12 @@ pnpm migrate
 
 Never run destructive reset/down/fresh migration commands against production without an approved rollback plan.
 
+Media uploads:
+
+- Local uploads are stored under `storage/`.
+- `UPLOAD_DIR` must point to persistent writable storage in local and cPanel environments.
+- Runtime uploads are ignored by Git and should not be copied through source control.
+
 ## Contributing
 
 Read:

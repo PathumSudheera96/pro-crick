@@ -99,6 +99,14 @@ postgresql://USER:PASSWORD@db:5432/DATABASE
 
 Actual development credentials belong in `.env`, not in source code.
 
+Upload storage belongs in `.env` as:
+
+```text
+UPLOAD_DIR=storage
+```
+
+The application still tolerates the earlier `UPLOADS_DIR` name for existing local `.env` files, but new environments should use `UPLOAD_DIR`.
+
 ---
 
 # 4. Docker Files
@@ -137,6 +145,7 @@ storage/
 ```
 
 The `storage/` directory is bind-mounted into the app container and ignored by Git except for `storage/.gitkeep`.
+Payload Media uploads use `UPLOAD_DIR`, which defaults to `storage` for local development.
 
 ---
 
@@ -264,6 +273,7 @@ Rules:
 If Payload warns that the database has been changed in dev mode before a migration was recorded, stop and review the database. For local development only, use a clean database or an explicitly approved local reset. Never answer that prompt casually against staging or production.
 
 For cPanel deployment, migrations must be applied from the configured application root after code has been uploaded, dependencies are installed, and production environment variables such as `DATABASE_URI` and `PAYLOAD_SECRET` are configured outside Git.
+The cPanel Node.js app must also set `UPLOAD_DIR` to a persistent writable directory, for example the app's `storage/` folder.
 
 Production migration checklist:
 
