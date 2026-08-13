@@ -1,13 +1,14 @@
 import { spawn } from 'node:child_process'
 
-const command = process.platform === 'win32' ? 'next.cmd' : 'next'
+const isWindows = process.platform === 'win32'
+const command = isWindows ? 'cmd' : 'next'
+const args = isWindows ? ['/d', '/s', '/c', 'next build'] : ['build']
 
-const child = spawn(command, ['build'], {
+const child = spawn(command, args, {
   env: {
     ...process.env,
     NODE_ENV: 'production',
   },
-  shell: process.platform === 'win32',
   stdio: 'inherit',
 })
 

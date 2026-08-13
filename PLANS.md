@@ -49,9 +49,9 @@ Planned stack:
 
 **Current Phase:** Phase 2 - Database and Authentication
 
-**Current Status:** STEP 02 database/migration foundation close-out completed. Payload uses the PostgreSQL adapter, committed migrations, environment-based `DATABASE_URI`, and documented local/cPanel migration commands. The committed initial migration was verified on a clean temporary PostgreSQL database. Ready to begin STEP 03 roles.
+**Current Status:** STEP 03 users/authentication/roles completed. Users now have `administrator` and `editor` roles, reusable access helpers, server-side user access rules, and a safe migration for the role field.
 
-**Next Main Task:** STEP 03 - Users / Authentication / Roles
+**Next Main Task:** STEP 04 - Media
 
 ---
 
@@ -116,9 +116,9 @@ Legend:
 - [x] Document migration commands
 - [x] Review and close out database/migration foundation
 - [x] Create Users collection
-- [ ] Add Administrator role
-- [ ] Add Editor role
-- [ ] Enforce server-side access control
+- [x] Add Administrator role
+- [x] Add Editor role
+- [x] Enforce server-side access control
 - [ ] Add basic access-control tests
 
 ## Phase 3 — Media and Shared Data
@@ -546,21 +546,20 @@ Notes:
 
 Complete:
 
-**STEP 02 - Database / Migration Foundation review and close-out**
+**STEP 03 - Users / Authentication / Roles**
 
 Next:
 
-**STEP 03 - Users / Authentication / Roles**
+**STEP 04 - Media**
 
 ---
 
 # 8. Next Tasks
 
-1. STEP 03 - Users / Authentication / Roles
-2. STEP 04 - Media
-3. STEP 05 - Player Taxonomies
-4. STEP 06 - SEO Field Group
-5. STEP 07 - Players Collection
+1. STEP 04 - Media
+2. STEP 05 - Player Taxonomies
+3. STEP 06 - SEO Field Group
+4. STEP 07 - Players Collection
 
 Do not jump ahead to frontend design until the core CMS data model is stable.
 
