@@ -7,11 +7,14 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "prepare:next-env": "node scripts/reset-next-env.mjs",
-    "build": "pnpm prepare:next-env && next build && pnpm prepare:next-env",
+    "build": "pnpm prepare:next-env && node scripts/run-next-build.mjs && pnpm prepare:next-env",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "pnpm prepare:next-env && tsc --noEmit",
     "payload": "payload",
+    "migrate": "payload migrate",
+    "migrate:status": "payload migrate:status",
+    "migrate:create": "payload migrate:create",
     "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types"
   },

@@ -49,9 +49,9 @@ Planned stack:
 
 **Current Phase:** Phase 2 - Database and Authentication
 
-**Current Status:** STEP 01A fresh-clone onboarding validation completed. Initial Payload/PostgreSQL migration workflow is established and should be formally reviewed as STEP 02 before continuing to roles.
+**Current Status:** STEP 02 database/migration foundation close-out completed. Payload uses the PostgreSQL adapter, committed migrations, environment-based `DATABASE_URI`, and documented local/cPanel migration commands. The committed initial migration was verified on a clean temporary PostgreSQL database. Ready to begin STEP 03 roles.
 
-**Next Main Task:** STEP 02 - Database / Migration Foundation review and close-out, then STEP 03 - Users / Authentication / Roles
+**Next Main Task:** STEP 03 - Users / Authentication / Roles
 
 ---
 
@@ -114,6 +114,7 @@ Legend:
 
 - [x] Establish migration workflow
 - [x] Document migration commands
+- [x] Review and close out database/migration foundation
 - [x] Create Users collection
 - [ ] Add Administrator role
 - [ ] Add Editor role
@@ -537,6 +538,7 @@ Notes:
 - cPanel Node.js application support has been confirmed with Node.js 22.23.0.
 - Docker-based fresh-clone onboarding has been validated on the current host.
 - Hot reload still needs an explicit verification pass during frontend work.
+- The current long-lived local development database may contain schema from earlier dev-mode Payload startup, so `migrate:status` can show the initial migration as pending there. Clean databases apply the committed migration successfully.
 
 ---
 
@@ -544,22 +546,21 @@ Notes:
 
 Complete:
 
-**STEP 01A - Fresh-clone / second-developer onboarding validation**
+**STEP 02 - Database / Migration Foundation review and close-out**
 
 Next:
 
-**STEP 02 - Database / Migration Foundation review and close-out**
+**STEP 03 - Users / Authentication / Roles**
 
 ---
 
 # 8. Next Tasks
 
-1. STEP 02 - Database / Migration Foundation review and close-out
-2. STEP 03 - Users / Authentication / Roles
-3. STEP 04 - Media
-4. STEP 05 - Player Taxonomies
-5. STEP 06 - SEO Field Group
-6. STEP 07 - Players Collection
+1. STEP 03 - Users / Authentication / Roles
+2. STEP 04 - Media
+3. STEP 05 - Player Taxonomies
+4. STEP 06 - SEO Field Group
+5. STEP 07 - Players Collection
 
 Do not jump ahead to frontend design until the core CMS data model is stable.
 

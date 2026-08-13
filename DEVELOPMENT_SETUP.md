@@ -212,6 +212,9 @@ docker compose exec app pnpm lint
 docker compose exec app pnpm typecheck
 docker compose exec app pnpm build
 docker compose exec app pnpm payload
+docker compose run --rm app pnpm migrate
+docker compose run --rm app pnpm migrate:status
+docker compose run --rm app pnpm migrate:create descriptive-name
 docker compose exec app pnpm generate:types
 ```
 
@@ -230,20 +233,22 @@ src/migrations/
 Check migration status:
 
 ```bash
-docker compose exec app pnpm payload migrate:status
+docker compose run --rm app pnpm migrate:status
 ```
 
 Create a migration after an intentional schema change:
 
 ```bash
-docker compose exec app pnpm payload migrate:create descriptive-name
+docker compose run --rm app pnpm migrate:create descriptive-name
 ```
 
 Apply pending migrations:
 
 ```bash
-docker compose exec app pnpm payload migrate
+docker compose run --rm app pnpm migrate
 ```
+
+Use a one-off `app` container for migration commands so they run separately from the long-running development server.
 
 The app is configured with Payload schema push disabled, so local and production databases use committed migrations instead of ad hoc schema synchronization.
 
@@ -255,6 +260,22 @@ Rules:
 - do not reset the production database
 - do not run development seed/reset commands against production
 - do not run `migrate:fresh`, `migrate:reset`, `migrate:refresh`, or `migrate:down` against production unless an explicit rollback plan has been approved
+
+If Payload warns that the database has been changed in dev mode before a migration was recorded, stop and review the database. For local development only, use a clean database or an explicitly approved local reset. Never answer that prompt casually against staging or production.
+
+For cPanel deployment, migrations must be applied from the configured application root after code has been uploaded, dependencies are installed, and production environment variables such as `DATABASE_URI` and `PAYLOAD_SECRET` are configured outside Git.
+
+Production migration checklist:
+
+1. back up the production PostgreSQL database
+2. confirm the deployed branch/commit
+3. confirm production environment variables are present in cPanel
+4. run `pnpm migrate:status`
+5. run `pnpm migrate`
+6. build or restart the Node.js application using the cPanel-supported process
+7. verify `/admin` and the public health check
+
+Do not invent or hard-code cPanel paths in repository files. The exact cPanel app root, Node.js startup command, and database host belong in the deployment runbook once staging is configured.
 
 ---
 
@@ -362,7 +383,7 @@ Use one branch per feature, fix, documentation task, setup change, or deployment
 If pulled changes include migrations:
 
 ```bash
-docker compose exec app pnpm <apply-migrations-command>
+docker compose run --rm app pnpm migrate
 ```
 
 If dependencies/Docker configuration changed:
@@ -420,7 +441,7 @@ A source-code clone plus documented setup should be sufficient.
 
 ---
 
-# 13. Sanitized Data Handoff
+# 14. Sanitized Data Handoff
 
 If realistic data is necessary:
 
@@ -443,7 +464,7 @@ Do not use a raw production dump for normal developer onboarding.
 
 ---
 
-# 14. Common Docker Troubleshooting
+# 15. Common Docker Troubleshooting
 
 ## Docker command is not found
 
@@ -496,7 +517,7 @@ Confirm:
 
 ---
 
-# 15. Fresh-Clone Acceptance Test
+# 16. Fresh-Clone Acceptance Test
 
 Local onboarding is complete only if a second developer can:
 
@@ -516,7 +537,7 @@ Target: no undocumented machine-specific setup.
 
 ---
 
-# 16. Production Difference
+# 17. Production Difference
 
 Local:
 
@@ -541,7 +562,7 @@ The production runbook must use the real cPanel paths, Node version, environment
 
 ---
 
-# 17. Documentation Rule
+# 18. Documentation Rule
 
 If a change modifies:
 
