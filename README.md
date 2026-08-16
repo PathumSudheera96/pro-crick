@@ -10,6 +10,17 @@ Prerequisites:
 - Docker
 - Docker Compose
 
+### macOS
+
+Install prerequisites with Homebrew, or via the Docker Desktop installer:
+
+```bash
+brew install git
+brew install --cask docker
+```
+
+Then open Docker Desktop once from Applications/Launchpad and wait for it to finish starting (whale icon steady in the menu bar) before running `docker compose` commands. Docker Compose v2 ships bundled with Docker Desktop — no separate install needed. Works the same on Apple Silicon and Intel Macs.
+
 Clone and start:
 
 ```bash
@@ -20,9 +31,11 @@ docker compose up --build
 docker compose exec app pnpm payload migrate
 ```
 
-On PowerShell:
+### Windows (PowerShell)
 
 ```powershell
+git clone git@github.com:PathumSudheera96/pro-crick.git
+cd pro-crick
 Copy-Item .env.example .env
 docker compose up --build
 docker compose exec app pnpm payload migrate
@@ -50,6 +63,8 @@ docker compose exec app pnpm payload migrate:status
 docker compose exec app pnpm payload migrate:create descriptive-name
 docker compose exec app pnpm payload migrate
 ```
+
+If `docker compose up --build` fails on macOS with I/O or "shared library" errors mid-install, Docker Desktop's virtual disk usually ran out of host disk space — free up space, restart Docker Desktop, and retry.
 
 ## Contributing
 
