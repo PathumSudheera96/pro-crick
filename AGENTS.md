@@ -114,10 +114,10 @@ public/
 storage/                 # local development uploads; ignored by Git unless explicitly seeded
 
 AGENTS.md
-PROJECT_SPEC.md
-PLANS.md
-CODEX_EXECUTION_STEPS.txt
-DEVELOPMENT_SETUP.md
+docs/PROJECT_SPEC.md
+docs/PLANS.md
+docs/CODEX_EXECUTION_STEPS.txt
+docs/DEVELOPMENT_SETUP.md
 CONTRIBUTING.md
 README.md
 .env.example
@@ -164,7 +164,7 @@ Expected development files:
 - `Dockerfile.dev`
 - `.dockerignore`
 - `.env.example`
-- `DEVELOPMENT_SETUP.md`
+- `docs/DEVELOPMENT_SETUP.md`
 
 The local workflow should support commands equivalent to:
 
@@ -218,7 +218,7 @@ Before considering local setup complete, validate the onboarding path from a cle
 8. create/read a simple record,
 9. restart containers and confirm database persistence.
 
-If any undocumented manual step is required, update `DEVELOPMENT_SETUP.md`.
+If any undocumented manual step is required, update `docs/DEVELOPMENT_SETUP.md`.
 
 ---
 
@@ -229,7 +229,7 @@ This project must be easy to share with another developer through GitHub.
 The standard handoff is:
 1. Add the developer to the private GitHub repository.
 2. Developer clones the repository.
-3. Developer reads `AGENTS.md`, `PROJECT_SPEC.md`, `PLANS.md`, `DEVELOPMENT_SETUP.md`, and `CONTRIBUTING.md`.
+3. Developer reads `AGENTS.md`, `docs/PROJECT_SPEC.md`, `docs/PLANS.md`, `docs/DEVELOPMENT_SETUP.md`, and `CONTRIBUTING.md`.
 4. Developer copies `.env.example` to `.env`.
 5. Developer starts the local environment with Docker Compose.
 6. Developer runs migrations and optional development seed data using documented commands.
@@ -250,7 +250,7 @@ Never share real production enquiry/application data simply for development conv
 - Use one logical feature/fix per branch.
 - Use pull requests for review before merging significant changes.
 - Do not commit generated runtime data.
-- Document new environment variables in `.env.example` and `DEVELOPMENT_SETUP.md`.
+- Document new environment variables in `.env.example` and `docs/DEVELOPMENT_SETUP.md`.
 - If a migration is added, the pull request must explain how another developer applies it.
 - If setup changes, verify the fresh-clone workflow again.
 
@@ -269,10 +269,10 @@ Codex-generated branches may use a `codex/` prefix.
 Keep these files current:
 
 - `AGENTS.md` — engineering rules
-- `PROJECT_SPEC.md` — approved V1 product requirements
-- `PLANS.md` — live roadmap/status
-- `CODEX_EXECUTION_STEPS.txt` — ordered Codex task prompts
-- `DEVELOPMENT_SETUP.md` — local Docker setup and day-to-day commands
+- `docs/PROJECT_SPEC.md` — approved V1 product requirements
+- `docs/PLANS.md` — live roadmap/status
+- `docs/CODEX_EXECUTION_STEPS.txt` — ordered Codex task prompts
+- `docs/DEVELOPMENT_SETUP.md` — local Docker setup and day-to-day commands
 - `CONTRIBUTING.md` — collaboration, branches, pull requests, and handoff rules
 - `README.md` — project overview and shortest getting-started path
 

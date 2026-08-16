@@ -31,16 +31,16 @@ Then open:
 - Website: `http://localhost:3000`
 - Admin: `http://localhost:3000/admin`
 
-See `DEVELOPMENT_SETUP.md` for migrations, seed data, troubleshooting, and complete onboarding instructions.
+See `docs/DEVELOPMENT_SETUP.md` for migrations, seed data, troubleshooting, and complete onboarding instructions.
 
 ## Contributing
 
 Read:
 
 1. `AGENTS.md`
-2. `PROJECT_SPEC.md`
-3. `PLANS.md`
-4. `DEVELOPMENT_SETUP.md`
+2. `docs/PROJECT_SPEC.md`
+3. `docs/PLANS.md`
+4. `docs/DEVELOPMENT_SETUP.md`
 5. `CONTRIBUTING.md`
 
 Do not commit `.env`, runtime uploads, database volumes, or production data.
