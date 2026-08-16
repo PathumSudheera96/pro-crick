@@ -1,4 +1,4 @@
-# PROJECT_SPEC.md — Pro-Crick V1 Product Specification
+# docs/PROJECT_SPEC.md — Pro-Crick V1 Product Specification
 
 ## 1. Document Purpose
 
@@ -11,8 +11,8 @@ This is a product specification, not a coding-style guide.
 Use together with:
 
 - `AGENTS.md` — engineering and Codex rules
-- `PLANS.md` — implementation progress and roadmap
-- `CODEX_EXECUTION_STEPS.txt` — executable Codex prompts
+- `docs/PLANS.md` — implementation progress and roadmap
+- `docs/CODEX_EXECUTION_STEPS.txt` — executable Codex prompts
 
 If implementation details conflict with this product specification, the product requirement should be clarified before changing scope.
 
@@ -1142,7 +1142,7 @@ A second developer should not need:
 - `node_modules`
 - a raw production database dump
 
-Developer onboarding documentation must be maintained in `DEVELOPMENT_SETUP.md`.
+Developer onboarding documentation must be maintained in `docs/DEVELOPMENT_SETUP.md`.
 
 Collaboration workflow must be maintained in `CONTRIBUTING.md`.
 

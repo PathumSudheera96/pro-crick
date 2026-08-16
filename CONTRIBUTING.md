@@ -15,11 +15,11 @@ Before contributing:
 1. Clone the private GitHub repository.
 2. Read:
    - `AGENTS.md`
-   - `PROJECT_SPEC.md`
-   - `PLANS.md`
-   - `DEVELOPMENT_SETUP.md`
+   - `docs/PROJECT_SPEC.md`
+   - `docs/PLANS.md`
+   - `docs/DEVELOPMENT_SETUP.md`
 3. Set up the local Docker environment.
-4. Confirm the current phase/task in `PLANS.md`.
+4. Confirm the current phase/task in `docs/PLANS.md`.
 5. Pull current `main` before creating a branch.
 
 ---
@@ -28,10 +28,10 @@ Before contributing:
 
 - GitHub repository: application code
 - PostgreSQL: CMS/runtime data
-- `PROJECT_SPEC.md`: approved V1 scope
-- `PLANS.md`: current implementation state
+- `docs/PROJECT_SPEC.md`: approved V1 scope
+- `docs/PLANS.md`: current implementation state
 - `AGENTS.md`: engineering rules
-- `CODEX_EXECUTION_STEPS.txt`: planned Codex execution prompts
+- `docs/CODEX_EXECUTION_STEPS.txt`: planned Codex execution prompts
 
 Do not keep important approved requirements only in private messages or local notes.
 
@@ -120,7 +120,7 @@ Never:
 If adding a variable:
 
 1. add a safe placeholder to `.env.example`
-2. update `DEVELOPMENT_SETUP.md`
+2. update `docs/DEVELOPMENT_SETUP.md`
 3. update deployment documentation if production needs it
 4. do not commit the real secret
 
@@ -200,6 +200,33 @@ Human developers still review Codex output before merge.
 
 ---
 
+# 11A. Claude Code Agents and Skills
+
+This repository ships project-level Claude Code configuration under `.claude/`, committed to Git so every developer gets the same tooling on clone. See `CLAUDE.md` for the general Claude Code orientation.
+
+## Subagents (`.claude/agents/`)
+
+Specialized subagents for delegating focused work:
+
+- `payload-schema` — Payload collections/globals/blocks, migrations, generated types, query layer
+- `access-control` — Payload access-control functions, public form endpoint security
+- `frontend-builder` — public Next.js frontend (pages, components, block renderers)
+- `seo-guardian` — SEO field group, metadata fallbacks, sitemap/robots/redirects/structured data
+- `db-migration-reviewer` — review-only gate on schema/migration safety before merge
+
+## Skills (`.claude/skills/`)
+
+Repeatable procedures/checklists any developer can invoke through Claude Code:
+
+- `pro-crick-dev-workflow` — Docker/migrate/lint/typecheck/build command reference
+- `pro-crick-new-collection` — checklist for adding/changing a Payload collection or global
+- `pro-crick-new-page-block` — checklist for adding/changing a Pages block (schema + renderer)
+- `pro-crick-seo-checklist` — pre-publish SEO checklist for new pages/routes
+
+These don't replace the required checks in Section 5 or the review priorities in Section 13 — they exist to make it easier to hit them consistently. Keep `.claude/agents/` and `.claude/skills/` current when engineering rules in `AGENTS.md` change; a PR that changes access-control rules, the migration workflow, or the SEO model should update the matching agent/skill file too.
+
+---
+
 # 12. Handoff Between Developers
 
 Before handing an in-progress branch to another developer:
@@ -210,7 +237,7 @@ Before handing an in-progress branch to another developer:
 - explain incomplete work
 - list required migration/setup steps
 - list known failures
-- update `PLANS.md` if status changed
+- update `docs/PLANS.md` if status changed
 
 A developer must not need another developer's local Docker volume to continue.
 
@@ -241,7 +268,7 @@ Do not merge significant work when:
 - required environment variable is undocumented
 - production secrets are present
 - public routes expose drafts/private content
-- the change contradicts `PROJECT_SPEC.md` without approved scope update
+- the change contradicts `docs/PROJECT_SPEC.md` without approved scope update
 
 ---
 
@@ -249,9 +276,10 @@ Do not merge significant work when:
 
 Update:
 
-- scope -> `PROJECT_SPEC.md`
-- progress/blockers -> `PLANS.md`
+- scope -> `docs/PROJECT_SPEC.md`
+- progress/blockers -> `docs/PLANS.md`
 - engineering rules -> `AGENTS.md`
-- local Docker/setup -> `DEVELOPMENT_SETUP.md`
+- local Docker/setup -> `docs/DEVELOPMENT_SETUP.md`
 - collaboration -> `CONTRIBUTING.md`
-- Codex task order -> `CODEX_EXECUTION_STEPS.txt`
+- Codex task order -> `docs/CODEX_EXECUTION_STEPS.txt`
+- Claude Code agents/skills -> `.claude/agents/`, `.claude/skills/` (see Section 11A)

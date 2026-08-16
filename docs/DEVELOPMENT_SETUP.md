@@ -1,4 +1,4 @@
-# DEVELOPMENT_SETUP.md — Pro-Crick Local Development
+# docs/DEVELOPMENT_SETUP.md — Pro-Crick Local Development
 
 ## Purpose
 
@@ -47,8 +47,8 @@ cd pro-crick
 Read:
 
 1. `AGENTS.md`
-2. `PROJECT_SPEC.md`
-3. `PLANS.md`
+2. `docs/PROJECT_SPEC.md`
+3. `docs/PLANS.md`
 4. `CONTRIBUTING.md`
 5. this file
 

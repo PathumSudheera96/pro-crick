@@ -1,4 +1,4 @@
-# PLANS.md — Pro-Crick Implementation Roadmap
+# docs/PLANS.md — Pro-Crick Implementation Roadmap
 
 ## Purpose
 
@@ -7,10 +7,10 @@ This file tracks the current implementation plan, project status, dependencies, 
 Use this file together with:
 
 - `AGENTS.md` — permanent development rules and engineering constraints
-- `PROJECT_SPEC.md` — V1 product and CMS requirements
-- `CODEX_EXECUTION_STEPS.txt` — step-by-step prompts to run with Codex
+- `docs/PROJECT_SPEC.md` — V1 product and CMS requirements
+- `docs/CODEX_EXECUTION_STEPS.txt` — step-by-step prompts to run with Codex
 
-Codex should read `AGENTS.md`, `PROJECT_SPEC.md`, and this file before beginning any major implementation task.
+Codex should read `AGENTS.md`, `docs/PROJECT_SPEC.md`, and this file before beginning any major implementation task.
 
 ---
 
@@ -72,12 +72,12 @@ Legend:
 - [x] Review basic cPanel resource limits
 - [x] Confirm available Node.js version in cPanel
 - [x] Create `AGENTS.md`
-- [x] Create `CODEX_EXECUTION_STEPS.txt`
-- [x] Create `PROJECT_SPEC.md`
-- [x] Create `PLANS.md`
+- [x] Create `docs/CODEX_EXECUTION_STEPS.txt`
+- [x] Create `docs/PROJECT_SPEC.md`
+- [x] Create `docs/PLANS.md`
 - [x] Create private GitHub repository
 - [x] Define Docker-based local development requirement
-- [x] Create `DEVELOPMENT_SETUP.md`
+- [x] Create `docs/DEVELOPMENT_SETUP.md`
 - [x] Create `CONTRIBUTING.md`
 - [~] Add project files to repository
 - [ ] Add another developer to the private repository when required

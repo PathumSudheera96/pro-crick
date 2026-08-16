@@ -203,7 +203,7 @@ After implementation:
 2. Review your own diff.
 3. List all files created or changed.
 4. List required environment variables.
-5. Document exact fresh-clone Docker commands in `DEVELOPMENT_SETUP.md`.
+5. Document exact fresh-clone Docker commands in `docs/DEVELOPMENT_SETUP.md`.
 6. Update `CONTRIBUTING.md` if collaboration/setup behavior changed.
 7. Report any unresolved setup issues.
 
@@ -222,9 +222,9 @@ Prompt:
 Read:
 
 - AGENTS.md
-- PROJECT_SPEC.md
-- PLANS.md
-- DEVELOPMENT_SETUP.md
+- docs/PROJECT_SPEC.md
+- docs/PLANS.md
+- docs/DEVELOPMENT_SETUP.md
 - CONTRIBUTING.md
 
 Implement/review STEP 01A only: local Docker onboarding validation.
@@ -271,7 +271,7 @@ Review:
 - .dockerignore
 - .gitignore
 - .env.example
-- DEVELOPMENT_SETUP.md
+- docs/DEVELOPMENT_SETUP.md
 - CONTRIBUTING.md
 
 Fix setup/documentation issues that prevent reliable onboarding.
@@ -2753,7 +2753,7 @@ IMPORTANT PROJECT PRINCIPLES
 ======================================================================
 
 1. AGENTS.md is the permanent development rulebook.
-2. DEVELOPMENT_SETUP.md is the standard local Docker/onboarding guide.
+2. docs/DEVELOPMENT_SETUP.md is the standard local Docker/onboarding guide.
 3. CONTRIBUTING.md defines collaboration and developer handoff.
 4. This file is the execution checklist.
 3. Never ask Codex to implement the entire project in one prompt.
