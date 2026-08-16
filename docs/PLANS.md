@@ -152,6 +152,7 @@ Legend:
 ## Phase 5 — Website Content CMS
 
 - [ ] Create Testimonials collection
+- [ ] Create Partners collection
 - [ ] Create Hero block
 - [ ] Create Rich Text block
 - [ ] Create Image + Text block
@@ -186,6 +187,7 @@ Legend:
 - [ ] Create generic CMS page renderer
 - [ ] Create page block renderers
 - [ ] Build Homepage
+- [ ] Build Partners/Sponsors homepage section
 - [ ] Build About page capability
 - [ ] Build Services page capability
 - [ ] Build Contact page capability

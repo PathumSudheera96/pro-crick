@@ -81,6 +81,7 @@ src/
     Enquiries.ts
     PlayerApplications.ts
     Testimonials.ts
+    Partners.ts
     Redirects.ts
     PlayingRoles.ts
     Countries.ts
@@ -298,6 +299,7 @@ Players
 Content
 - Pages
 - Testimonials
+- Partners
 - Media
 
 Leads
@@ -612,6 +614,7 @@ Editor:
 - manage players
 - manage pages
 - manage testimonials
+- manage partners
 - manage media
 - manage enquiries
 - manage player applications
