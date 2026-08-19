@@ -125,7 +125,7 @@ function MonochromePerformance() {
             <div className="relative bg-[#090909] p-6 sm:p-8 lg:p-10">
               <div className="flex items-center justify-between border-b border-white/12 pb-5">
                 <Image
-                  src="/images/pro-crick-512.png"
+                  src="/images/pro-crick-SVG-cropped.svg"
                   alt="Pro-Crick"
                   width={150}
                   height={106}
@@ -252,7 +252,7 @@ function CricketSignal() {
               <div className="relative">
                 <div className="flex items-center justify-between border-b border-white/12 pb-5">
                   <Image
-                    src="/images/pro-crick-512.png"
+                    src="/images/pro-crick-SVG-cropped.svg"
                     alt="Pro-Crick"
                     width={150}
                     height={106}

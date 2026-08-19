@@ -2,12 +2,17 @@
 
 ## Project overview
 
-Pro-Crick is a cricket player agency website and custom CMS.
+Pro-Crick is a cricket talent connection platform, cricket player agency website, and custom CMS.
+
+Brand line: **Where Cricket Connects**.
+
+The initial business focus is connecting talented Sri Lankan cricketers with cricket clubs across the United Kingdom. The long-term vision is a global cricket talent network connecting players, clubs, and cricket communities through transparent, long-term partnerships.
 
 The application is a single Next.js + Payload CMS codebase backed by PostgreSQL and intended to be self-hosted on cPanel.
 
 Primary business goals:
-- Present Pro-Crick as a professional cricket player agency.
+- Present Pro-Crick as a professional cricket talent connection platform and player agency.
+- Communicate the Sri Lanka-to-UK initial market clearly while keeping the platform extensible for broader international expansion.
 - Maintain a structured, searchable player database.
 - Allow non-technical administrators to manage players and website content.
 - Capture player enquiries and player applications.
@@ -705,6 +710,8 @@ The Pro-Crick brand direction is:
 - strong player photography
 - generous whitespace
 - professional international agency feel rather than a local club theme
+- people-first, trust-led cricket partnership positioning
+- initial Sri Lankan talent to UK club opportunity focus
 
 Requirements:
 - mobile-first responsive implementation

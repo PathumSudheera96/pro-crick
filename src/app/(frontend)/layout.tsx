@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from 'next/font/google'
+import { ChatWidget } from '@/components/site/ChatWidget'
+import { SiteAnimations } from '@/components/site/SiteAnimations'
 import './styles.css'
 
 const displayFont = IBM_Plex_Sans_Condensed({
@@ -35,7 +37,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ChatWidget />
+        <SiteAnimations />
+      </body>
     </html>
   )
 }

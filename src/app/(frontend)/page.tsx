@@ -3,21 +3,31 @@ import { FeaturedPlayers } from '@/components/home/FeaturedPlayers'
 import { Hero } from '@/components/home/Hero'
 import { Introduction } from '@/components/home/Introduction'
 import { Partners } from '@/components/home/Partners'
+import { RegistrationSplitCta } from '@/components/home/RegistrationSplitCta'
 import { Services } from '@/components/home/Services'
 import { Stats } from '@/components/home/Stats'
 import { Testimonials } from '@/components/home/Testimonials'
+import { WhyChooseUs } from '@/components/home/WhyChooseUs'
+import { Footer } from '@/components/site/Footer'
+import { NavBar } from '@/components/site/NavBar'
 
 export default function HomePage() {
   return (
-    <main>
-      <Hero />
-      <Introduction />
-      <FeaturedPlayers />
-      <Services />
-      <Stats />
-      <Testimonials />
-      <Partners />
-      <Cta />
-    </main>
+    <>
+      <NavBar variant="transparent-dark" overlay />
+      <main>
+        <Hero />
+        <Introduction />
+        <FeaturedPlayers />
+        <RegistrationSplitCta />
+        <WhyChooseUs />
+        <Stats />
+        <Services />
+        <Testimonials />
+        <Partners />
+        <Cta />
+      </main>
+      <Footer />
+    </>
   )
 }
