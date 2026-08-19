@@ -20,7 +20,19 @@ If implementation details conflict with this product specification, the product 
 
 # 2. Product Overview
 
-Pro-Crick is a professional cricket player agency website.
+Pro-Crick is a professional cricket talent connection platform and cricket player agency website.
+
+Brand line:
+
+**Where Cricket Connects**
+
+Approved positioning:
+
+- Pro-Crick bridges talented cricketers and cricket clubs through meaningful, transparent, long-term partnerships.
+- V1's initial market focus is connecting talented Sri Lankan cricketers with cricket clubs across the United Kingdom.
+- The platform should support professional cricketers, emerging/amateur cricketers, and Sri Lankan players already based in the United Kingdom who are seeking the right club environment.
+- The long-term vision is to expand beyond Sri Lanka into a global cricket talent network connecting players, clubs, and cricket communities internationally.
+- Public copy should emphasize trust, transparency, partnership, professionalism, passion for cricket, and flexibility.
 
 The site should help:
 
@@ -126,6 +138,22 @@ Required V1 public routes/capabilities:
 
 Additional CMS-managed pages may be added without code changes where compatible with the routing model.
 
+## 5.1 Required About / Agency Content
+
+The `/about` page and relevant homepage introduction sections should be able to present:
+
+- agency background and purpose
+- Sri Lanka-to-UK initial market focus
+- long-term global cricket talent network vision
+- founder profiles for Dilan Perera and Nisala Tharaka
+- mission and vision
+- player benefits
+- club benefits
+- values: trust, transparency, partnership, professionalism, passion for cricket, and flexibility
+- promise: connect talent with opportunity and build partnerships where cricket thrives
+
+Use `docs/about_agency.md` as the current source brief until the client supplies final polished copy.
+
 ---
 
 # 6. Homepage
@@ -149,6 +177,8 @@ Purpose:
 - explain Pro-Crick
 - establish credibility
 - summarize agency value
+- introduce the "Where Cricket Connects" positioning
+- communicate the Sri Lanka-to-UK starting focus without limiting the future global vision
 
 ## 6.3 Featured Players
 
@@ -162,10 +192,12 @@ Requirements:
 
 Examples:
 
-- player representation
 - club/player connections
+- Sri Lankan talent discovery for UK clubs
 - overseas opportunities
 - cricket placement support
+- player opportunity matching
+- transparent partnership support for players and clubs
 
 Exact content to be provided/approved by client.
 
@@ -868,11 +900,20 @@ Fields:
 - address
 - social links
 
+Default contact/social values from the agency brief:
+
+- email: `connect@pro-crick.com`
+- Facebook: `https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr`
+- Instagram: `https://www.instagram.com/pro__crick?igsh=MWdsajd4Y2R2NG45NQ%3D%3D&utm_source=qr`
+- X: `https://x.com/pro__crick?s=11`
+- LinkedIn: `https://www.linkedin.com/company/pro-crick-where-cricket-connects/`
+
 Potential social fields:
 
 - Facebook
 - Instagram
 - LinkedIn
+- X / Twitter
 - YouTube
 - TikTok
 
@@ -972,6 +1013,10 @@ Do not spend excessive V1 time creating advanced analytics dashboards.
 
 Use the supplied Pro-Crick logo as the primary brand reference.
 
+Brand line:
+
+**Where Cricket Connects**
+
 Desired style:
 
 - premium
@@ -982,6 +1027,7 @@ Desired style:
 - sports agency
 - editorial player photography
 - generous whitespace
+- trust-led, people-first partnership tone
 
 Color direction:
 
@@ -999,6 +1045,12 @@ Avoid:
 - copying CricX visual design
 
 The site may be functionally inspired by professional cricket agency websites, but should be visually distinct.
+
+Photography/content direction:
+
+- prioritize real cricket environments, team unity, player development, and club/player partnership moments
+- avoid imagery that makes Pro-Crick feel like a local club website rather than an agency/network
+- avoid unverified claims about scale, number of clubs, or years of operation
 
 ---
 
@@ -1391,6 +1443,8 @@ Client/team supplies or approves:
 - player CVs
 - player videos
 - agency content
+- founder biographies
+- mission, vision, values, and promise copy
 - testimonials
 - business information
 - legal content

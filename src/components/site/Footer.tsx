@@ -49,7 +49,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1.9fr]">
           <div>
             <Image
-              src="/images/pro-crick-512.png"
+              src="/images/pro-crick-SVG-cropped.svg"
               alt="Pro-Crick"
               width={190}
               height={134}

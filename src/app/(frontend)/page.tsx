@@ -6,18 +6,24 @@ import { Partners } from '@/components/home/Partners'
 import { Services } from '@/components/home/Services'
 import { Stats } from '@/components/home/Stats'
 import { Testimonials } from '@/components/home/Testimonials'
+import { Footer } from '@/components/site/Footer'
+import { NavBar } from '@/components/site/NavBar'
 
 export default function HomePage() {
   return (
-    <main>
-      <Hero />
-      <Introduction />
-      <FeaturedPlayers />
-      <Services />
-      <Stats />
-      <Testimonials />
-      <Partners />
-      <Cta />
-    </main>
+    <>
+      <NavBar variant="transparent-dark" overlay />
+      <main>
+        <Hero />
+        <Introduction />
+        <FeaturedPlayers />
+        <Services />
+        <Stats />
+        <Testimonials />
+        <Partners />
+        <Cta />
+      </main>
+      <Footer />
+    </>
   )
 }

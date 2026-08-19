@@ -16,11 +16,20 @@ Codex should read `AGENTS.md`, `docs/PROJECT_SPEC.md`, and this file before begi
 
 # 1. Project Summary
 
-Pro-Crick is a professional cricket player agency website with a custom CMS.
+Pro-Crick is a professional cricket talent connection platform and player agency website with a custom CMS.
+
+Brand line: **Where Cricket Connects**.
+
+Current approved positioning:
+
+- Initial market focus: connect talented Sri Lankan cricketers with cricket clubs across the United Kingdom.
+- Long-term vision: expand into a global cricket talent network connecting players, clubs, and cricket communities internationally.
+- Core tone: trust, transparency, partnership, professionalism, passion for cricket, and flexibility.
 
 Primary goals:
 
-- Present Pro-Crick as a premium international cricket player agency
+- Present Pro-Crick as a premium cricket talent connection platform and player agency
+- Communicate the Sri Lanka-to-UK initial opportunity focus clearly
 - Maintain a structured player database
 - Allow administrators/editors to manage player profiles
 - Provide public player search and filtering
@@ -187,6 +196,9 @@ Legend:
 - [ ] Create generic CMS page renderer
 - [ ] Create page block renderers
 - [ ] Build Homepage
+- [ ] Add approved agency background / "Where Cricket Connects" content
+- [ ] Add founder profile content for Dilan Perera and Nisala Tharaka
+- [ ] Add mission, vision, values, player benefits, and club benefits content sections
 - [ ] Build Partners/Sponsors homepage section
 - [ ] Build About page capability
 - [ ] Build Services page capability
@@ -486,15 +498,21 @@ These items should be confirmed before or during early implementation.
 
 - [x] Pro-Crick logo available
 - [ ] final logo files / SVG
+- [x] brand line confirmed: "Where Cricket Connects"
+- [x] initial market focus confirmed: Sri Lankan cricketers to UK clubs
+- [x] founder names/content source supplied
+- [x] official contact email supplied: `connect@pro-crick.com`
+- [x] official social links supplied
 - [ ] approved typography
 - [ ] final brand red color
-- [ ] photography style
-- [ ] final frontend visual direction
+- [~] photography style
+- [~] final frontend visual direction
 
 ## Player Requirements
 
 - [ ] final player fields confirmed with client
 - [ ] final player filters confirmed
+- [ ] confirm whether Sri Lankan nationality/UK eligibility should be featured as default filters or homepage discovery shortcuts
 - [ ] whether gender filter is required
 - [ ] whether player availability date is needed
 - [ ] whether multiple playing roles are allowed
@@ -505,7 +523,8 @@ These items should be confirmed before or during early implementation.
 ## Enquiries
 
 - [ ] email notification requirements
-- [ ] target notification email address
+- [x] public contact email confirmed: `connect@pro-crick.com`
+- [ ] target notification inbox for form submissions
 - [ ] SMTP/provider
 - [ ] whether WhatsApp CTA is needed
 

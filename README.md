@@ -1,6 +1,10 @@
 # Pro-Crick
 
-Pro-Crick is a cricket player agency website and custom CMS built with Next.js, Payload CMS, PostgreSQL, and Tailwind CSS.
+Pro-Crick is a cricket talent connection platform, player agency website, and custom CMS built with Next.js, Payload CMS, PostgreSQL, and Tailwind CSS.
+
+Brand line: **Where Cricket Connects**.
+
+The initial business focus is connecting talented Sri Lankan cricketers with cricket clubs across the United Kingdom, with a longer-term vision to grow into a global cricket talent network.
 
 ## Local Development
 

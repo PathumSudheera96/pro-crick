@@ -233,9 +233,24 @@ export default function DesignSystemPage() {
 
       <section className="bg-surface py-12">
         <div className="mx-auto max-w-[96rem] px-5 sm:px-8 lg:px-10">
-          <h2 className="type-h2 mb-6">Navigation and footer</h2>
+          <h2 className="type-h2 mb-6">Navigation variants</h2>
+          <div className="grid gap-6">
+            <NavPreview label="Light">
+              <NavBar variant="light" />
+            </NavPreview>
+            <NavPreview label="Dark">
+              <NavBar variant="dark" />
+            </NavPreview>
+            <NavPreview label="Transparent light" image>
+              <NavBar variant="transparent-light" />
+            </NavPreview>
+            <NavPreview label="Transparent dark" image dark>
+              <NavBar variant="transparent-dark" />
+            </NavPreview>
+          </div>
+
+          <h2 className="type-h2 mb-6 mt-14">Footer</h2>
           <div className="overflow-hidden border border-hairline">
-            <NavBar />
             <Footer />
           </div>
         </div>
@@ -270,6 +285,49 @@ function TypeRow({ label, children }: { label: string; children: React.ReactNode
     <div className="border-t border-hairline pt-5">
       <p className="type-small mb-4 font-semibold text-muted">{label}</p>
       {children}
+    </div>
+  )
+}
+
+function NavPreview({
+  label,
+  children,
+  image = false,
+  dark = false,
+}: {
+  label: string
+  children: React.ReactNode
+  image?: boolean
+  dark?: boolean
+}) {
+  if (!image) {
+    return (
+      <div>
+        <p className="type-accent mb-3 font-semibold uppercase text-muted">{label}</p>
+        <div className="overflow-hidden border border-hairline">{children}</div>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <p className="type-accent mb-3 font-semibold uppercase text-muted">{label}</p>
+      <div className="relative isolate overflow-hidden border border-hairline">
+        <Image
+          src="https://images.pexels.com/photos/17628715/pexels-photo-17628715.jpeg?auto=compress&cs=tinysrgb&w=1400"
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 100vw, 1536px"
+          className="absolute inset-0 -z-20 object-cover"
+        />
+        <div className={`absolute inset-0 -z-10 ${dark ? 'bg-black/30' : 'bg-white/20'}`} />
+        {children}
+        <div className={`px-6 py-10 ${dark ? 'text-white' : 'text-foreground'}`}>
+          <p className="type-small max-w-xl">
+            Transparent navbar preview with backdrop blur over live image context.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
