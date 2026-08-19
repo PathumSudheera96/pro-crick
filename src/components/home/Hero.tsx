@@ -6,7 +6,7 @@ const HERO_IMAGE =
 
 export function Hero() {
   return (
-    <section className="relative isolate min-h-screen overflow-hidden bg-black text-white">
+    <section data-gsap-section className="relative isolate min-h-screen overflow-hidden bg-black text-white">
       <Image
         src={HERO_IMAGE}
         alt="Cricket players celebrating together on the field"
@@ -22,18 +22,18 @@ export function Hero() {
       <div className="mx-auto flex min-h-screen max-w-[96rem] flex-col px-5 sm:px-8 lg:px-10">
         <div className="flex flex-1 items-center pb-16 pt-24 sm:pb-20 sm:pt-28">
           <div className="max-w-5xl">
-            <p className="type-accent max-w-xl font-semibold uppercase text-[#c9cdd3]">
+            <p data-gsap-item className="type-accent max-w-xl font-semibold uppercase text-[#c9cdd3]">
               Modern scouting and representation for cricket clubs, players, and agencies.
             </p>
-            <h1 className="type-h1 home-hero-title mt-6 max-w-5xl text-white">
+            <h1 data-gsap-item data-gsap-title className="type-h1 home-hero-title mt-6 max-w-5xl text-white">
               Cricket talent ready for club review.
             </h1>
-            <p className="type-lead mt-7 max-w-2xl text-white/70">
+            <p data-gsap-item className="type-lead mt-7 max-w-2xl text-white/70">
               Pro-Crick turns player profiles into decisive scouting views: role, format,
               availability, representative notes, and the next step for serious enquiries.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div data-gsap-item className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/players"
                 className="inline-flex min-h-14 items-center justify-center gap-3 bg-accent px-8 text-sm font-medium uppercase text-white transition-colors hover:bg-accent-hover"

@@ -18,12 +18,12 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section className="bg-[#ece5dc]">
+    <section data-gsap-section className="bg-[#ece5dc]">
       <div className="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <p className="type-accent uppercase text-muted">What the homepage signals</p>
-            <h2 className="type-h2 mt-4 text-foreground">
+            <p data-gsap-item className="type-accent uppercase text-muted">What the homepage signals</p>
+            <h2 data-gsap-item data-gsap-title className="type-h2 mt-4 text-foreground">
               Not a generic roster. An agency front door.
             </h2>
           </div>
@@ -31,6 +31,7 @@ export function Services() {
           <div className="grid gap-5 lg:grid-cols-3">
             {SERVICES.map((service) => (
               <div
+                data-gsap-item
                 key={service.name}
                 className="flex min-h-[16rem] flex-col justify-between border border-black/10 bg-surface p-6 transition-colors duration-200 hover:bg-[#eef0f3]"
               >
@@ -44,9 +45,9 @@ export function Services() {
         </div>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="bg-panel p-7 text-white transition-colors duration-200 hover:bg-[#151515] sm:p-9">
+          <div data-gsap-item className="bg-panel p-7 text-white transition-colors duration-200 hover:bg-[#151515] sm:p-9">
             <p className="type-accent uppercase text-white/45">For clubs and recruiters</p>
-            <h3 className="type-h3 mt-4">
+            <h3 data-gsap-title className="type-h3 mt-4">
               Every enquiry should begin with substance, not guesswork.
             </h3>
             <p className="type-body mt-4 max-w-2xl text-white/68">
@@ -62,7 +63,7 @@ export function Services() {
               'Availability windows',
               'Cleaner enquiries',
             ].map((item) => (
-              <div key={item} className="bg-surface px-5 py-6 text-sm font-semibold uppercase tracking-[0.18em] text-foreground/80 transition-colors duration-200 hover:bg-[#eef0f3]">
+              <div data-gsap-item key={item} className="bg-surface px-5 py-6 text-sm font-semibold uppercase tracking-[0.18em] text-foreground/80 transition-colors duration-200 hover:bg-[#eef0f3]">
                 {item}
               </div>
             ))}

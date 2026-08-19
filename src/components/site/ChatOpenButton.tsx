@@ -1,14 +1,15 @@
 'use client'
 
+import type { ButtonHTMLAttributes } from 'react'
+
 export function ChatOpenButton({
   children,
   className,
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
+      {...props}
       type="button"
       className={className}
       onClick={() => window.dispatchEvent(new CustomEvent('pro-crick:open-chat'))}

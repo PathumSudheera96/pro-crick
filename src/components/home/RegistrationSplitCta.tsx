@@ -6,7 +6,7 @@ const REGISTRATION_IMAGE =
 
 export function RegistrationSplitCta() {
   return (
-    <section className="relative isolate overflow-hidden bg-panel px-5 py-20 text-white sm:px-8 lg:px-10">
+    <section data-gsap-section className="relative isolate overflow-hidden bg-panel px-5 py-20 text-white sm:px-8 lg:px-10">
       <Image
         src={REGISTRATION_IMAGE}
         alt="Cricketer on the field"
@@ -56,12 +56,13 @@ function RegistrationPanel({
         withDivider ? 'border-l border-white/42' : ''
       }`}
     >
-      <h2 className="max-w-3xl text-[clamp(1.35rem,3vw,3.25rem)] font-medium leading-[1.02] tracking-[-0.035em] text-white">
+      <h2 data-gsap-item data-gsap-title className="max-w-3xl text-[clamp(1.35rem,3vw,3.25rem)] font-medium leading-[1.02] tracking-[-0.035em] text-white">
         {title}
       </h2>
-      <p className="type-lead mt-8 max-w-2xl text-white/82">{description}</p>
+      <p data-gsap-item className="type-lead mt-8 max-w-2xl text-white/82">{description}</p>
       <Link
         href={href}
+        data-gsap-item
         className="mt-9 inline-flex min-h-14 items-center justify-center bg-accent px-5 text-center text-xs font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:bg-accent-hover sm:min-w-80 sm:px-8 sm:text-sm"
       >
         {buttonLabel}

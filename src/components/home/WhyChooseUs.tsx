@@ -39,14 +39,14 @@ const WHY_CHOOSE_ITEMS = [
 
 export function WhyChooseUs() {
   return (
-    <section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
+    <section data-gsap-section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
       <div className="mx-auto max-w-[90rem]">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="type-accent font-semibold uppercase text-accent">Why choose us</p>
-          <h2 className="type-h2 mt-4 text-foreground">
+          <p data-gsap-item className="type-accent font-semibold uppercase text-accent">Why choose us</p>
+          <h2 data-gsap-item data-gsap-title className="type-h2 mt-4 text-foreground">
             Built for clear cricket decisions.
           </h2>
-          <p className="type-body mx-auto mt-6 max-w-2xl text-muted">
+          <p data-gsap-item className="type-body mx-auto mt-6 max-w-2xl text-muted">
             Pro-Crick gives players and clubs a cleaner route from profile discovery to
             serious recruitment conversations.
           </p>
@@ -55,6 +55,7 @@ export function WhyChooseUs() {
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {WHY_CHOOSE_ITEMS.map((item) => (
             <article
+              data-gsap-item
               key={item.title}
               className="border border-hairline bg-white p-6 transition-colors duration-200 hover:border-foreground/20 hover:bg-surface"
             >

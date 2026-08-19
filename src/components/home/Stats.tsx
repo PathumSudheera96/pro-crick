@@ -27,10 +27,11 @@ const STATS = [
 
 export function Stats() {
   return (
-    <section className="bg-accent px-5 py-20 text-white sm:px-8 lg:px-10">
+    <section data-gsap-section className="bg-accent px-5 py-20 text-white sm:px-8 lg:px-10">
       <div className="mx-auto grid max-w-[90rem] gap-10 sm:grid-cols-2 lg:grid-cols-4">
         {STATS.map((stat) => (
           <article
+            data-gsap-item
             key={stat.title}
             className="text-center"
           >

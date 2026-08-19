@@ -263,12 +263,12 @@ export function FeaturedPlayers() {
 
   return (
     <section>
-      <div className="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-10">
+      <div data-gsap-section className="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-10">
         <div className="flex max-w-5xl flex-col items-start gap-7">
-          <h2 className="type-h2 max-w-4xl text-foreground">
+          <h2 data-gsap-item data-gsap-title className="type-h2 max-w-4xl text-foreground">
             Where cricket talent meets the right opportunity.
           </h2>
-          <p className="type-body max-w-3xl text-muted">
+          <p data-gsap-item className="type-body max-w-3xl text-muted">
             Pro-Crick bridges talented cricketers and cricket clubs through transparent,
             long-term partnerships. Our initial focus is connecting Sri Lankan players
             with clubs across the United Kingdom, while building toward a trusted global
@@ -276,6 +276,7 @@ export function FeaturedPlayers() {
           </p>
           <Link
             href="/about"
+            data-gsap-item
             className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-accent transition-colors duration-200 hover:text-accent-hover"
           >
             About Pro-Crick
@@ -284,17 +285,17 @@ export function FeaturedPlayers() {
         </div>
       </div>
 
-      <div className="bg-accent px-5 py-24 sm:px-8 lg:px-10">
+      <div data-gsap-section className="bg-accent px-5 py-24 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-[90rem]">
           <div className="border-t border-white/24 pt-12">
             <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-              <p className="type-accent font-semibold uppercase text-white/72">
+              <p data-gsap-item className="type-accent font-semibold uppercase text-white/72">
                 Featured players
               </p>
-              <h3 className="type-h3 mt-4 max-w-3xl text-white">
+              <h3 data-gsap-item data-gsap-title className="type-h3 mt-4 max-w-3xl text-white">
                 Player profiles prepared for serious club conversations.
               </h3>
-              <p className="type-body mt-6 max-w-2xl text-white/78">
+              <p data-gsap-item className="type-body mt-6 max-w-2xl text-white/78">
                 A preview of how Pro-Crick presents player fit, role, availability,
                 and agency context for faster club review.
               </p>
@@ -304,7 +305,7 @@ export function FeaturedPlayers() {
           <div className="mt-10 overflow-hidden">
             <ul ref={trackRef} className="featured-player-track flex items-stretch gap-5">
               {HOMEPAGE_PLAYERS.map((player) => (
-                <li key={player.slug} className="featured-player-slide h-auto">
+                <li data-gsap-item key={player.slug} className="featured-player-slide h-auto">
                   <Link
                     href={`/players/${player.slug}`}
                     className="group flex h-full flex-col overflow-hidden bg-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] transition-colors duration-200 hover:bg-surface"
@@ -340,7 +341,7 @@ export function FeaturedPlayers() {
             </ul>
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div data-gsap-item className="mt-8 flex items-center justify-center gap-3">
             <button
               type="button"
               aria-label="Previous featured players"
@@ -375,7 +376,7 @@ export function FeaturedPlayers() {
             </button>
           </div>
 
-          <div className="mt-12 flex justify-center">
+          <div data-gsap-item className="mt-12 flex justify-center">
             <Link
               href="/players"
               className="inline-flex min-h-12 items-center justify-center gap-3 bg-white px-7 text-sm font-medium uppercase tracking-[0.16em] text-foreground transition-colors duration-200 hover:bg-surface"
