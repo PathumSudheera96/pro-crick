@@ -85,6 +85,7 @@ Can:
 - manage players
 - manage pages
 - manage testimonials
+- manage partners
 - manage media
 - manage enquiries
 - manage player applications
@@ -190,6 +191,15 @@ Example objectives:
 - Find a Player
 - Enquire Now
 - Apply to Join
+
+## 6.8 Partners / Sponsors
+
+Requirements:
+
+- display a row/strip of partner or sponsor logos
+- CMS-managed via a dedicated Partners collection (see §12A)
+- each logo may optionally link out to the partner's site
+- homepage only in V1; not part of the reusable page block library
 
 ---
 
@@ -583,6 +593,24 @@ Used on:
 
 ---
 
+# 12A. Partners / Sponsors
+
+Fields:
+
+- name
+- logo
+- linkUrl (optional)
+- sortOrder
+- publishing status (active/inactive)
+
+Used on:
+
+- homepage (§6.8)
+
+Not part of the reusable page block library in V1 — homepage-only section, similar to how Testimonials appears on the homepage without being a Page block.
+
+---
+
 # 13. Media Library
 
 Support:
@@ -895,6 +923,7 @@ Recommended CMS navigation:
 
 - Pages
 - Testimonials
+- Partners
 - Media
 
 ## Leads

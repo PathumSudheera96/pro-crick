@@ -1,8 +1,24 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #050505;
+  --color-muted: #60656f;
+  --color-hairline: #dfe2e7;
+  --color-surface: #f5f6f8;
+  --color-accent: #d71920;
+  --color-accent-hover: #ad141a;
+  --color-accent-soft: #f4d5d7;
+  --color-panel: #0a0a0a;
+  --color-accent-foreground: #ffffff;
+
+  --font-display: var(--font-display-family), Impact, sans-serif;
+  --font-body: var(--font-body-family), system-ui, sans-serif;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #0a0a0a;
+  --foreground: #050505;
 }
 
 * {
@@ -11,6 +27,7 @@
 
 html {
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -18,8 +35,89 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: var(--font-body);
+  font-size: clamp(0.875rem, 0.84rem + 0.18vw, 1rem);
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: rgba(215, 25, 32, 0.32);
+}
+
+.type-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 8.5rem);
+  font-weight: 600;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+.type-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 5.8vw, 5rem);
+  font-weight: 600;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.type-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.type-h4 {
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.type-h5 {
+  font-size: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+  font-weight: 600;
+  line-height: 1.18;
+}
+
+.type-lead {
+  font-size: clamp(1rem, 0.94rem + 0.35vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.type-body {
+  font-size: clamp(0.875rem, 0.84rem + 0.18vw, 1rem);
+  line-height: 1.75;
+}
+
+.type-small {
+  font-size: clamp(0.8125rem, 0.78rem + 0.14vw, 0.875rem);
+  line-height: 1.65;
+}
+
+.type-accent {
+  font-size: clamp(0.6875rem, 0.66rem + 0.12vw, 0.75rem);
+  line-height: 1.25;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
