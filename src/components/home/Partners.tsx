@@ -15,7 +15,7 @@ export function Partners() {
   return (
     <section className="border-t border-hairline">
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10">
-        <p className="text-center text-xs font-semibold uppercase tracking-wide text-muted">
+        <p className="type-accent text-center font-semibold uppercase text-muted">
           Partners
         </p>
         <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-8 grayscale">

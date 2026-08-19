@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
-import { Archivo, Zilla_Slab } from 'next/font/google'
+import { IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from 'next/font/google'
 import './styles.css'
 
-const displayFont = Zilla_Slab({
+const displayFont = IBM_Plex_Sans_Condensed({
   subsets: ['latin'],
   weight: ['500', '600', '700'],
   variable: '--font-display-family',
   display: 'swap',
 })
 
-const bodyFont = Archivo({
+const bodyFont = IBM_Plex_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-body-family',
   display: 'swap',
 })

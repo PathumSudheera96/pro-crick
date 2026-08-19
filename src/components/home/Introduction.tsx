@@ -1,19 +1,18 @@
 export function Introduction() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-24 sm:px-10">
-      <div className="grid gap-12 sm:grid-cols-[1.2fr_1fr] sm:gap-20">
-        <p className="font-display text-3xl font-medium leading-snug tracking-tight sm:text-4xl">
-          We represent players, not listings. Every profile on Pro-Crick is
-          reviewed and stood behind — for clubs deciding who to trust, and
-          for players deciding who represents them.
-        </p>
-        <div className="border-t border-hairline pt-6 text-base leading-7 text-muted sm:border-l sm:border-t-0 sm:pl-10 sm:pt-0">
-          <p>
-            From domestic talent to overseas placement, Pro-Crick connects
-            clubs and organizations with cricketers across playing roles,
-            formats, and eligible countries — backed by a structured,
-            verifiable player record.
+    <section className="border-y border-hairline bg-surface">
+      <div className="mx-auto max-w-[90rem] px-5 py-7 sm:px-8 lg:px-10">
+        <div className="grid gap-4 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
+          <p className="type-accent uppercase text-muted">
+            Trusted by clubs, scouts, and player networks
           </p>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-lg font-semibold text-foreground/82 sm:grid-cols-4 sm:text-xl">
+            {['MIDLAND CC', 'NORTHGATE XI', 'REDWELL SPORT', 'SOUTHERN LEAGUE'].map(
+              (partner) => (
+                <span key={partner}>{partner}</span>
+              ),
+            )}
+          </div>
         </div>
       </div>
     </section>

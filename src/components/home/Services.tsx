@@ -1,45 +1,73 @@
 const SERVICES = [
   {
-    name: 'Player Representation',
+    name: 'Representation',
     description:
-      'Ongoing representation for cricketers — profile management, opportunity sourcing, and agency support throughout a player’s career.',
+      'Profiles are positioned with clarity: role, strengths, availability, and the kind of environment that makes sense for the player.',
   },
   {
-    name: 'Club & Player Connections',
+    name: 'Shortlisting',
     description:
-      'A structured directory that helps clubs and organizations discover players by role, availability, and eligibility.',
+      'Clubs get a cleaner route from interest to shortlist, with enough context to move beyond a one-line stat summary.',
   },
   {
-    name: 'Overseas Opportunities',
+    name: 'Placement',
     description:
-      'Support for players pursuing contracts and placements abroad, including eligibility and logistics guidance.',
-  },
-  {
-    name: 'Placement Support',
-    description:
-      'End-to-end support connecting represented players with clubs, from initial enquiry through to signing.',
+      'From first outreach through contract-stage conversations, Pro-Crick keeps the commercial and communication process disciplined.',
   },
 ]
 
 export function Services() {
   return (
-    <section className="bg-surface">
-      <div className="mx-auto max-w-6xl px-6 py-24 sm:px-10">
-        <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">
-          What we do
-        </h2>
+    <section className="bg-[#ece5dc]">
+      <div className="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-10">
+        <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+          <div>
+            <p className="type-accent uppercase text-muted">What the homepage signals</p>
+            <h2 className="type-h2 mt-4 text-foreground">
+              Not a generic roster. An agency front door.
+            </h2>
+          </div>
 
-        <dl className="mt-12 divide-y divide-hairline border-t border-hairline">
-          {SERVICES.map((service) => (
-            <div
-              key={service.name}
-              className="grid gap-2 py-8 sm:grid-cols-[1fr_1.6fr] sm:gap-10"
-            >
-              <dt className="font-display text-xl font-medium">{service.name}</dt>
-              <dd className="text-base leading-7 text-muted">{service.description}</dd>
-            </div>
-          ))}
-        </dl>
+          <div className="grid gap-5 lg:grid-cols-3">
+            {SERVICES.map((service) => (
+              <div
+                key={service.name}
+                className="flex min-h-[16rem] flex-col justify-between border border-black/10 bg-surface p-6 transition-colors duration-200 hover:bg-[#eef0f3]"
+              >
+                <dt className="type-h4 text-foreground">
+                  {service.name}
+                </dt>
+                <dd className="type-small mt-6 text-muted">{service.description}</dd>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="bg-panel p-7 text-white transition-colors duration-200 hover:bg-[#151515] sm:p-9">
+            <p className="type-accent uppercase text-white/45">For clubs and recruiters</p>
+            <h3 className="type-h3 mt-4">
+              Every enquiry should begin with substance, not guesswork.
+            </h3>
+            <p className="type-body mt-4 max-w-2xl text-white/68">
+              The homepage sets that tone immediately: editorial player imagery, structured
+              player summaries, and a clean path toward reviewing the full directory.
+            </p>
+          </div>
+
+          <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 sm:grid-cols-2">
+            {[
+              'Role clarity',
+              'Eligibility notes',
+              'Availability windows',
+              'Cleaner enquiries',
+            ].map((item) => (
+              <div key={item} className="bg-surface px-5 py-6 text-sm font-semibold uppercase tracking-[0.18em] text-foreground/80 transition-colors duration-200 hover:bg-[#eef0f3]">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
