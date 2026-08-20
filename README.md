@@ -60,6 +60,35 @@ docker compose exec app pnpm typecheck
 docker compose exec app pnpm build
 ```
 
+## Staging Deployment
+
+This repository includes a staging deployment wrapper for the current cPanel SSH workflow:
+
+```bash
+pnpm deploy:staging
+```
+
+The script:
+
+- reads `SERVER_IP`, `USER`, `PORT`, and `APP_ROOT` from local environment variables or from a repo-local `.cpanel_creds` file,
+- runs local `pnpm lint`, `pnpm typecheck`, and `pnpm build` checks by default,
+- syncs the repository to the cPanel app root with `rsync`,
+- activates the remote cPanel Node.js environment,
+- runs `corepack pnpm install --frozen-lockfile`,
+- builds the app remotely,
+- runs committed Payload migrations,
+- restarts the cPanel Node.js application.
+
+Useful variants:
+
+```bash
+pnpm deploy:staging -- --dry-run
+pnpm deploy:staging -- --skip-checks
+pnpm deploy:staging -- --skip-migrations
+```
+
+The deployment script intentionally does not sync `.env`, `storage/`, `node_modules/`, `.next/`, or `.cpanel_creds`.
+
 Migration commands:
 
 ```bash

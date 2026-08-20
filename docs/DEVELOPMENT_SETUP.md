@@ -511,6 +511,14 @@ Docker Compose is not automatically the production deployment mechanism.
 
 The production runbook must use the real cPanel paths, Node version, environment configuration, and PostgreSQL credentials.
 
+For the current staging host, the repository includes a local wrapper:
+
+```bash
+pnpm deploy:staging
+```
+
+It uses SSH + `rsync` against the cPanel Node.js app root, then installs, builds, migrates, and restarts remotely. Keep `.cpanel_creds` local-only and gitignored. The script does not upload `.env`, `storage/`, `.next/`, `node_modules/`, or other local runtime artifacts.
+
 ---
 
 # 17. Documentation Rule
