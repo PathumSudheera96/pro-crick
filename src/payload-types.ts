@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     'playing-roles': PlayingRole;
     countries: Country;
+    clubs: Club;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     'playing-roles': PlayingRolesSelect<false> | PlayingRolesSelect<true>;
     countries: CountriesSelect<false> | CountriesSelect<true>;
+    clubs: ClubsSelect<false> | ClubsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -216,6 +218,23 @@ export interface Country {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clubs".
+ */
+export interface Club {
+  id: number;
+  name: string;
+  /**
+   * Stable URL-safe identifier used by relationships and future club pages.
+   */
+  slug: string;
+  country?: (number | null) | Country;
+  description?: string | null;
+  sortOrder: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -253,6 +272,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'countries';
         value: number | Country;
+      } | null)
+    | ({
+        relationTo: 'clubs';
+        value: number | Club;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -373,6 +396,19 @@ export interface CountriesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   isoCode?: T;
+  description?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clubs_select".
+ */
+export interface ClubsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  country?: T;
   description?: T;
   sortOrder?: T;
   updatedAt?: T;

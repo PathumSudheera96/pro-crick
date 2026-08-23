@@ -138,7 +138,7 @@ Legend:
 - [x] Add file-type restrictions
 - [x] Create Playing Roles collection
 - [x] Create Countries collection
-- [ ] Create Clubs collection
+- [x] Create Clubs collection
 - [ ] Create reusable SEO field group
 
 ## Phase 4 — Player CMS
