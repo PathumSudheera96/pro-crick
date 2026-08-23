@@ -139,7 +139,7 @@ Legend:
 - [x] Create Playing Roles collection
 - [x] Create Countries collection
 - [x] Create Clubs collection
-- [ ] Create reusable SEO field group
+- [x] Create reusable SEO field group
 
 ## Phase 4 — Player CMS
 
