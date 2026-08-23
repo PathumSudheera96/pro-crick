@@ -35,6 +35,10 @@ EOF
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --)
+      shift
+      continue
+      ;;
     --skip-checks)
       SKIP_CHECKS=1
       shift
@@ -94,9 +98,10 @@ APP_KEY="$(basename "${APP_ROOT}")"
 
 RSYNC_ARGS=(
   -az
-  --delete
   --itemize-changes
   --exclude ".git/"
+  --exclude ".DS_Store"
+  --exclude "**/.DS_Store"
   --exclude ".next/"
   --exclude "node_modules/"
   --exclude ".env"
@@ -104,8 +109,27 @@ RSYNC_ARGS=(
   --exclude "storage/"
   --exclude ".pnpm-store/"
   --exclude ".cpanel_creds"
+  --exclude "tsconfig.tsbuildinfo"
+  --exclude "*.tsbuildinfo"
   --exclude "stderr.log"
   --exclude "*.log"
+  --filter "P .htaccess"
+  --filter "P .htaccess.*"
+  --filter "P .well-known/"
+  --filter "P cgi-bin/"
+  --filter "P tmp/"
+  --filter "P storage/"
+  --filter "P node_modules"
+  --filter "P node_modules/"
+  --filter "P .deploy-backups/"
+  --filter "P .deploy-*/"
+  --filter "P .release-*/"
+  --filter "P *.zip"
+  --filter "P activate-step03.sh"
+  --filter "P inspect-prod-db.sh"
+  --filter "P run-prod-migrations.sh"
+  --filter "P server.js"
+  --filter "P verify-and-restart.sh"
   --filter "P storage/"
   --filter "P .env"
   --filter "P .env.*"
@@ -124,7 +148,7 @@ REMOTE_SCRIPT=$(cat <<EOF
 set -euo pipefail
 cd "${APP_ROOT}"
 
-APP_KEY="${APP_KEY}"
+export APP_KEY="${APP_KEY}"
 NODEVENV_ROOT="\${HOME}/nodevenv/\${APP_KEY}"
 NODEVENV_BIN=""
 
@@ -142,7 +166,9 @@ if [[ -z "\${NODEVENV_BIN}" ]]; then
 fi
 
 # shellcheck disable=SC1090
+set +u
 source "\${NODEVENV_BIN}/activate"
+set -u
 
 eval "\$(python3 - <<'PY'
 import json
@@ -162,9 +188,10 @@ PY
 
 export PATH="\${NODEVENV_BIN}:\${PATH}"
 
-corepack enable
 corepack pnpm install --frozen-lockfile
-corepack pnpm build
+corepack pnpm prepare:next-env
+corepack pnpm exec next build --webpack
+corepack pnpm prepare:next-env
 corepack pnpm payload migrate:status
 EOF
 )
