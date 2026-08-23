@@ -5,7 +5,8 @@
   "type": "module",
   "packageManager": "pnpm@11.15.1",
   "scripts": {
-    "dev": "next dev --hostname 0.0.0.0",
+    "dev": "pnpm prepare:next-env && next dev --webpack --hostname 0.0.0.0",
+    "deploy:staging": "bash scripts/deploy-staging.sh",
     "prepare:next-env": "node scripts/reset-next-env.mjs",
     "build": "pnpm prepare:next-env && next build && pnpm prepare:next-env",
     "start": "next start",
