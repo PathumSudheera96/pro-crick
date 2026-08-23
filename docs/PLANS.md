@@ -56,11 +56,11 @@ Planned stack:
 
 # 2. Current Project Phase
 
-**Current Phase:** Phase 2 - Database and Authentication
+**Current Phase:** Phase 3 - Media and Shared Data
 
-**Current Status:** STEP 01A fresh-clone onboarding validation completed. Initial Payload/PostgreSQL migration workflow is established and should be formally reviewed as STEP 02 before continuing to roles.
+**Current Status:** Phase 2 users/authentication/roles is implemented with basic access-control tests. Media upload foundation is now in progress.
 
-**Next Main Task:** STEP 02 - Database / Migration Foundation review and close-out, then STEP 03 - Users / Authentication / Roles
+**Next Main Task:** Complete the remaining Phase 3 shared-data foundations: Playing Roles, Countries, Clubs, and the reusable SEO field group
 
 ---
 
@@ -124,18 +124,18 @@ Legend:
 - [x] Establish migration workflow
 - [x] Document migration commands
 - [x] Create Users collection
-- [ ] Add Administrator role
-- [ ] Add Editor role
-- [ ] Enforce server-side access control
-- [ ] Add basic access-control tests
+- [x] Add Administrator role
+- [x] Add Editor role
+- [x] Enforce server-side access control
+- [x] Add basic access-control tests
 
 ## Phase 3 — Media and Shared Data
 
-- [ ] Create Media collection
-- [ ] Configure image uploads
-- [ ] Configure PDF uploads
-- [ ] Add alt text
-- [ ] Add file-type restrictions
+- [x] Create Media collection
+- [x] Configure image uploads
+- [x] Configure PDF uploads
+- [x] Add alt text
+- [x] Add file-type restrictions
 - [ ] Create Playing Roles collection
 - [ ] Create Countries collection
 - [ ] Create Clubs collection

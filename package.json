@@ -11,6 +11,7 @@
     "build": "pnpm prepare:next-env && next build && pnpm prepare:next-env",
     "start": "next start",
     "lint": "eslint .",
+    "test": "node --test --experimental-strip-types tests/**/*.test.mjs",
     "typecheck": "pnpm prepare:next-env && tsc --noEmit",
     "payload": "payload",
     "generate:importmap": "payload generate:importmap",
