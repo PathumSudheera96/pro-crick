@@ -136,7 +136,7 @@ Legend:
 - [x] Configure PDF uploads
 - [x] Add alt text
 - [x] Add file-type restrictions
-- [ ] Create Playing Roles collection
+- [x] Create Playing Roles collection
 - [ ] Create Countries collection
 - [ ] Create Clubs collection
 - [ ] Create reusable SEO field group

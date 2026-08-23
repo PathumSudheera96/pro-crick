@@ -6,6 +6,7 @@ import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
 import { Media } from './src/collections/Media'
+import { PlayingRoles } from './src/collections/PlayingRoles'
 import { Users } from './src/collections/Users'
 import { migrations } from './src/migrations'
 
@@ -20,7 +21,7 @@ export default buildConfig({
       importMapFile: path.resolve(dirname, 'src/app/(payload)/admin/importMap.js'),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, PlayingRoles],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
