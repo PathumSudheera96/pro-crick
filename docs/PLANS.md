@@ -137,7 +137,7 @@ Legend:
 - [x] Add alt text
 - [x] Add file-type restrictions
 - [x] Create Playing Roles collection
-- [ ] Create Countries collection
+- [x] Create Countries collection
 - [ ] Create Clubs collection
 - [ ] Create reusable SEO field group
 

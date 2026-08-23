@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     'playing-roles': PlayingRole;
+    countries: Country;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'playing-roles': PlayingRolesSelect<false> | PlayingRolesSelect<true>;
+    countries: CountriesSelect<false> | CountriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -194,6 +196,26 @@ export interface PlayingRole {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: number;
+  name: string;
+  /**
+   * Stable URL-safe identifier used by filters and relationships.
+   */
+  slug: string;
+  /**
+   * Optional ISO 3166-1 alpha-2 code such as LK or GB.
+   */
+  isoCode?: string | null;
+  description?: string | null;
+  sortOrder: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -227,6 +249,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'playing-roles';
         value: number | PlayingRole;
+      } | null)
+    | ({
+        relationTo: 'countries';
+        value: number | Country;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -334,6 +360,19 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PlayingRolesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  description?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries_select".
+ */
+export interface CountriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  isoCode?: T;
   description?: T;
   sortOrder?: T;
   updatedAt?: T;
