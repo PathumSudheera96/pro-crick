@@ -9,10 +9,14 @@ import { Countries } from './src/collections/Countries'
 import { Clubs } from './src/collections/Clubs'
 import { Media } from './src/collections/Media'
 import { Partners } from './src/collections/Partners'
+import { Pages } from './src/collections/Pages'
 import { PlayingRoles } from './src/collections/PlayingRoles'
 import { Players } from './src/collections/Players'
 import { Testimonials } from './src/collections/Testimonials'
 import { Users } from './src/collections/Users'
+import { Footer } from './src/globals/Footer'
+import { Header } from './src/globals/Header'
+import { SiteSettings } from './src/globals/SiteSettings'
 import { migrations } from './src/migrations'
 
 const filename = fileURLToPath(import.meta.url)
@@ -26,7 +30,7 @@ export default buildConfig({
       importMapFile: path.resolve(dirname, 'src/app/(payload)/admin/importMap.js'),
     },
   },
-  collections: [Users, Media, PlayingRoles, Countries, Clubs, Players, Testimonials, Partners],
+  collections: [Users, Media, PlayingRoles, Countries, Clubs, Players, Testimonials, Partners, Pages],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
@@ -35,6 +39,7 @@ export default buildConfig({
     push: false,
   }),
   editor: lexicalEditor(),
+  globals: [SiteSettings, Header, Footer],
   secret: process.env.PAYLOAD_SECRET || '',
   sharp,
   typescript: {

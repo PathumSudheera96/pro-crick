@@ -171,10 +171,10 @@ Legend:
 - [x] Create FAQ block
 - [x] Create CTA block
 - [x] Create Contact block
-- [ ] Create Pages collection
-- [ ] Create Site Settings global
-- [ ] Create Header global
-- [ ] Create Footer global
+- [x] Create Pages collection
+- [x] Create Site Settings global
+- [x] Create Header global
+- [x] Create Footer global
 
 ## Phase 6 — Frontend Foundation
 
