@@ -8,7 +8,7 @@
     "dev": "pnpm prepare:next-env && next dev --webpack --hostname 0.0.0.0",
     "deploy:staging": "bash scripts/deploy-staging.sh",
     "prepare:next-env": "node scripts/reset-next-env.mjs",
-    "build": "pnpm prepare:next-env && next build && pnpm prepare:next-env",
+    "build": "rm -rf .next && pnpm prepare:next-env && next build --webpack && pnpm prepare:next-env",
     "start": "next start",
     "lint": "eslint .",
     "seed:players": "payload run scripts/seedPlayers.ts",

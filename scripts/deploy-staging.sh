@@ -189,6 +189,7 @@ PY
 export PATH="\${NODEVENV_BIN}:\${PATH}"
 
 corepack pnpm install --frozen-lockfile
+rm -rf .next
 corepack pnpm prepare:next-env
 corepack pnpm exec next build --webpack
 corepack pnpm prepare:next-env

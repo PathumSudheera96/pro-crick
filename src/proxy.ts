@@ -7,16 +7,19 @@ const PUBLIC_FILE_PATTERN = /\.[^/]+$/
 
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
+  const internalPort = process.env.PORT || request.nextUrl.port || '3000'
+  const internalOrigin = process.env.INTERNAL_APP_ORIGIN || `http://127.0.0.1:${internalPort}`
 
   if (PUBLIC_FILE_PATTERN.test(pathname) || isProtectedRedirectPath(pathname)) {
     return NextResponse.next()
   }
 
   const response = await fetch(
-    new URL(`/api/redirects/resolve?path=${encodeURIComponent(pathname)}`, request.url),
+    new URL(`/api/redirects/resolve?path=${encodeURIComponent(pathname)}`, internalOrigin),
     {
       headers: {
         'x-pro-crick-internal-secret': process.env.PAYLOAD_SECRET || '',
+        host: request.headers.get('host') || request.nextUrl.host,
       },
     },
   )

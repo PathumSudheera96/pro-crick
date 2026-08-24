@@ -56,11 +56,11 @@ Planned stack:
 
 # 2. Current Project Phase
 
-**Current Phase:** Phase 4 - Player CMS
+**Current Phase:** Phase 9-12 Backend Foundations
 
-**Current Status:** Shared data foundations are implemented. Player schema work is now in progress.
+**Current Status:** Core CMS schemas, player/content query helpers, public lead endpoints, redirect runtime, and technical SEO foundations are implemented. Remaining work is now mostly frontend rendering, UX completion, and launch hardening.
 
-**Next Main Task:** Complete the Player CMS, then move into Website Content CMS and the player directory query layer
+**Next Main Task:** Build the frontend player directory/profile experiences and connect the marketing shell to Payload-managed content
 
 ---
 
@@ -239,35 +239,35 @@ Legend:
 
 ## Phase 10 — Enquiries
 
-- [ ] Create Enquiries collection
-- [ ] Add statuses
-- [ ] Add player relationship
+- [x] Create Enquiries collection
+- [x] Add statuses
+- [x] Add player relationship
 - [ ] Build general enquiry form
 - [ ] Build player-specific enquiry form
-- [ ] Add server-side validation
-- [ ] Add spam protection
+- [x] Add server-side validation
+- [x] Add spam protection
 - [ ] Add success/error states
 - [ ] Optional: email notifications
 
 ## Phase 11 — Player Applications
 
-- [ ] Create Player Applications collection
-- [ ] Add application statuses
+- [x] Create Player Applications collection
+- [x] Add application statuses
 - [ ] Build `/apply`
-- [ ] Add profile photo upload
-- [ ] Add CV upload
-- [ ] Add video links
-- [ ] Add server-side validation
-- [ ] Add spam protection
-- [ ] Build application-to-player conversion
-- [ ] Ensure converted player starts as Draft
+- [x] Add profile photo upload
+- [x] Add CV upload
+- [x] Add video links
+- [x] Add server-side validation
+- [x] Add spam protection
+- [x] Build application-to-player conversion
+- [x] Ensure converted player starts as Draft
 
 ## Phase 12 — SEO
 
-- [ ] Connect reusable SEO fields
+- [x] Connect reusable SEO fields
 - [x] Implement metadata fallbacks
 - [x] Add canonical URLs
-- [ ] Add Open Graph
+- [x] Add Open Graph
 - [x] Add sitemap.xml
 - [x] Add robots.txt
 - [ ] Add structured data
@@ -286,7 +286,7 @@ Legend:
 - [ ] Fix P0/P1 security issues
 - [ ] Add empty states
 - [ ] Add error states
-- [ ] Automated testing pass
+- [~] Automated testing pass
 - [ ] Production-readiness audit
 - [ ] Fix launch blockers
 
