@@ -208,14 +208,14 @@ Legend:
 
 ## Phase 8 — Player Directory
 
-- [ ] Build player query layer
-- [ ] Add keyword search
-- [ ] Add Playing Role filter
-- [ ] Add Nationality filter
-- [ ] Add Availability filter
-- [ ] Add Eligible Country filter
-- [ ] Add pagination
-- [ ] Add sorting
+- [x] Build player query layer
+- [x] Add keyword search
+- [x] Add Playing Role filter
+- [x] Add Nationality filter
+- [x] Add Availability filter
+- [x] Add Eligible Country filter
+- [x] Add pagination
+- [x] Add sorting
 - [ ] Build player card
 - [ ] Build `/players`
 - [ ] Add URL-aware filter state
