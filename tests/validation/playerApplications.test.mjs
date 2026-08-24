@@ -58,6 +58,7 @@ test('buildPlayerDraftFromApplication converts approved application data into a 
       playerStatus: 'available',
       playingExperience: 'Colombo CC, UK league cricket',
       primaryRole: 10,
+      sortOrder: 0,
       shortIntroduction: 'Top-order batter averaging 40 in first-class cricket.',
       slug: 'kasun-jayawardena',
       status: 'draft',

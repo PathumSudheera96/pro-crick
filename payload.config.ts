@@ -15,6 +15,7 @@ import { Pages } from './src/collections/Pages'
 import { PlayerApplications } from './src/collections/PlayerApplications'
 import { PlayingRoles } from './src/collections/PlayingRoles'
 import { Players } from './src/collections/Players'
+import { Redirects } from './src/collections/Redirects'
 import { Testimonials } from './src/collections/Testimonials'
 import { Users } from './src/collections/Users'
 import { Footer } from './src/globals/Footer'
@@ -46,6 +47,7 @@ export default buildConfig({
     Pages,
     Enquiries,
     PlayerApplications,
+    Redirects,
   ],
   db: postgresAdapter({
     pool: {

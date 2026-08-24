@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from 'next/font/google'
 import { ChatWidget } from '@/components/site/ChatWidget'
 import { SiteAnimations } from '@/components/site/SiteAnimations'
+import { buildSeoMetadata, getSiteUrl } from '@/lib/seo/metadata'
 import './styles.css'
 
 const displayFont = IBM_Plex_Sans_Condensed({
@@ -19,8 +20,11 @@ const bodyFont = IBM_Plex_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Pro-Crick',
-  description: 'Professional cricket player agency and custom CMS.',
+  ...buildSeoMetadata({
+    contentTitle: 'Pro-Crick',
+    path: '/',
+    summary: 'Professional cricket talent connection platform and player agency.',
+  }),
   icons: {
     icon: [
       { url: '/images/pro-crick-32.png', sizes: '32x32', type: 'image/png' },
@@ -28,6 +32,7 @@ export const metadata: Metadata = {
     ],
     apple: '/images/pro-crick-512.png',
   },
+  metadataBase: new URL(getSiteUrl()),
 }
 
 export default function RootLayout({

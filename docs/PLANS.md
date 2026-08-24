@@ -265,15 +265,15 @@ Legend:
 ## Phase 12 — SEO
 
 - [ ] Connect reusable SEO fields
-- [ ] Implement metadata fallbacks
-- [ ] Add canonical URLs
+- [x] Implement metadata fallbacks
+- [x] Add canonical URLs
 - [ ] Add Open Graph
-- [ ] Add sitemap.xml
-- [ ] Add robots.txt
+- [x] Add sitemap.xml
+- [x] Add robots.txt
 - [ ] Add structured data
 - [ ] Add breadcrumbs
 - [ ] Create Redirects collection
-- [ ] Create redirect runtime
+- [x] Create redirect runtime
 - [ ] Verify noindex behavior
 - [ ] Verify 404 behavior
 

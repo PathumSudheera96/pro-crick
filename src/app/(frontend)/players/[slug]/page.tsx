@@ -6,6 +6,7 @@ import players from '../../../../../public/player_data/players.json'
 import { ChatOpenButton } from '@/components/site/ChatOpenButton'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
+import { buildSeoMetadata } from '@/lib/seo/metadata'
 
 type Player = {
   slug: string
@@ -45,13 +46,18 @@ export async function generateMetadata({ params }: PlayerPageProps): Promise<Met
   if (!player) {
     return {
       title: 'Player Not Found | Pro-Crick',
+      robots: {
+        follow: false,
+        index: false,
+      },
     }
   }
 
-  return {
-    title: `${player.name} | Pro-Crick`,
-    description: player.profileLine,
-  }
+  return buildSeoMetadata({
+    contentTitle: player.name,
+    path: `/players/${player.slug}`,
+    summary: player.profileLine,
+  })
 }
 
 export default async function PlayerProfilePage({ params }: PlayerPageProps) {
