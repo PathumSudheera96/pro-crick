@@ -13,7 +13,7 @@ export function Partners() {
   }
 
   return (
-    <section className="border-t border-hairline">
+    <section id="partners" className="border-t border-hairline">
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10">
         <p className="type-accent text-center font-semibold uppercase text-muted">
           Partners

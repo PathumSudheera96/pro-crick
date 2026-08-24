@@ -2,17 +2,17 @@ const SERVICES = [
   {
     name: 'Representation',
     description:
-      'Profiles are positioned with clarity: role, strengths, availability, and the kind of environment that makes sense for the player.',
+      'Profiles are framed around role, readiness, strengths, and the type of club environment where the player can actually perform.',
   },
   {
     name: 'Shortlisting',
     description:
-      'Clubs get a cleaner route from interest to shortlist, with enough context to move beyond a one-line stat summary.',
+      'Clubs get enough practical context to move beyond a one-line stat summary and into a more confident shortlist.',
   },
   {
-    name: 'Placement',
+    name: 'Opportunity matching',
     description:
-      'From first outreach through contract-stage conversations, Pro-Crick keeps the commercial and communication process disciplined.',
+      'From first outreach through next-stage conversation, Pro-Crick keeps the process clear for both players and clubs.',
   },
 ]
 
@@ -22,9 +22,9 @@ export function Services() {
       <div className="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <p data-gsap-item className="type-accent uppercase text-muted">What the homepage signals</p>
+            <p data-gsap-item className="type-accent uppercase text-muted">Services</p>
             <h2 data-gsap-item data-gsap-title className="type-h2 mt-4 text-foreground">
-              Not a generic roster. An agency front door.
+              Built to support players, clubs, and better cricket recruitment outcomes.
             </h2>
           </div>
 
@@ -48,11 +48,11 @@ export function Services() {
           <div data-gsap-item className="bg-panel p-7 text-white transition-colors duration-200 hover:bg-[#151515] sm:p-9">
             <p className="type-accent uppercase text-white/45">For clubs and recruiters</p>
             <h3 data-gsap-title className="type-h3 mt-4">
-              Every enquiry should begin with substance, not guesswork.
+              Every enquiry should begin with context, not guesswork.
             </h3>
             <p className="type-body mt-4 max-w-2xl text-white/68">
-              The homepage sets that tone immediately: editorial player imagery, structured
-              player summaries, and a clean path toward reviewing the full directory.
+              Pro-Crick is built to move from discovery to structured review, shortlist, and
+              partnership conversation without losing clarity between the player and the club.
             </p>
           </div>
 

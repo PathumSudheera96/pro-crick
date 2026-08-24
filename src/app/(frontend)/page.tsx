@@ -1,5 +1,7 @@
+import { AgencyOverview } from '@/components/home/AgencyOverview'
 import { Cta } from '@/components/home/Cta'
 import { FeaturedPlayers } from '@/components/home/FeaturedPlayers'
+import { Founders } from '@/components/home/Founders'
 import { Hero } from '@/components/home/Hero'
 import { Introduction } from '@/components/home/Introduction'
 import { Partners } from '@/components/home/Partners'
@@ -18,8 +20,10 @@ export default function HomePage() {
       <main>
         <Hero />
         <Introduction />
+        <AgencyOverview />
         <FeaturedPlayers />
         <RegistrationSplitCta />
+        <Founders />
         <WhyChooseUs />
         <Stats />
         <Services />

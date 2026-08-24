@@ -7,7 +7,7 @@ const FOOTER_COLUMNS = [
     links: [
       { label: 'About Pro-Crick', href: '/about' },
       { label: 'Services', href: '/services' },
-      { label: 'Partners', href: '/partners' },
+      { label: 'Partners', href: '/#partners' },
       { label: 'Contact', href: '/contact' },
     ],
   },
@@ -15,7 +15,7 @@ const FOOTER_COLUMNS = [
     title: 'Players',
     links: [
       { label: 'Directory', href: '/players' },
-      { label: 'Featured Players', href: '/players?featured=true' },
+      { label: 'Featured Players', href: '/players?sort=featured' },
       { label: 'Apply to Join', href: '/apply' },
       { label: 'Player CVs', href: '/players' },
     ],
@@ -34,7 +34,7 @@ const FOOTER_COLUMNS = [
     links: [
       { label: 'Privacy Policy', href: '/privacy-policy' },
       { label: 'Terms', href: '/terms' },
-      { label: 'Accessibility', href: '/accessibility' },
+      { label: 'Contact Pro-Crick', href: '/contact' },
       { label: 'Admin', href: '/admin' },
     ],
   },
@@ -56,8 +56,8 @@ export function Footer() {
               className="h-14 w-auto invert"
             />
             <p className="type-small mt-6 max-w-sm text-white/62">
-              A modern cricket player agency platform for scouting, representation,
-              player discovery, and club enquiries.
+              Professional cricket talent connections for players, clubs, and long-term
+              partnerships built around trust, transparency, and fit.
             </p>
           </div>
 

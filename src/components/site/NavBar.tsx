@@ -13,10 +13,10 @@ const NAV_ITEMS = [
 ]
 
 const SOCIAL_ITEMS = [
-  { label: 'Facebook', href: 'https://www.facebook.com/', icon: FacebookIcon },
-  { label: 'Instagram', href: 'https://www.instagram.com/', icon: InstagramIcon },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: LinkedinIcon },
-  { label: 'X', href: 'https://x.com/', icon: XIcon },
+  { label: 'Facebook', href: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr', icon: FacebookIcon },
+  { label: 'Instagram', href: 'https://www.instagram.com/pro__crick?igsh=MWdsajd4Y2R2NG45NQ%3D%3D&utm_source=qr', icon: InstagramIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/', icon: LinkedinIcon },
+  { label: 'X', href: 'https://x.com/pro__crick?s=11', icon: XIcon },
 ]
 
 type NavBarVariant = 'light' | 'dark' | 'transparent-light' | 'transparent-dark'
@@ -79,6 +79,8 @@ export function NavBar({
                   key={item.label}
                   href={item.href}
                   aria-label={item.label}
+                  target="_blank"
+                  rel="noreferrer"
                   className="flex h-7 w-7 items-center justify-center text-white/62 transition-colors duration-200 hover:text-white"
                 >
                   <Icon />

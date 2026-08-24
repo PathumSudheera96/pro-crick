@@ -9,14 +9,13 @@ export function Cta() {
     <section data-gsap-section className="mx-auto max-w-[90rem] px-5 pb-10 pt-24 sm:px-8 lg:px-10">
       <div className="grid overflow-hidden border border-hairline bg-surface lg:grid-cols-[1.05fr_0.95fr]">
         <div className="p-7 sm:p-10 lg:p-14">
-          <p data-gsap-item className="type-accent uppercase text-muted">Final call to action</p>
+          <p data-gsap-item className="type-accent uppercase text-muted">Next step</p>
           <h2 data-gsap-item data-gsap-title className="type-h2 mt-4 max-w-2xl text-foreground">
-            Build the homepage around authority, not noise.
+            Ready to move from interest to a real cricket conversation?
           </h2>
           <p data-gsap-item className="type-body mt-5 max-w-xl text-muted">
-            This version keeps the scope tight: one homepage only, stronger visual
-            hierarchy, and placeholder imagery/copy that can be replaced once the client
-            approves real content.
+            Whether you are a club looking for the right player or a cricketer seeking the
+            right environment, Pro-Crick is designed to keep the next step clear.
           </p>
           <div data-gsap-item className="mt-9 flex flex-col gap-4 sm:flex-row">
             <Link
