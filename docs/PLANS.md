@@ -162,15 +162,15 @@ Legend:
 
 - [x] Create Testimonials collection
 - [x] Create Partners collection
-- [ ] Create Hero block
-- [ ] Create Rich Text block
-- [ ] Create Image + Text block
-- [ ] Create Featured Players block
-- [ ] Create Stats block
-- [ ] Create Testimonials block
-- [ ] Create FAQ block
-- [ ] Create CTA block
-- [ ] Create Contact block
+- [x] Create Hero block
+- [x] Create Rich Text block
+- [x] Create Image + Text block
+- [x] Create Featured Players block
+- [x] Create Stats block
+- [x] Create Testimonials block
+- [x] Create FAQ block
+- [x] Create CTA block
+- [x] Create Contact block
 - [ ] Create Pages collection
 - [ ] Create Site Settings global
 - [ ] Create Header global
