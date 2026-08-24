@@ -23,14 +23,15 @@ export function Hero() {
         <div className="flex flex-1 items-center pb-16 pt-24 sm:pb-20 sm:pt-28">
           <div className="max-w-5xl">
             <p data-gsap-item className="type-accent max-w-xl font-semibold uppercase text-[#c9cdd3]">
-              Modern scouting and representation for cricket clubs, players, and agencies.
+              Where Cricket Connects. Sri Lankan talent, UK club opportunity, long-term partnerships.
             </p>
             <h1 data-gsap-item data-gsap-title className="type-h1 home-hero-title mt-6 max-w-5xl text-white">
-              Cricket talent ready for club review.
+              Connect the right cricket talent with the right club environment.
             </h1>
             <p data-gsap-item className="type-lead mt-7 max-w-2xl text-white/70">
-              Pro-Crick turns player profiles into decisive scouting views: role, format,
-              availability, representative notes, and the next step for serious enquiries.
+              Pro-Crick helps clubs review structured player profiles and helps players find
+              the right platform. The process starts with clarity: role, readiness,
+              availability, and a direct route to serious enquiry.
             </p>
 
             <div data-gsap-item className="mt-10 flex flex-col gap-4 sm:flex-row">
