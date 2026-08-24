@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'application-uploads': ApplicationUpload;
     'playing-roles': PlayingRole;
     countries: Country;
     clubs: Club;
@@ -77,6 +78,7 @@ export interface Config {
     partners: Partner;
     pages: Page;
     enquiries: Enquiry;
+    'player-applications': PlayerApplication;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +88,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'application-uploads': ApplicationUploadsSelect<false> | ApplicationUploadsSelect<true>;
     'playing-roles': PlayingRolesSelect<false> | PlayingRolesSelect<true>;
     countries: CountriesSelect<false> | CountriesSelect<true>;
     clubs: ClubsSelect<false> | ClubsSelect<true>;
@@ -94,6 +97,7 @@ export interface Config {
     partners: PartnersSelect<false> | PartnersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
+    'player-applications': PlayerApplicationsSelect<false> | PlayerApplicationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -176,6 +180,35 @@ export interface Media {
   title?: string | null;
   alt?: string | null;
   caption?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "application-uploads".
+ */
+export interface ApplicationUpload {
+  id: number;
+  label?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -565,6 +598,40 @@ export interface Enquiry {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "player-applications".
+ */
+export interface PlayerApplication {
+  id: number;
+  referenceNumber: string;
+  applicantName: string;
+  email: string;
+  phone?: string | null;
+  nationality?: (number | null) | Country;
+  cricketRole?: (number | null) | PlayingRole;
+  currentClub?: (number | null) | Club;
+  teamsExperience?: string | null;
+  statistics?: string | null;
+  biography: string;
+  profilePhoto?: (number | null) | ApplicationUpload;
+  playerCv?: (number | null) | ApplicationUpload;
+  youtubeVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  vimeoVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  applicationStatus: 'new' | 'under_review' | 'approved' | 'rejected';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -594,6 +661,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'application-uploads';
+        value: number | ApplicationUpload;
       } | null)
     | ({
         relationTo: 'playing-roles';
@@ -626,6 +697,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'enquiries';
         value: number | Enquiry;
+      } | null)
+    | ({
+        relationTo: 'player-applications';
+        value: number | PlayerApplication;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -700,6 +775,38 @@ export interface MediaSelect<T extends boolean = true> {
   title?: T;
   alt?: T;
   caption?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "application-uploads_select".
+ */
+export interface ApplicationUploadsSelect<T extends boolean = true> {
+  label?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1049,6 +1156,39 @@ export interface EnquiriesSelect<T extends boolean = true> {
   phone?: T;
   message?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "player-applications_select".
+ */
+export interface PlayerApplicationsSelect<T extends boolean = true> {
+  referenceNumber?: T;
+  applicantName?: T;
+  email?: T;
+  phone?: T;
+  nationality?: T;
+  cricketRole?: T;
+  currentClub?: T;
+  teamsExperience?: T;
+  statistics?: T;
+  biography?: T;
+  profilePhoto?: T;
+  playerCv?: T;
+  youtubeVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  vimeoVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  applicationStatus?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -7,10 +7,12 @@ import sharp from 'sharp'
 
 import { Countries } from './src/collections/Countries'
 import { Clubs } from './src/collections/Clubs'
+import { ApplicationUploads } from './src/collections/ApplicationUploads'
 import { Media } from './src/collections/Media'
 import { Enquiries } from './src/collections/Enquiries'
 import { Partners } from './src/collections/Partners'
 import { Pages } from './src/collections/Pages'
+import { PlayerApplications } from './src/collections/PlayerApplications'
 import { PlayingRoles } from './src/collections/PlayingRoles'
 import { Players } from './src/collections/Players'
 import { Testimonials } from './src/collections/Testimonials'
@@ -31,7 +33,20 @@ export default buildConfig({
       importMapFile: path.resolve(dirname, 'src/app/(payload)/admin/importMap.js'),
     },
   },
-  collections: [Users, Media, PlayingRoles, Countries, Clubs, Players, Testimonials, Partners, Pages, Enquiries],
+  collections: [
+    Users,
+    Media,
+    ApplicationUploads,
+    PlayingRoles,
+    Countries,
+    Clubs,
+    Players,
+    Testimonials,
+    Partners,
+    Pages,
+    Enquiries,
+    PlayerApplications,
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',

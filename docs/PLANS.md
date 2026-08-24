@@ -697,3 +697,13 @@ This file should always answer:
 - [x] Add server-side validation
 - [x] Add spam protection
 - [x] Add success/error states
+- [x] Create Player Applications collection
+- [x] Add application statuses
+- [ ] Build `/apply`
+- [x] Add profile photo upload
+- [x] Add CV upload
+- [x] Add video links
+- [x] Add server-side validation
+- [x] Add spam protection
+- [x] Build application-to-player conversion
+- [x] Ensure converted player starts as Draft
