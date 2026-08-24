@@ -1,6 +1,6 @@
 import type { CollectionBeforeValidateHook, CollectionConfig } from 'payload'
 
-import { isAdminOrEditor, isAdminOrEditorBoolean } from '@/access/users'
+import { redirectCollectionAccess } from '../access/collectionPolicies'
 import { normalizeRedirectPath, validateRedirectPair, validateRedirectPath } from '@/lib/redirects/shared'
 
 const normalizeRedirectFields: CollectionBeforeValidateHook = ({ data }) => {
@@ -17,13 +17,7 @@ const normalizeRedirectFields: CollectionBeforeValidateHook = ({ data }) => {
 
 export const Redirects: CollectionConfig = {
   slug: 'redirects',
-  access: {
-    admin: isAdminOrEditorBoolean,
-    create: isAdminOrEditor,
-    delete: isAdminOrEditor,
-    read: isAdminOrEditor,
-    update: isAdminOrEditor,
-  },
+  access: redirectCollectionAccess,
   admin: {
     defaultColumns: ['fromPath', 'toPath', 'redirectType', 'enabled', 'updatedAt'],
     group: 'SEO',

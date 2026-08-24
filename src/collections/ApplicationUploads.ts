@@ -1,17 +1,13 @@
 import path from 'node:path'
 import type { CollectionConfig } from 'payload'
 
-import { isAdminOrEditor, isAdminOrEditorBoolean } from '@/access/users'
+import {
+  leadCollectionAccess,
+} from '../access/collectionPolicies'
 
 export const ApplicationUploads: CollectionConfig = {
   slug: 'application-uploads',
-  access: {
-    admin: isAdminOrEditorBoolean,
-    create: () => false,
-    delete: isAdminOrEditor,
-    read: isAdminOrEditor,
-    update: isAdminOrEditor,
-  },
+  access: leadCollectionAccess,
   admin: {
     defaultColumns: ['filename', 'mimeType', 'updatedAt'],
     group: 'Leads',

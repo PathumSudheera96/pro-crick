@@ -1,6 +1,6 @@
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 
-import { isAdminOrEditor, isAdminOrEditorBoolean } from '@/access/users'
+import { leadCollectionAccess } from '../access/collectionPolicies'
 
 export const generatePlayerApplicationReferenceNumber = (): string => {
   const date = new Date().toISOString().slice(0, 10).replace(/-/g, '')
@@ -22,13 +22,7 @@ const assignReferenceNumber: CollectionBeforeChangeHook = ({ data, operation }) 
 
 export const PlayerApplications: CollectionConfig = {
   slug: 'player-applications',
-  access: {
-    admin: isAdminOrEditorBoolean,
-    create: () => false,
-    delete: isAdminOrEditor,
-    read: isAdminOrEditor,
-    update: isAdminOrEditor,
-  },
+  access: leadCollectionAccess,
   admin: {
     defaultColumns: ['referenceNumber', 'applicantName', 'applicationStatus', 'createdAt'],
     group: 'Leads',

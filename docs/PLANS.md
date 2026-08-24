@@ -272,7 +272,7 @@ Legend:
 - [x] Add robots.txt
 - [ ] Add structured data
 - [ ] Add breadcrumbs
-- [ ] Create Redirects collection
+- [x] Create Redirects collection
 - [x] Create redirect runtime
 - [ ] Verify noindex behavior
 - [ ] Verify 404 behavior
