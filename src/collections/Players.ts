@@ -1,6 +1,7 @@
 import type { Access, CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 
 import { hasRole, isAdminOrEditor, isAdminOrEditorBoolean } from '@/access/users'
+import { seoFields } from '@/fields/seo'
 
 const isPublishedOrPrivileged: Access = ({ req }) => {
   if (hasRole(req.user, 'administrator') || hasRole(req.user, 'editor')) {
@@ -77,6 +78,10 @@ export const Players: CollectionConfig = {
       name: 'shortIntroduction',
       type: 'textarea',
       maxLength: 280,
+    },
+    {
+      name: 'biography',
+      type: 'textarea',
     },
     {
       name: 'dateOfBirth',
@@ -191,6 +196,32 @@ export const Players: CollectionConfig = {
       relationTo: 'clubs',
     },
     {
+      name: 'careerHighlights',
+      type: 'array',
+      fields: [
+        {
+          name: 'highlight',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'achievements',
+      type: 'array',
+      fields: [
+        {
+          name: 'achievement',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'playingExperience',
+      type: 'textarea',
+    },
+    {
       name: 'playerStatus',
       type: 'select',
       defaultValue: 'available',
@@ -220,6 +251,124 @@ export const Players: CollectionConfig = {
       type: 'relationship',
       hasMany: true,
       relationTo: 'countries',
+    },
+    {
+      name: 'statisticsByFormat',
+      type: 'array',
+      fields: [
+        {
+          name: 'format',
+          type: 'select',
+          options: [
+            {
+              label: 'Test',
+              value: 'test',
+            },
+            {
+              label: 'ODI',
+              value: 'odi',
+            },
+            {
+              label: 'T20',
+              value: 't20',
+            },
+            {
+              label: 'List A',
+              value: 'list-a',
+            },
+            {
+              label: 'First Class',
+              value: 'first-class',
+            },
+          ],
+          required: true,
+        },
+        {
+          name: 'matches',
+          type: 'number',
+        },
+        {
+          name: 'runs',
+          type: 'number',
+        },
+        {
+          name: 'battingAverage',
+          type: 'number',
+        },
+        {
+          name: 'highestScore',
+          type: 'number',
+        },
+        {
+          name: 'hundreds',
+          type: 'number',
+        },
+        {
+          name: 'fifties',
+          type: 'number',
+        },
+        {
+          name: 'wickets',
+          type: 'number',
+        },
+        {
+          name: 'bowlingAverage',
+          type: 'number',
+        },
+        {
+          name: 'bestBowling',
+          type: 'text',
+        },
+        {
+          name: 'economyRate',
+          type: 'number',
+        },
+      ],
+    },
+    {
+      name: 'gallery',
+      type: 'relationship',
+      hasMany: true,
+      relationTo: 'media',
+    },
+    {
+      name: 'playerCv',
+      type: 'relationship',
+      relationTo: 'media',
+    },
+    {
+      name: 'youtubeVideos',
+      type: 'array',
+      fields: [
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'vimeoVideos',
+      type: 'array',
+      fields: [
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'instagramUrl',
+      type: 'text',
+    },
+    {
+      name: 'espnCricinfoUrl',
+      type: 'text',
+    },
+    {
+      name: 'cricbuzzUrl',
+      type: 'text',
     },
     {
       name: 'featured',
@@ -260,6 +409,7 @@ export const Players: CollectionConfig = {
         readOnly: true,
       },
     },
+    ...seoFields(),
   ],
   hooks: {
     beforeChange: [syncPublishedAt],

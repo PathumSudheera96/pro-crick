@@ -147,12 +147,12 @@ Legend:
 - [x] Add identity fields
 - [x] Add cricket fields
 - [x] Add availability fields
-- [ ] Add statistics
+- [x] Add statistics
 - [x] Add clubs/teams
-- [ ] Add videos
-- [ ] Add gallery
-- [ ] Add CV
-- [ ] Add SEO
+- [x] Add videos
+- [x] Add gallery
+- [x] Add CV
+- [x] Add SEO
 - [x] Add publishing controls
 - [x] Add featured player control
 - [x] Add player sort order

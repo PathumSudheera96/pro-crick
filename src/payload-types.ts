@@ -249,6 +249,7 @@ export interface Player {
   profileImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
   shortIntroduction?: string | null;
+  biography?: string | null;
   dateOfBirth?: string | null;
   nationality: number | Country;
   gender?: ('male' | 'female' | 'other') | null;
@@ -270,13 +271,72 @@ export interface Player {
   currentClub?: (number | null) | Club;
   previousClubs?: (number | Club)[] | null;
   teamsRepresented?: (number | Club)[] | null;
+  careerHighlights?:
+    | {
+        highlight: string;
+        id?: string | null;
+      }[]
+    | null;
+  achievements?:
+    | {
+        achievement: string;
+        id?: string | null;
+      }[]
+    | null;
+  playingExperience?: string | null;
   playerStatus: 'available' | 'contracted' | 'unavailable';
   availabilityDate?: string | null;
   eligibleCountries?: (number | Country)[] | null;
+  statisticsByFormat?:
+    | {
+        format: 'test' | 'odi' | 't20' | 'list-a' | 'first-class';
+        matches?: number | null;
+        runs?: number | null;
+        battingAverage?: number | null;
+        highestScore?: number | null;
+        hundreds?: number | null;
+        fifties?: number | null;
+        wickets?: number | null;
+        bowlingAverage?: number | null;
+        bestBowling?: string | null;
+        economyRate?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  gallery?: (number | Media)[] | null;
+  playerCv?: (number | null) | Media;
+  youtubeVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  vimeoVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  instagramUrl?: string | null;
+  espnCricinfoUrl?: string | null;
+  cricbuzzUrl?: string | null;
   featured?: boolean | null;
   sortOrder: number;
   status: 'draft' | 'published' | 'archived';
   publishedAt?: string | null;
+  /**
+   * Reusable SEO metadata for public content. Leave fields empty to allow application-level fallbacks.
+   */
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    canonicalUrl?: string | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    index?: boolean | null;
+    follow?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -475,6 +535,7 @@ export interface PlayersSelect<T extends boolean = true> {
   profileImage?: T;
   heroImage?: T;
   shortIntroduction?: T;
+  biography?: T;
   dateOfBirth?: T;
   nationality?: T;
   gender?: T;
@@ -485,13 +546,71 @@ export interface PlayersSelect<T extends boolean = true> {
   currentClub?: T;
   previousClubs?: T;
   teamsRepresented?: T;
+  careerHighlights?:
+    | T
+    | {
+        highlight?: T;
+        id?: T;
+      };
+  achievements?:
+    | T
+    | {
+        achievement?: T;
+        id?: T;
+      };
+  playingExperience?: T;
   playerStatus?: T;
   availabilityDate?: T;
   eligibleCountries?: T;
+  statisticsByFormat?:
+    | T
+    | {
+        format?: T;
+        matches?: T;
+        runs?: T;
+        battingAverage?: T;
+        highestScore?: T;
+        hundreds?: T;
+        fifties?: T;
+        wickets?: T;
+        bowlingAverage?: T;
+        bestBowling?: T;
+        economyRate?: T;
+        id?: T;
+      };
+  gallery?: T;
+  playerCv?: T;
+  youtubeVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  vimeoVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  instagramUrl?: T;
+  espnCricinfoUrl?: T;
+  cricbuzzUrl?: T;
   featured?: T;
   sortOrder?: T;
   status?: T;
   publishedAt?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        canonicalUrl?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        index?: T;
+        follow?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
