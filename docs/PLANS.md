@@ -56,11 +56,11 @@ Planned stack:
 
 # 2. Current Project Phase
 
-**Current Phase:** Phase 3 - Media and Shared Data
+**Current Phase:** Phase 4 - Player CMS
 
-**Current Status:** Phase 2 users/authentication/roles is implemented with basic access-control tests. Media upload foundation is now in progress.
+**Current Status:** Shared data foundations are implemented. Player schema work is now in progress.
 
-**Next Main Task:** Complete the remaining Phase 3 shared-data foundations: Playing Roles, Countries, Clubs, and the reusable SEO field group
+**Next Main Task:** Complete the Player CMS, then move into Website Content CMS and the player directory query layer
 
 ---
 
@@ -143,19 +143,19 @@ Legend:
 
 ## Phase 4 — Player CMS
 
-- [ ] Create Players collection
-- [ ] Add identity fields
-- [ ] Add cricket fields
-- [ ] Add availability fields
+- [x] Create Players collection
+- [x] Add identity fields
+- [x] Add cricket fields
+- [x] Add availability fields
 - [ ] Add statistics
-- [ ] Add clubs/teams
+- [x] Add clubs/teams
 - [ ] Add videos
 - [ ] Add gallery
 - [ ] Add CV
 - [ ] Add SEO
-- [ ] Add publishing controls
-- [ ] Add featured player control
-- [ ] Add player sort order
+- [x] Add publishing controls
+- [x] Add featured player control
+- [x] Add player sort order
 - [ ] Create development sample players
 
 ## Phase 5 — Website Content CMS

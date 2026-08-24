@@ -72,6 +72,7 @@ export interface Config {
     'playing-roles': PlayingRole;
     countries: Country;
     clubs: Club;
+    players: Player;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     'playing-roles': PlayingRolesSelect<false> | PlayingRolesSelect<true>;
     countries: CountriesSelect<false> | CountriesSelect<true>;
     clubs: ClubsSelect<false> | ClubsSelect<true>;
+    players: PlayersSelect<false> | PlayersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -235,6 +237,51 @@ export interface Club {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "players".
+ */
+export interface Player {
+  id: number;
+  fullName: string;
+  /**
+   * Stable public URL segment for the player profile.
+   */
+  slug: string;
+  profileImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
+  shortIntroduction?: string | null;
+  dateOfBirth?: string | null;
+  nationality: number | Country;
+  gender?: ('male' | 'female' | 'other') | null;
+  currentLocation?: string | null;
+  primaryRole: number | PlayingRole;
+  battingStyle?: ('right-hand-bat' | 'left-hand-bat') | null;
+  bowlingStyle?:
+    | (
+        | 'right-arm-fast'
+        | 'right-arm-medium'
+        | 'right-arm-off-break'
+        | 'right-arm-leg-break'
+        | 'left-arm-fast'
+        | 'left-arm-medium'
+        | 'left-arm-orthodox'
+        | 'left-arm-wrist-spin'
+      )
+    | null;
+  currentClub?: (number | null) | Club;
+  previousClubs?: (number | Club)[] | null;
+  teamsRepresented?: (number | Club)[] | null;
+  playerStatus: 'available' | 'contracted' | 'unavailable';
+  availabilityDate?: string | null;
+  eligibleCountries?: (number | Country)[] | null;
+  featured?: boolean | null;
+  sortOrder: number;
+  status: 'draft' | 'published' | 'archived';
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -276,6 +323,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'clubs';
         value: number | Club;
+      } | null)
+    | ({
+        relationTo: 'players';
+        value: number | Player;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -411,6 +462,36 @@ export interface ClubsSelect<T extends boolean = true> {
   country?: T;
   description?: T;
   sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "players_select".
+ */
+export interface PlayersSelect<T extends boolean = true> {
+  fullName?: T;
+  slug?: T;
+  profileImage?: T;
+  heroImage?: T;
+  shortIntroduction?: T;
+  dateOfBirth?: T;
+  nationality?: T;
+  gender?: T;
+  currentLocation?: T;
+  primaryRole?: T;
+  battingStyle?: T;
+  bowlingStyle?: T;
+  currentClub?: T;
+  previousClubs?: T;
+  teamsRepresented?: T;
+  playerStatus?: T;
+  availabilityDate?: T;
+  eligibleCountries?: T;
+  featured?: T;
+  sortOrder?: T;
+  status?: T;
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

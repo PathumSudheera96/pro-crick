@@ -9,6 +9,7 @@ import { Countries } from './src/collections/Countries'
 import { Clubs } from './src/collections/Clubs'
 import { Media } from './src/collections/Media'
 import { PlayingRoles } from './src/collections/PlayingRoles'
+import { Players } from './src/collections/Players'
 import { Users } from './src/collections/Users'
 import { migrations } from './src/migrations'
 
@@ -23,7 +24,7 @@ export default buildConfig({
       importMapFile: path.resolve(dirname, 'src/app/(payload)/admin/importMap.js'),
     },
   },
-  collections: [Users, Media, PlayingRoles, Countries, Clubs],
+  collections: [Users, Media, PlayingRoles, Countries, Clubs, Players],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
