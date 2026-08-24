@@ -1,19 +1,8 @@
-import type { Access, CollectionBeforeChangeHook, CollectionConfig } from 'payload'
+import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 
-import { hasRole, isAdminOrEditor, isAdminOrEditorBoolean } from '@/access/users'
+import { isPublishedOrPrivileged } from '@/access/content'
+import { isAdminOrEditor, isAdminOrEditorBoolean } from '@/access/users'
 import { seoFields } from '@/fields/seo'
-
-const isPublishedOrPrivileged: Access = ({ req }) => {
-  if (hasRole(req.user, 'administrator') || hasRole(req.user, 'editor')) {
-    return true
-  }
-
-  return {
-    status: {
-      equals: 'published',
-    },
-  }
-}
 
 const syncPublishedAt: CollectionBeforeChangeHook = ({ data }) => {
   if (data?.status === 'published' && !data?.publishedAt) {

@@ -160,8 +160,8 @@ Legend:
 
 ## Phase 5 — Website Content CMS
 
-- [ ] Create Testimonials collection
-- [ ] Create Partners collection
+- [x] Create Testimonials collection
+- [x] Create Partners collection
 - [ ] Create Hero block
 - [ ] Create Rich Text block
 - [ ] Create Image + Text block

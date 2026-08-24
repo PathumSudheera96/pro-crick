@@ -8,8 +8,10 @@ import sharp from 'sharp'
 import { Countries } from './src/collections/Countries'
 import { Clubs } from './src/collections/Clubs'
 import { Media } from './src/collections/Media'
+import { Partners } from './src/collections/Partners'
 import { PlayingRoles } from './src/collections/PlayingRoles'
 import { Players } from './src/collections/Players'
+import { Testimonials } from './src/collections/Testimonials'
 import { Users } from './src/collections/Users'
 import { migrations } from './src/migrations'
 
@@ -24,7 +26,7 @@ export default buildConfig({
       importMapFile: path.resolve(dirname, 'src/app/(payload)/admin/importMap.js'),
     },
   },
-  collections: [Users, Media, PlayingRoles, Countries, Clubs, Players],
+  collections: [Users, Media, PlayingRoles, Countries, Clubs, Players, Testimonials, Partners],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
