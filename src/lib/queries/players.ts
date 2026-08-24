@@ -1,8 +1,8 @@
-import config from '@payload-config'
-import { getPayload } from 'payload'
+import { cache } from 'react'
 import type { PaginatedDocs } from 'payload'
 
 import type { Player } from '@/payload-types'
+import { getPayloadClient } from './payload'
 export {
   buildPlayerDirectoryWhere,
   resolvePlayerDirectorySort,
@@ -20,7 +20,7 @@ import {
 export const getPublishedPlayers = async (
   filters: PlayerDirectoryFilters,
 ): Promise<PaginatedDocs<Player>> => {
-  const payload = await getPayload({ config })
+  const payload = await getPayloadClient()
   const normalized = sanitizeDirectoryFilters(filters)
 
   return payload.find({
@@ -34,7 +34,7 @@ export const getPublishedPlayers = async (
 }
 
 export const getPlayerDirectoryFilterOptions = async () => {
-  const payload = await getPayload({ config })
+  const payload = await getPayloadClient()
 
   const [roles, countries] = await Promise.all([
     payload.find({
@@ -63,3 +63,47 @@ export const getPlayerDirectoryFilterOptions = async () => {
     roles: roles.docs,
   }
 }
+
+export const getPublishedPlayerBySlug = cache(async (slug: string): Promise<Player | null> => {
+  const payload = await getPayloadClient()
+  const result = await payload.find({
+    collection: 'players',
+    depth: 2,
+    limit: 1,
+    pagination: false,
+    where: {
+      and: [
+        {
+          slug: {
+            equals: slug,
+          },
+        },
+        {
+          status: {
+            equals: 'published',
+          },
+        },
+      ],
+    },
+  })
+
+  return result.docs[0] || null
+})
+
+export const getPublishedPlayerSlugs = cache(async (): Promise<string[]> => {
+  const payload = await getPayloadClient()
+  const result = await payload.find({
+    collection: 'players',
+    depth: 0,
+    limit: 500,
+    pagination: false,
+    sort: 'slug',
+    where: {
+      status: {
+        equals: 'published',
+      },
+    },
+  })
+
+  return result.docs.map((player) => player.slug)
+})

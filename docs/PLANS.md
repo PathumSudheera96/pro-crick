@@ -223,7 +223,7 @@ Legend:
 
 ## Phase 9 — Player Profiles
 
-- [ ] Build player-by-slug query
+- [x] Build player-by-slug query
 - [ ] Build `/players/[slug]`
 - [ ] Build player hero
 - [ ] Build biography
