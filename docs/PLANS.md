@@ -689,3 +689,11 @@ This file should always answer:
 - What is blocked?
 - What do we do next?
 - What important decisions have already been made?
+- [x] Create Enquiries collection
+- [x] Add statuses
+- [x] Add player relationship
+- [ ] Build general enquiry form
+- [ ] Build player-specific enquiry form
+- [x] Add server-side validation
+- [x] Add spam protection
+- [x] Add success/error states
