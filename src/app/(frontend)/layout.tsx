@@ -1,26 +1,15 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from 'next/font/google'
 import { ChatWidget } from '@/components/site/ChatWidget'
 import { SiteAnimations } from '@/components/site/SiteAnimations'
+import { buildSeoMetadata, getSiteUrl } from '@/lib/seo/metadata'
 import './styles.css'
 
-const displayFont = IBM_Plex_Sans_Condensed({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-display-family',
-  display: 'swap',
-})
-
-const bodyFont = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-body-family',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
-  title: 'Pro-Crick',
-  description: 'Professional cricket player agency and custom CMS.',
+  ...buildSeoMetadata({
+    contentTitle: 'Pro-Crick',
+    path: '/',
+    summary: 'Professional cricket talent connection platform and player agency.',
+  }),
   icons: {
     icon: [
       { url: '/images/pro-crick-32.png', sizes: '32x32', type: 'image/png' },
@@ -28,6 +17,7 @@ export const metadata: Metadata = {
     ],
     apple: '/images/pro-crick-512.png',
   },
+  metadataBase: new URL(getSiteUrl()),
 }
 
 export default function RootLayout({
@@ -36,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html lang="en">
       <body>
         {children}
         <ChatWidget />

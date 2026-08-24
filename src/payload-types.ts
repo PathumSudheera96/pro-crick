@@ -68,6 +68,18 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    media: Media;
+    'application-uploads': ApplicationUpload;
+    'playing-roles': PlayingRole;
+    countries: Country;
+    clubs: Club;
+    players: Player;
+    testimonials: Testimonial;
+    partners: Partner;
+    pages: Page;
+    enquiries: Enquiry;
+    'player-applications': PlayerApplication;
+    redirects: Redirect;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,6 +88,18 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    'application-uploads': ApplicationUploadsSelect<false> | ApplicationUploadsSelect<true>;
+    'playing-roles': PlayingRolesSelect<false> | PlayingRolesSelect<true>;
+    countries: CountriesSelect<false> | CountriesSelect<true>;
+    clubs: ClubsSelect<false> | ClubsSelect<true>;
+    players: PlayersSelect<false> | PlayersSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    partners: PartnersSelect<false> | PartnersSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
+    'player-applications': PlayerApplicationsSelect<false> | PlayerApplicationsSelect<true>;
+    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -85,8 +109,16 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+    header: Header;
+    footer: Footer;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -121,6 +153,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  role: 'administrator' | 'editor';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -139,6 +172,478 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  title?: string | null;
+  alt?: string | null;
+  caption?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "application-uploads".
+ */
+export interface ApplicationUpload {
+  id: number;
+  label?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "playing-roles".
+ */
+export interface PlayingRole {
+  id: number;
+  name: string;
+  /**
+   * Stable URL-safe identifier used by player filters and relationships.
+   */
+  slug: string;
+  description?: string | null;
+  sortOrder: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: number;
+  name: string;
+  /**
+   * Stable URL-safe identifier used by filters and relationships.
+   */
+  slug: string;
+  /**
+   * Optional ISO 3166-1 alpha-2 code such as LK or GB.
+   */
+  isoCode?: string | null;
+  description?: string | null;
+  sortOrder: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clubs".
+ */
+export interface Club {
+  id: number;
+  name: string;
+  /**
+   * Stable URL-safe identifier used by relationships and future club pages.
+   */
+  slug: string;
+  country?: (number | null) | Country;
+  description?: string | null;
+  sortOrder: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "players".
+ */
+export interface Player {
+  id: number;
+  fullName: string;
+  /**
+   * Stable public URL segment for the player profile.
+   */
+  slug: string;
+  profileImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
+  shortIntroduction?: string | null;
+  biography?: string | null;
+  dateOfBirth?: string | null;
+  nationality: number | Country;
+  gender?: ('male' | 'female' | 'other') | null;
+  currentLocation?: string | null;
+  primaryRole: number | PlayingRole;
+  battingStyle?: ('right-hand-bat' | 'left-hand-bat') | null;
+  bowlingStyle?:
+    | (
+        | 'right-arm-fast'
+        | 'right-arm-medium'
+        | 'right-arm-off-break'
+        | 'right-arm-leg-break'
+        | 'left-arm-fast'
+        | 'left-arm-medium'
+        | 'left-arm-orthodox'
+        | 'left-arm-wrist-spin'
+      )
+    | null;
+  currentClub?: (number | null) | Club;
+  previousClubs?: (number | Club)[] | null;
+  teamsRepresented?: (number | Club)[] | null;
+  careerHighlights?:
+    | {
+        highlight: string;
+        id?: string | null;
+      }[]
+    | null;
+  achievements?:
+    | {
+        achievement: string;
+        id?: string | null;
+      }[]
+    | null;
+  playingExperience?: string | null;
+  playerStatus: 'available' | 'contracted' | 'unavailable';
+  availabilityDate?: string | null;
+  eligibleCountries?: (number | Country)[] | null;
+  statisticsByFormat?:
+    | {
+        format: 'test' | 'odi' | 't20' | 'list-a' | 'first-class';
+        matches?: number | null;
+        runs?: number | null;
+        battingAverage?: number | null;
+        highestScore?: number | null;
+        hundreds?: number | null;
+        fifties?: number | null;
+        wickets?: number | null;
+        bowlingAverage?: number | null;
+        bestBowling?: string | null;
+        economyRate?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  gallery?: (number | Media)[] | null;
+  playerCv?: (number | null) | Media;
+  youtubeVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  vimeoVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  instagramUrl?: string | null;
+  espnCricinfoUrl?: string | null;
+  cricbuzzUrl?: string | null;
+  featured?: boolean | null;
+  sortOrder: number;
+  status: 'draft' | 'published' | 'archived';
+  publishedAt?: string | null;
+  /**
+   * Reusable SEO metadata for public content. Leave fields empty to allow application-level fallbacks.
+   */
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    canonicalUrl?: string | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    index?: boolean | null;
+    follow?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  role?: string | null;
+  organization?: string | null;
+  player?: (number | null) | Player;
+  quote: string;
+  featured?: boolean | null;
+  sortOrder: number;
+  status: 'draft' | 'published' | 'archived';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
+export interface Partner {
+  id: number;
+  name: string;
+  slug: string;
+  logo?: (number | null) | Media;
+  websiteUrl?: string | null;
+  description?: string | null;
+  featured?: boolean | null;
+  sortOrder: number;
+  status: 'draft' | 'published' | 'archived';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  slug: string;
+  status: 'draft' | 'published' | 'archived';
+  publishedAt?: string | null;
+  layout: (
+    | HeroBlock
+    | RichTextBlock
+    | ImageTextBlock
+    | FeaturedPlayersBlock
+    | StatsBlock
+    | TestimonialsBlock
+    | FAQBlock
+    | CTABlock
+    | ContactBlock
+  )[];
+  /**
+   * Reusable SEO metadata for public content. Leave fields empty to allow application-level fallbacks.
+   */
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    canonicalUrl?: string | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    index?: boolean | null;
+    follow?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock".
+ */
+export interface HeroBlock {
+  eyebrow?: string | null;
+  title: string;
+  subtitle?: string | null;
+  backgroundImage?: (number | null) | Media;
+  primaryCtaLabel?: string | null;
+  primaryCtaUrl?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  content: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextBlock".
+ */
+export interface ImageTextBlock {
+  title: string;
+  body: string;
+  image: number | Media;
+  imagePosition: 'left' | 'right';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedPlayersBlock".
+ */
+export interface FeaturedPlayersBlock {
+  title: string;
+  subtitle?: string | null;
+  players?: (number | Player)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredPlayers';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock".
+ */
+export interface StatsBlock {
+  title?: string | null;
+  items: {
+    value: string;
+    label: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock".
+ */
+export interface TestimonialsBlock {
+  title?: string | null;
+  testimonials?: (number | Testimonial)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock".
+ */
+export interface FAQBlock {
+  title?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock".
+ */
+export interface CTABlock {
+  title: string;
+  body?: string | null;
+  buttonLabel?: string | null;
+  buttonUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlock".
+ */
+export interface ContactBlock {
+  title: string;
+  body?: string | null;
+  showGeneralEnquiryForm?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries".
+ */
+export interface Enquiry {
+  id: number;
+  referenceNumber: string;
+  relatedPlayer?: (number | null) | Player;
+  name: string;
+  clubOrOrganization?: string | null;
+  country?: string | null;
+  email: string;
+  phone?: string | null;
+  message: string;
+  status: 'new' | 'contacted' | 'in_progress' | 'closed';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "player-applications".
+ */
+export interface PlayerApplication {
+  id: number;
+  referenceNumber: string;
+  applicantName: string;
+  email: string;
+  phone?: string | null;
+  nationality?: (number | null) | Country;
+  cricketRole?: (number | null) | PlayingRole;
+  currentClub?: (number | null) | Club;
+  teamsExperience?: string | null;
+  statistics?: string | null;
+  biography: string;
+  profilePhoto?: (number | null) | ApplicationUpload;
+  playerCv?: (number | null) | ApplicationUpload;
+  youtubeVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  vimeoVideos?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  applicationStatus: 'new' | 'under_review' | 'approved' | 'rejected';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects".
+ */
+export interface Redirect {
+  id: number;
+  fromPath: string;
+  toPath: string;
+  redirectType: '301' | '302';
+  enabled?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -163,10 +668,59 @@ export interface PayloadKv {
  */
 export interface PayloadLockedDocument {
   id: number;
-  document?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'application-uploads';
+        value: number | ApplicationUpload;
+      } | null)
+    | ({
+        relationTo: 'playing-roles';
+        value: number | PlayingRole;
+      } | null)
+    | ({
+        relationTo: 'countries';
+        value: number | Country;
+      } | null)
+    | ({
+        relationTo: 'clubs';
+        value: number | Club;
+      } | null)
+    | ({
+        relationTo: 'players';
+        value: number | Player;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'partners';
+        value: number | Partner;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'enquiries';
+        value: number | Enquiry;
+      } | null)
+    | ({
+        relationTo: 'player-applications';
+        value: number | PlayerApplication;
+      } | null)
+    | ({
+        relationTo: 'redirects';
+        value: number | Redirect;
+      } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
@@ -214,6 +768,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -230,6 +785,443 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  title?: T;
+  alt?: T;
+  caption?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "application-uploads_select".
+ */
+export interface ApplicationUploadsSelect<T extends boolean = true> {
+  label?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "playing-roles_select".
+ */
+export interface PlayingRolesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries_select".
+ */
+export interface CountriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  isoCode?: T;
+  description?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clubs_select".
+ */
+export interface ClubsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  country?: T;
+  description?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "players_select".
+ */
+export interface PlayersSelect<T extends boolean = true> {
+  fullName?: T;
+  slug?: T;
+  profileImage?: T;
+  heroImage?: T;
+  shortIntroduction?: T;
+  biography?: T;
+  dateOfBirth?: T;
+  nationality?: T;
+  gender?: T;
+  currentLocation?: T;
+  primaryRole?: T;
+  battingStyle?: T;
+  bowlingStyle?: T;
+  currentClub?: T;
+  previousClubs?: T;
+  teamsRepresented?: T;
+  careerHighlights?:
+    | T
+    | {
+        highlight?: T;
+        id?: T;
+      };
+  achievements?:
+    | T
+    | {
+        achievement?: T;
+        id?: T;
+      };
+  playingExperience?: T;
+  playerStatus?: T;
+  availabilityDate?: T;
+  eligibleCountries?: T;
+  statisticsByFormat?:
+    | T
+    | {
+        format?: T;
+        matches?: T;
+        runs?: T;
+        battingAverage?: T;
+        highestScore?: T;
+        hundreds?: T;
+        fifties?: T;
+        wickets?: T;
+        bowlingAverage?: T;
+        bestBowling?: T;
+        economyRate?: T;
+        id?: T;
+      };
+  gallery?: T;
+  playerCv?: T;
+  youtubeVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  vimeoVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  instagramUrl?: T;
+  espnCricinfoUrl?: T;
+  cricbuzzUrl?: T;
+  featured?: T;
+  sortOrder?: T;
+  status?: T;
+  publishedAt?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        canonicalUrl?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        index?: T;
+        follow?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  organization?: T;
+  player?: T;
+  quote?: T;
+  featured?: T;
+  sortOrder?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners_select".
+ */
+export interface PartnersSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  logo?: T;
+  websiteUrl?: T;
+  description?: T;
+  featured?: T;
+  sortOrder?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  status?: T;
+  publishedAt?: T;
+  layout?:
+    | T
+    | {
+        hero?: T | HeroBlockSelect<T>;
+        richText?: T | RichTextBlockSelect<T>;
+        imageText?: T | ImageTextBlockSelect<T>;
+        featuredPlayers?: T | FeaturedPlayersBlockSelect<T>;
+        stats?: T | StatsBlockSelect<T>;
+        testimonials?: T | TestimonialsBlockSelect<T>;
+        faq?: T | FAQBlockSelect<T>;
+        cta?: T | CTABlockSelect<T>;
+        contact?: T | ContactBlockSelect<T>;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        canonicalUrl?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        index?: T;
+        follow?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock_select".
+ */
+export interface HeroBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  subtitle?: T;
+  backgroundImage?: T;
+  primaryCtaLabel?: T;
+  primaryCtaUrl?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextBlock_select".
+ */
+export interface ImageTextBlockSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  image?: T;
+  imagePosition?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedPlayersBlock_select".
+ */
+export interface FeaturedPlayersBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  players?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock_select".
+ */
+export interface StatsBlockSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock_select".
+ */
+export interface TestimonialsBlockSelect<T extends boolean = true> {
+  title?: T;
+  testimonials?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock_select".
+ */
+export interface FAQBlockSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock_select".
+ */
+export interface CTABlockSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  buttonLabel?: T;
+  buttonUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlock_select".
+ */
+export interface ContactBlockSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  showGeneralEnquiryForm?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries_select".
+ */
+export interface EnquiriesSelect<T extends boolean = true> {
+  referenceNumber?: T;
+  relatedPlayer?: T;
+  name?: T;
+  clubOrOrganization?: T;
+  country?: T;
+  email?: T;
+  phone?: T;
+  message?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "player-applications_select".
+ */
+export interface PlayerApplicationsSelect<T extends boolean = true> {
+  referenceNumber?: T;
+  applicantName?: T;
+  email?: T;
+  phone?: T;
+  nationality?: T;
+  cricketRole?: T;
+  currentClub?: T;
+  teamsExperience?: T;
+  statistics?: T;
+  biography?: T;
+  profilePhoto?: T;
+  playerCv?: T;
+  youtubeVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  vimeoVideos?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  applicationStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects_select".
+ */
+export interface RedirectsSelect<T extends boolean = true> {
+  fromPath?: T;
+  toPath?: T;
+  redirectType?: T;
+  enabled?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -270,6 +1262,156 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  siteName: string;
+  companyName: string;
+  logo?: (number | null) | Media;
+  favicon?: (number | null) | Media;
+  defaultSeoTitle?: string | null;
+  defaultSeoDescription?: string | null;
+  defaultOgImage?: (number | null) | Media;
+  email?: string | null;
+  phone?: string | null;
+  whatsApp?: string | null;
+  address?: string | null;
+  socialLinks?:
+    | {
+        platform: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  navigationItems?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaUrl?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  footerText?: string | null;
+  linkColumns?:
+    | {
+        heading: string;
+        links?:
+          | {
+              label: string;
+              url: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?:
+    | {
+        platform: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  companyName?: T;
+  logo?: T;
+  favicon?: T;
+  defaultSeoTitle?: T;
+  defaultSeoDescription?: T;
+  defaultOgImage?: T;
+  email?: T;
+  phone?: T;
+  whatsApp?: T;
+  address?: T;
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  navigationItems?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  primaryCtaLabel?: T;
+  primaryCtaUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  footerText?: T;
+  linkColumns?:
+    | T
+    | {
+        heading?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

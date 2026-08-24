@@ -56,11 +56,11 @@ Planned stack:
 
 # 2. Current Project Phase
 
-**Current Phase:** Phase 2 - Database and Authentication
+**Current Phase:** Phase 9-12 Backend Foundations
 
-**Current Status:** STEP 01A fresh-clone onboarding validation completed. Initial Payload/PostgreSQL migration workflow is established and should be formally reviewed as STEP 02 before continuing to roles.
+**Current Status:** Core CMS schemas, player/content query helpers, public lead endpoints, redirect runtime, and technical SEO foundations are implemented. Remaining work is now mostly frontend rendering, UX completion, and launch hardening.
 
-**Next Main Task:** STEP 02 - Database / Migration Foundation review and close-out, then STEP 03 - Users / Authentication / Roles
+**Next Main Task:** Build the frontend player directory/profile experiences and connect the marketing shell to Payload-managed content
 
 ---
 
@@ -124,57 +124,57 @@ Legend:
 - [x] Establish migration workflow
 - [x] Document migration commands
 - [x] Create Users collection
-- [ ] Add Administrator role
-- [ ] Add Editor role
-- [ ] Enforce server-side access control
-- [ ] Add basic access-control tests
+- [x] Add Administrator role
+- [x] Add Editor role
+- [x] Enforce server-side access control
+- [x] Add basic access-control tests
 
 ## Phase 3 — Media and Shared Data
 
-- [ ] Create Media collection
-- [ ] Configure image uploads
-- [ ] Configure PDF uploads
-- [ ] Add alt text
-- [ ] Add file-type restrictions
-- [ ] Create Playing Roles collection
-- [ ] Create Countries collection
-- [ ] Create Clubs collection
-- [ ] Create reusable SEO field group
+- [x] Create Media collection
+- [x] Configure image uploads
+- [x] Configure PDF uploads
+- [x] Add alt text
+- [x] Add file-type restrictions
+- [x] Create Playing Roles collection
+- [x] Create Countries collection
+- [x] Create Clubs collection
+- [x] Create reusable SEO field group
 
 ## Phase 4 — Player CMS
 
-- [ ] Create Players collection
-- [ ] Add identity fields
-- [ ] Add cricket fields
-- [ ] Add availability fields
-- [ ] Add statistics
-- [ ] Add clubs/teams
-- [ ] Add videos
-- [ ] Add gallery
-- [ ] Add CV
-- [ ] Add SEO
-- [ ] Add publishing controls
-- [ ] Add featured player control
-- [ ] Add player sort order
-- [ ] Create development sample players
+- [x] Create Players collection
+- [x] Add identity fields
+- [x] Add cricket fields
+- [x] Add availability fields
+- [x] Add statistics
+- [x] Add clubs/teams
+- [x] Add videos
+- [x] Add gallery
+- [x] Add CV
+- [x] Add SEO
+- [x] Add publishing controls
+- [x] Add featured player control
+- [x] Add player sort order
+- [x] Create development sample players
 
 ## Phase 5 — Website Content CMS
 
-- [ ] Create Testimonials collection
-- [ ] Create Partners collection
-- [ ] Create Hero block
-- [ ] Create Rich Text block
-- [ ] Create Image + Text block
-- [ ] Create Featured Players block
-- [ ] Create Stats block
-- [ ] Create Testimonials block
-- [ ] Create FAQ block
-- [ ] Create CTA block
-- [ ] Create Contact block
-- [ ] Create Pages collection
-- [ ] Create Site Settings global
-- [ ] Create Header global
-- [ ] Create Footer global
+- [x] Create Testimonials collection
+- [x] Create Partners collection
+- [x] Create Hero block
+- [x] Create Rich Text block
+- [x] Create Image + Text block
+- [x] Create Featured Players block
+- [x] Create Stats block
+- [x] Create Testimonials block
+- [x] Create FAQ block
+- [x] Create CTA block
+- [x] Create Contact block
+- [x] Create Pages collection
+- [x] Create Site Settings global
+- [x] Create Header global
+- [x] Create Footer global
 
 ## Phase 6 — Frontend Foundation
 
@@ -208,14 +208,14 @@ Legend:
 
 ## Phase 8 — Player Directory
 
-- [ ] Build player query layer
-- [ ] Add keyword search
-- [ ] Add Playing Role filter
-- [ ] Add Nationality filter
-- [ ] Add Availability filter
-- [ ] Add Eligible Country filter
-- [ ] Add pagination
-- [ ] Add sorting
+- [x] Build player query layer
+- [x] Add keyword search
+- [x] Add Playing Role filter
+- [x] Add Nationality filter
+- [x] Add Availability filter
+- [x] Add Eligible Country filter
+- [x] Add pagination
+- [x] Add sorting
 - [ ] Build player card
 - [ ] Build `/players`
 - [ ] Add URL-aware filter state
@@ -223,7 +223,7 @@ Legend:
 
 ## Phase 9 — Player Profiles
 
-- [ ] Build player-by-slug query
+- [x] Build player-by-slug query
 - [ ] Build `/players/[slug]`
 - [ ] Build player hero
 - [ ] Build biography
@@ -239,41 +239,41 @@ Legend:
 
 ## Phase 10 — Enquiries
 
-- [ ] Create Enquiries collection
-- [ ] Add statuses
-- [ ] Add player relationship
+- [x] Create Enquiries collection
+- [x] Add statuses
+- [x] Add player relationship
 - [ ] Build general enquiry form
 - [ ] Build player-specific enquiry form
-- [ ] Add server-side validation
-- [ ] Add spam protection
+- [x] Add server-side validation
+- [x] Add spam protection
 - [ ] Add success/error states
 - [ ] Optional: email notifications
 
 ## Phase 11 — Player Applications
 
-- [ ] Create Player Applications collection
-- [ ] Add application statuses
+- [x] Create Player Applications collection
+- [x] Add application statuses
 - [ ] Build `/apply`
-- [ ] Add profile photo upload
-- [ ] Add CV upload
-- [ ] Add video links
-- [ ] Add server-side validation
-- [ ] Add spam protection
-- [ ] Build application-to-player conversion
-- [ ] Ensure converted player starts as Draft
+- [x] Add profile photo upload
+- [x] Add CV upload
+- [x] Add video links
+- [x] Add server-side validation
+- [x] Add spam protection
+- [x] Build application-to-player conversion
+- [x] Ensure converted player starts as Draft
 
 ## Phase 12 — SEO
 
-- [ ] Connect reusable SEO fields
-- [ ] Implement metadata fallbacks
-- [ ] Add canonical URLs
-- [ ] Add Open Graph
-- [ ] Add sitemap.xml
-- [ ] Add robots.txt
+- [x] Connect reusable SEO fields
+- [x] Implement metadata fallbacks
+- [x] Add canonical URLs
+- [x] Add Open Graph
+- [x] Add sitemap.xml
+- [x] Add robots.txt
 - [ ] Add structured data
 - [ ] Add breadcrumbs
-- [ ] Create Redirects collection
-- [ ] Create redirect runtime
+- [x] Create Redirects collection
+- [x] Create redirect runtime
 - [ ] Verify noindex behavior
 - [ ] Verify 404 behavior
 
@@ -286,7 +286,7 @@ Legend:
 - [ ] Fix P0/P1 security issues
 - [ ] Add empty states
 - [ ] Add error states
-- [ ] Automated testing pass
+- [~] Automated testing pass
 - [ ] Production-readiness audit
 - [ ] Fix launch blockers
 
@@ -689,3 +689,21 @@ This file should always answer:
 - What is blocked?
 - What do we do next?
 - What important decisions have already been made?
+- [x] Create Enquiries collection
+- [x] Add statuses
+- [x] Add player relationship
+- [ ] Build general enquiry form
+- [ ] Build player-specific enquiry form
+- [x] Add server-side validation
+- [x] Add spam protection
+- [x] Add success/error states
+- [x] Create Player Applications collection
+- [x] Add application statuses
+- [ ] Build `/apply`
+- [x] Add profile photo upload
+- [x] Add CV upload
+- [x] Add video links
+- [x] Add server-side validation
+- [x] Add spam protection
+- [x] Build application-to-player conversion
+- [x] Ensure converted player starts as Draft

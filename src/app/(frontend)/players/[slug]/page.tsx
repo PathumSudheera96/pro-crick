@@ -2,27 +2,13 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import players from '../../../../../public/player_data/players.json'
 import { ChatOpenButton } from '@/components/site/ChatOpenButton'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
-
-type Player = {
-  slug: string
-  name: string
-  dateOfBirth: string
-  age: number
-  role: string
-  nationality: string
-  status: string
-  battingStyle: string
-  bowlingStyle: string
-  majorTeams: string
-  coachingQualification?: string
-  imageUrl: string
-  profileLine: string
-  profileBio: string
-}
+import { mapPlayerToProfileViewModel } from '@/lib/players/playerProfile'
+import { getSiteSettings } from '@/lib/queries/content'
+import { getPublishedPlayerBySlug } from '@/lib/queries/players'
+import { buildSeoMetadata } from '@/lib/seo/metadata'
 
 type PlayerPageProps = {
   params: Promise<{
@@ -30,45 +16,48 @@ type PlayerPageProps = {
   }>
 }
 
-const PLAYER_DATA = players as Player[]
-
-export function generateStaticParams() {
-  return PLAYER_DATA.map((player) => ({
-    slug: player.slug,
-  }))
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: PlayerPageProps): Promise<Metadata> {
   const { slug } = await params
-  const player = getPlayer(slug)
+  const [player, siteSettings] = await Promise.all([getPublishedPlayerBySlug(slug), getSiteSettings()])
 
   if (!player) {
     return {
       title: 'Player Not Found | Pro-Crick',
+      robots: {
+        follow: false,
+        index: false,
+      },
     }
   }
 
-  return {
-    title: `${player.name} | Pro-Crick`,
-    description: player.profileLine,
-  }
+  return buildSeoMetadata({
+    contentTitle: player.fullName,
+    path: `/players/${player.slug}`,
+    seo: player.seo,
+    siteSettings,
+    summary: player.shortIntroduction || player.biography,
+  })
 }
 
 export default async function PlayerProfilePage({ params }: PlayerPageProps) {
   const { slug } = await params
-  const player = getPlayer(slug)
+  const player = await getPublishedPlayerBySlug(slug)
 
   if (!player) {
     notFound()
   }
 
+  const profile = mapPlayerToProfileViewModel(player)
+
   const detailItems = [
-    ['Status', player.status],
-    ['Age', String(player.age)],
-    ['Date of Birth', player.dateOfBirth],
-    ['Batting Style', player.battingStyle],
-    ['Bowling Style', player.bowlingStyle],
-    ['Coaching', player.coachingQualification ?? 'Available on request'],
+    ['Status', profile.status],
+    ['Age', profile.age],
+    ['Date of Birth', profile.dateOfBirth],
+    ['Batting Style', profile.battingStyle],
+    ['Bowling Style', profile.bowlingStyle],
+    ['Availability', player.availabilityDate ? profile.status : 'Available on request'],
   ]
 
   return (
@@ -93,21 +82,21 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
               </div>
 
               <h1 data-gsap-item data-gsap-title className="mt-8 text-[clamp(2.25rem,5vw,4.875rem)] font-medium leading-[0.96] tracking-[-0.06em] text-foreground">
-                {player.name}
+                {profile.name}
               </h1>
 
               <dl data-gsap-item className="mt-10 grid gap-5 text-foreground sm:grid-cols-2">
                 <div>
                   <dt className="type-accent font-medium uppercase text-muted">Position</dt>
-                  <dd className="type-h5 mt-2 font-medium">{player.role}</dd>
+                  <dd className="type-h5 mt-2 font-medium">{profile.currentRole}</dd>
                 </div>
                 <div>
                   <dt className="type-accent font-medium uppercase text-muted">Country</dt>
-                  <dd className="type-h5 mt-2 font-medium">{player.nationality}</dd>
+                  <dd className="type-h5 mt-2 font-medium">{profile.nationality}</dd>
                 </div>
               </dl>
 
-              <p data-gsap-item className="type-lead mt-8 max-w-xl text-muted">{player.profileLine}</p>
+              <p data-gsap-item className="type-lead mt-8 max-w-xl text-muted">{profile.profileLine}</p>
 
               <ChatOpenButton
                 data-gsap-item
@@ -119,16 +108,22 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
 
             <div data-gsap-item className="relative mx-auto w-full max-w-[32rem] lg:mr-0">
               <div className="relative overflow-hidden bg-white">
-                <Image
-                  src={player.imageUrl}
-                  alt={player.name}
-                  width={1200}
-                  height={1200}
-                  priority
-                  loading="eager"
-                  className="aspect-square w-full object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 32rem"
-                />
+                {profile.imageUrl ? (
+                  <Image
+                    src={profile.imageUrl}
+                    alt={profile.name}
+                    width={1200}
+                    height={1200}
+                    priority
+                    loading="eager"
+                    className="aspect-square w-full object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 32rem"
+                  />
+                ) : (
+                  <div className="flex aspect-square items-center justify-center bg-muted/10 px-6 text-center text-sm uppercase tracking-[0.12em] text-muted">
+                    Player image coming soon
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -156,11 +151,11 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
               <div className="mt-10 grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
                 <div data-gsap-item>
                   <p className="type-accent font-medium uppercase text-muted">Major teams</p>
-                  <p className="type-body mt-3 text-foreground">{player.majorTeams}</p>
+                  <p className="type-body mt-3 text-foreground">{profile.majorTeams}</p>
                 </div>
                 <div data-gsap-item>
                   <p className="type-accent font-medium uppercase text-muted">Biography</p>
-                  <p className="type-body mt-3 text-muted">{player.profileBio}</p>
+                  <p className="type-body mt-3 text-muted">{profile.biography}</p>
                 </div>
               </div>
             </div>
@@ -170,8 +165,4 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
       <Footer />
     </>
   )
-}
-
-function getPlayer(slug: string) {
-  return PLAYER_DATA.find((player) => player.slug === slug)
 }

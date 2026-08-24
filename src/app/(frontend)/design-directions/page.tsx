@@ -1,37 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {
-  IBM_Plex_Mono,
-  IBM_Plex_Sans,
-  IBM_Plex_Sans_Condensed,
-  Instrument_Sans,
-  Space_Grotesk,
-} from 'next/font/google'
 
-const plexSans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-})
-
-const plexCondensed = IBM_Plex_Sans_Condensed({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-})
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-})
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-})
-
-const instrumentSans = Instrument_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-})
+const plexSansClass = 'font-["Avenir_Next",Avenir,"Segoe_UI",system-ui,sans-serif]'
+const plexCondensedClass = 'font-["Arial_Narrow","Helvetica_Neue_Condensed","Franklin_Gothic_Medium",sans-serif]'
+const plexMonoClass = 'font-["SFMono-Regular","Menlo","Monaco","Liberation_Mono",monospace]'
+const spaceGroteskClass = 'font-["Arial_Narrow","Helvetica_Neue",sans-serif]'
+const instrumentSansClass = 'font-["Avenir_Next",Avenir,"Segoe_UI",system-ui,sans-serif]'
 
 const monoPlayers = [
   {
@@ -105,7 +79,7 @@ export default function DesignDirectionsPage() {
 
 function MonochromePerformance() {
   return (
-    <section className={`${plexSans.className} bg-[#050505] text-white`}>
+    <section className={`${plexSansClass} bg-[#050505] text-white`}>
       <div className="mx-auto max-w-[96rem] px-5 py-16 sm:px-8 lg:px-10">
         <DirectionHeader
           label="Direction 01"
@@ -139,11 +113,11 @@ function MonochromePerformance() {
               </div>
 
               <div className="pt-14">
-                <p className={`${plexMono.className} text-xs uppercase tracking-[0.22em] text-[#C9CDD3]`}>
+                <p className={`${plexMonoClass} text-xs uppercase tracking-[0.22em] text-[#C9CDD3]`}>
                   Player index / verified availability
                 </p>
                 <h2
-                  className={`${plexCondensed.className} mt-5 max-w-2xl text-6xl font-semibold uppercase leading-[0.86] tracking-normal text-white sm:text-8xl`}
+                  className={`${plexCondensedClass} mt-5 max-w-2xl text-6xl font-semibold uppercase leading-[0.86] tracking-normal text-white sm:text-8xl`}
                 >
                   Talent ready for club review.
                 </h2>
@@ -197,14 +171,14 @@ function MonochromePerformance() {
                       className="aspect-square object-cover grayscale"
                     />
                     <div>
-                      <h3 className={`${plexCondensed.className} text-3xl font-semibold uppercase leading-none`}>
+                      <h3 className={`${plexCondensedClass} text-3xl font-semibold uppercase leading-none`}>
                         {player.name}
                       </h3>
                       <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-black/48">
                         {player.role} / {player.status}
                       </p>
                     </div>
-                    <div className={`${plexMono.className} border-l border-black/10 pl-4 text-right`}>
+                    <div className={`${plexMonoClass} border-l border-black/10 pl-4 text-right`}>
                       <p className="text-4xl font-semibold text-[#D71920]">{player.rating}</p>
                       <p className="text-[0.65rem] uppercase tracking-[0.18em] text-black/42">Index</p>
                     </div>
@@ -229,7 +203,7 @@ function MonochromePerformance() {
 
 function CricketSignal() {
   return (
-    <section className={`${instrumentSans.className} bg-[#F8F9F7] text-[#08100D]`}>
+    <section className={`${instrumentSansClass} bg-[#F8F9F7] text-[#08100D]`}>
       <div className="mx-auto max-w-[96rem] px-5 py-16 sm:px-8 lg:px-10">
         <DirectionHeader
           label="Direction 02"
@@ -266,7 +240,7 @@ function CricketSignal() {
                 <div className="grid gap-8 pt-12 lg:grid-cols-[0.8fr_1fr]">
                   <div>
                     <h2
-                      className={`${spaceGrotesk.className} text-5xl font-semibold leading-[0.95] tracking-normal sm:text-7xl`}
+                      className={`${spaceGroteskClass} text-5xl font-semibold leading-[0.95] tracking-normal sm:text-7xl`}
                     >
                       The next shortlist starts here.
                     </h2>
@@ -283,7 +257,7 @@ function CricketSignal() {
                           key={item}
                           className="grid grid-cols-[3.5rem_1fr] items-center border border-white/12 bg-white/[0.04]"
                         >
-                          <span className={`${spaceGrotesk.className} flex h-16 items-center justify-center bg-[#0B5D3B] text-xl font-semibold`}>
+                          <span className={`${spaceGroteskClass} flex h-16 items-center justify-center bg-[#0B5D3B] text-xl font-semibold`}>
                             0{index + 1}
                           </span>
                           <span className="px-5 text-sm font-semibold">{item}</span>
@@ -301,7 +275,7 @@ function CricketSignal() {
                   ].map(([label, value]) => (
                     <div key={label} className="bg-[#0B5D3B] p-5">
                       <p className="text-xs uppercase tracking-[0.2em] text-white/54">{label}</p>
-                      <p className={`${spaceGrotesk.className} mt-2 text-2xl font-semibold`}>{value}</p>
+                      <p className={`${spaceGroteskClass} mt-2 text-2xl font-semibold`}>{value}</p>
                     </div>
                   ))}
                 </div>
@@ -310,7 +284,7 @@ function CricketSignal() {
 
             <div className="bg-white p-5 sm:p-7 lg:p-9">
               <div className="flex items-center justify-between border-b border-[#08100D]/12 pb-5">
-                <p className={`${spaceGrotesk.className} text-2xl font-semibold`}>Player signal</p>
+                <p className={`${spaceGroteskClass} text-2xl font-semibold`}>Player signal</p>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#C51622]">Updated today</p>
               </div>
 
@@ -326,7 +300,7 @@ function CricketSignal() {
                         className="h-64 w-full object-cover"
                       />
                       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#08100D] to-transparent p-5 text-white">
-                        <h3 className={`${spaceGrotesk.className} text-3xl font-semibold`}>
+                        <h3 className={`${spaceGroteskClass} text-3xl font-semibold`}>
                           {player.name}
                         </h3>
                         <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/64">
@@ -350,7 +324,7 @@ function CricketSignal() {
 
           <div className="grid border-t border-white/12 bg-[#0B5D3B] text-white lg:grid-cols-[1fr_auto]">
             <div className="p-6 sm:p-8">
-              <h3 className={`${spaceGrotesk.className} text-4xl font-semibold tracking-normal`}>
+              <h3 className={`${spaceGroteskClass} text-4xl font-semibold tracking-normal`}>
                 Green gives cricket context. Red keeps the leather-ball signal.
               </h3>
             </div>

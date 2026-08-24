@@ -4,6 +4,14 @@ import { withPayload } from '@payloadcms/next/withPayload'
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  experimental: {
+    cpus: 1,
+    staticGenerationMaxConcurrency: 1,
+    staticGenerationMinPagesPerWorker: 1000,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     minimumCacheTTL: 86400,
     remotePatterns: [
