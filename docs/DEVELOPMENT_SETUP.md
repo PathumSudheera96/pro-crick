@@ -123,6 +123,8 @@ The app container should:
 - mount source code from the host
 - avoid using host `node_modules`
 
+The `app` service installs dependencies into its Docker-managed `node_modules` volume on startup before launching the development server. This keeps host `node_modules` out of the containerized workflow and avoids interactive pnpm prompts during `docker compose up`.
+
 The database container should:
 
 - use `postgres:16.4-alpine`
