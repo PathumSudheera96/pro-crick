@@ -156,7 +156,7 @@ Legend:
 - [x] Add publishing controls
 - [x] Add featured player control
 - [x] Add player sort order
-- [ ] Create development sample players
+- [x] Create development sample players
 
 ## Phase 5 — Website Content CMS
 

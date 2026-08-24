@@ -208,6 +208,7 @@ Current project scripts:
 
 ```bash
 docker compose exec app pnpm dev
+docker compose exec app pnpm seed:players
 docker compose exec app pnpm test
 docker compose exec app pnpm lint
 docker compose exec app pnpm typecheck
