@@ -12,8 +12,8 @@
   --color-panel: #0a0a0a;
   --color-accent-foreground: #ffffff;
 
-  --font-display: var(--font-display-family), Impact, sans-serif;
-  --font-body: var(--font-body-family), system-ui, sans-serif;
+  --font-display: "Arial Narrow", "Helvetica Neue Condensed", "Franklin Gothic Medium", Impact, sans-serif;
+  --font-body: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
 }
 
 :root {

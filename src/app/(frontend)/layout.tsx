@@ -1,23 +1,8 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from 'next/font/google'
 import { ChatWidget } from '@/components/site/ChatWidget'
 import { SiteAnimations } from '@/components/site/SiteAnimations'
 import { buildSeoMetadata, getSiteUrl } from '@/lib/seo/metadata'
 import './styles.css'
-
-const displayFont = IBM_Plex_Sans_Condensed({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-display-family',
-  display: 'swap',
-})
-
-const bodyFont = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-body-family',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   ...buildSeoMetadata({
@@ -41,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html lang="en">
       <body>
         {children}
         <ChatWidget />
