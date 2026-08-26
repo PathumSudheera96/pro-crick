@@ -93,7 +93,7 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
                 <p className="type-accent font-medium uppercase text-foreground">Player profile</p>
               </div>
 
-              <h1 data-gsap-item data-gsap-title className="mt-8 text-[clamp(2.25rem,5vw,4.875rem)] font-medium leading-[0.96] tracking-[-0.06em] text-foreground">
+              <h1 data-gsap-item data-gsap-title className="mt-8 text-[clamp(2.25rem,5vw,4.875rem)] font-semibold leading-[0.96] tracking-[-0.06em] text-foreground">
                 {profile.name}
               </h1>
 

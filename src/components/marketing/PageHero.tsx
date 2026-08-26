@@ -44,7 +44,7 @@ export function PageHero({
           <h1
             data-gsap-item
             data-gsap-title
-            className={`mt-5 text-[clamp(2.8rem,6vw,6rem)] font-medium leading-[0.92] tracking-[-0.06em] ${isDark ? 'text-white' : 'text-foreground'}`}
+            className={`mt-5 text-[clamp(2.8rem,6vw,6rem)] font-semibold leading-[0.92] tracking-[-0.06em] ${isDark ? 'text-white' : 'text-foreground'}`}
           >
             {title}
           </h1>

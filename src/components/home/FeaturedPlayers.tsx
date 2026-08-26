@@ -264,24 +264,36 @@ export function FeaturedPlayers() {
   return (
     <section>
       <div data-gsap-section className="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-10">
-        <div className="flex max-w-5xl flex-col items-start gap-7">
-          <h2 data-gsap-item data-gsap-title className="type-h2 max-w-4xl text-foreground">
-            Where cricket talent meets the right opportunity.
-          </h2>
-          <p data-gsap-item className="type-body max-w-3xl text-muted">
-            Pro-Crick bridges talented cricketers and cricket clubs through transparent,
-            long-term partnerships. Our initial focus is connecting Sri Lankan players
-            with clubs across the United Kingdom, while building toward a trusted global
-            cricket talent network.
-          </p>
-          <Link
-            href="/about"
-            data-gsap-item
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-accent transition-colors duration-200 hover:text-accent-hover"
-          >
-            About Pro-Crick
-            <ArrowIcon />
-          </Link>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_34rem] lg:items-center lg:gap-10">
+          <div className="flex max-w-5xl flex-col items-start gap-7">
+            <h2 data-gsap-item data-gsap-title className="type-h2 max-w-4xl leading-[0.98] text-foreground">
+              Where cricket talent meets the right opportunity.
+            </h2>
+            <p data-gsap-item className="type-body max-w-3xl text-muted">
+              Pro-Crick bridges talented cricketers and cricket clubs through transparent,
+              long-term partnerships. Our initial focus is connecting Sri Lankan players
+              with clubs across the United Kingdom, while building toward a trusted global
+              cricket talent network.
+            </p>
+            <Link
+              href="/about"
+              data-gsap-item
+              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-accent transition-colors duration-200 hover:text-accent-hover"
+            >
+              About Pro-Crick
+              <ArrowIcon />
+            </Link>
+          </div>
+
+          <div data-gsap-item className="flex justify-center lg:justify-end">
+            <Image
+              src="/images/pro-crick-PNG.png"
+              alt="Pro-Crick logo"
+              width={720}
+              height={720}
+              className="h-auto w-full max-w-[20rem] sm:max-w-[24rem] lg:max-w-[34rem]"
+            />
+          </div>
         </div>
       </div>
 

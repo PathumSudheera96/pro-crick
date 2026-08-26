@@ -10,7 +10,7 @@ export function SiteAnimations() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const sections = gsap.utils.toArray<HTMLElement>('[data-gsap-section]')
-    const titleRestores: Array<() => void> = []
+    const titleRestores = new Set<() => void>()
 
     if (prefersReducedMotion) {
       gsap.set('[data-gsap-item], [data-gsap-title]', { autoAlpha: 1, clearProps: 'transform' })
@@ -19,9 +19,10 @@ export function SiteAnimations() {
 
     const context = gsap.context(() => {
       sections.forEach((section) => {
-        const titleWords = gsap.utils.toArray<HTMLElement>('[data-gsap-title]', section).flatMap(
+        const titleSplits = gsap.utils.toArray<HTMLElement>('[data-gsap-title]', section).map(
           (title) => splitTitleIntoWords(title, titleRestores),
         )
+        const titleWords = titleSplits.flatMap((split) => split.words)
         const items = gsap
           .utils
           .toArray<HTMLElement>('[data-gsap-item]', section)
@@ -44,6 +45,12 @@ export function SiteAnimations() {
               duration: 0.72,
               ease: 'power3.out',
               stagger: 0.045,
+              onComplete: () => {
+                titleSplits.forEach((split) => split.restore())
+              },
+              onInterrupt: () => {
+                titleSplits.forEach((split) => split.restore())
+              },
               scrollTrigger: {
                 trigger: section,
                 start: 'top 78%',
@@ -86,13 +93,16 @@ export function SiteAnimations() {
   return null
 }
 
-function splitTitleIntoWords(title: HTMLElement, titleRestores: Array<() => void>) {
+function splitTitleIntoWords(title: HTMLElement, titleRestores: Set<() => void>) {
   const originalContent = title.innerHTML
   const label = title.textContent?.replace(/\s+/g, ' ').trim() ?? ''
   const words = label.split(' ').filter(Boolean)
 
   if (words.length === 0) {
-    return []
+    return {
+      words: [] as HTMLElement[],
+      restore: () => {},
+    }
   }
 
   title.setAttribute('aria-label', label)
@@ -103,12 +113,23 @@ function splitTitleIntoWords(title: HTMLElement, titleRestores: Array<() => void
     )
     .join(' ')
 
-  titleRestores.push(() => {
+  let restored = false
+  const restore = () => {
+    if (restored) {
+      return
+    }
+    restored = true
     title.innerHTML = originalContent
     title.removeAttribute('aria-label')
-  })
+    titleRestores.delete(restore)
+  }
 
-  return gsap.utils.toArray<HTMLElement>('span span', title)
+  titleRestores.add(restore)
+
+  return {
+    words: gsap.utils.toArray<HTMLElement>('span span', title),
+    restore,
+  }
 }
 
 function escapeHtml(value: string) {

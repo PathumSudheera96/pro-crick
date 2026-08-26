@@ -1,4 +1,3 @@
-import { AgencyOverview } from '@/components/home/AgencyOverview'
 import { Cta } from '@/components/home/Cta'
 import { FeaturedPlayers } from '@/components/home/FeaturedPlayers'
 import { Founders } from '@/components/home/Founders'
@@ -20,7 +19,6 @@ export default function HomePage() {
       <main>
         <Hero />
         <Introduction />
-        <AgencyOverview />
         <FeaturedPlayers />
         <RegistrationSplitCta />
         <Founders />
