@@ -105,10 +105,12 @@ export default function AboutPage() {
         <section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
           <div className="mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
             <div className="flex justify-center lg:justify-start">
-              <img
+              <Image
                 src="/images/pro-crick-PNG.png"
                 alt="Pro-Crick logo"
-                className="w-full max-w-[280px] object-contain sm:max-w-[320px] lg:max-w-[360px]"
+                width={720}
+                height={405}
+                className="h-auto w-full max-w-[280px] object-contain sm:max-w-[320px] lg:max-w-[360px]"
               />
             </div>
             <div className="grid gap-6">
