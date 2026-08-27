@@ -20,46 +20,30 @@ const VALUES = [
 const PLAYER_BENEFITS = [
   {
     title: 'Access to relevant club opportunities',
-    description:
-      'Players are introduced to clubs where the role, standard, and environment are a better match for their game rather than being pushed toward unsuitable short-term moves.',
   },
   {
     title: 'Guidance through every stage',
-    description:
-      'From first discussion to active conversations with clubs, Pro-Crick helps players understand expectations, present themselves clearly, and stay prepared for each next step.',
   },
   {
     title: 'A trusted bridge between both sides',
-    description:
-      'Communication stays more direct and more credible when a player has a structured representative helping both sides stay aligned on timing, fit, and intent.',
   },
   {
     title: 'Long-term development focus',
-    description:
-      'The aim is not just placement. The focus is on finding cricket environments where a player can perform, grow, and build stronger opportunities over time.',
   },
 ]
 
 const CLUB_BENEFITS = [
   {
     title: 'Access to a stronger player network',
-    description:
-      'Clubs gain access to a broader pool of players with different roles, backgrounds, and experience levels, making recruitment more targeted and less reactive.',
   },
   {
     title: 'Shortlisting with cricket context',
-    description:
-      'Recommendations are shaped by cricket understanding, not just surface-level stats, so clubs can evaluate players with better context around role fit and readiness.',
   },
   {
     title: 'A clearer recruitment process',
-    description:
-      'Pro-Crick helps reduce friction in outreach, conversations, and decision-making so clubs can move with more confidence and less wasted time.',
   },
   {
     title: 'Partnerships built for fit and reliability',
-    description:
-      'The objective is to support stronger long-term club-player matches, where expectations are clearer and both sides can build a productive cricket relationship.',
   },
 ]
 
@@ -182,26 +166,67 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-panel px-5 py-24 text-white sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-[90rem]">
-            <BenefitSection
-              eyebrow="For players"
-              title="Support built around ambition, fit, and visibility."
-              description="Pro-Crick is designed to give players more than exposure. The process is built to help them find the right cricket environment, communicate professionally, and move toward opportunities with better clarity."
-              items={PLAYER_BENEFITS}
+        <section className="relative overflow-hidden bg-[linear-gradient(135deg,#e24a4f_0%,#bf2732_42%,#7f111b_100%)] px-5 py-24 text-white sm:px-8 lg:px-10">
+          <div className="absolute inset-y-0 left-1/2 right-0 hidden lg:block">
+            <Image
+              src="https://images.pexels.com/photos/29463867/pexels-photo-29463867/free-photo-of-cricket-batsman-playing-powerful-shot-on-field.jpeg?auto=compress&cs=tinysrgb&w=1800"
+              alt="Cricket player batting during a match"
+              fill
+              unoptimized
+              sizes="50vw"
+              className="object-cover object-center"
             />
+          </div>
+          <div className="relative mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-2 lg:items-center">
+            <div className="flex items-center lg:pr-10">
+              <BenefitSection
+                eyebrow="For players"
+                title="Support built around ambition, fit, and visibility."
+                description={
+                  <>
+                    <p>
+                      Pro-Crick is built to help players move beyond generic exposure, with clearer
+                      presentation, stronger club alignment, and a process that supports better
+                      decisions around timing, fit, and opportunity for growth.
+                    </p>
+                  </>
+                }
+              items={PLAYER_BENEFITS}
+              ctaClassName="!text-[#bf2732] hover:!text-[#bf2732]"
+            />
+          </div>
+            <div className="hidden min-h-[560px] lg:block" />
           </div>
         </section>
 
-        <section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-[90rem]">
-            <BenefitSection
-              eyebrow="For clubs"
-              title="A cleaner route to committed, suitable talent."
-              description="Clubs need more than a list of names. Pro-Crick aims to make recruitment clearer by combining player access with practical cricket understanding and a more reliable communication process."
-              items={CLUB_BENEFITS}
-              light
+        <section className="relative overflow-hidden bg-panel px-5 py-24 text-white sm:px-8 lg:px-10">
+          <div className="absolute inset-y-0 left-0 right-1/2 hidden lg:block">
+            <Image
+              src="/player_data/jarrod-mckay.png"
+              alt="Cricket player ready during a match"
+              fill
+              sizes="50vw"
+              className="object-cover object-center"
             />
+          </div>
+          <div className="relative mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-2 lg:items-center">
+            <div className="hidden min-h-[560px] lg:block" />
+            <div className="flex items-center justify-end lg:pl-10">
+              <BenefitSection
+                eyebrow="For clubs"
+                title="A cleaner route to committed, suitable talent."
+                description={
+                  <>
+                    <p>
+                      Pro-Crick helps clubs move beyond scattered outreach by combining stronger
+                      player access, practical cricket context, and clearer communication through a
+                      recruitment process built for faster, better-informed decisions.
+                    </p>
+                  </>
+                }
+                items={CLUB_BENEFITS}
+              />
+            </div>
           </div>
         </section>
 
@@ -349,7 +374,9 @@ function InfoPanel({
 }) {
   return (
     <article className="border border-hairline bg-surface p-7">
-      <p className="type-accent font-medium uppercase text-accent">{eyebrow}</p>
+      <p className="text-[clamp(1rem,0.92rem+0.4vw,1.125rem)] font-medium uppercase tracking-[0.12em] text-accent">
+        {eyebrow}
+      </p>
       <h3 className="type-h4 mt-4 text-foreground">{title}</h3>
       <p className="type-body mt-4 text-muted">{description}</p>
     </article>
@@ -357,46 +384,100 @@ function InfoPanel({
 }
 
 function BenefitSection({
+  ctaClassName,
   description,
   eyebrow,
   items,
   light = false,
   title,
 }: {
-  description: string
+  ctaClassName?: string
+  description: ReactNode
   eyebrow: string
-  items: Array<{ title: string; description: string }>
+  items: Array<{ title: string; description?: string }>
   light?: boolean
   title: string
 }) {
+  const titleOnlyItems = items.every((item) => !item.description)
+
   return (
-    <div>
+    <div className="relative z-10">
       <div className="max-w-3xl">
-        <p className={`type-accent font-medium uppercase ${light ? 'text-accent' : 'text-white/48'}`}>
+        <h3
+          className={`text-[clamp(1.25rem,1.05rem+0.9vw,1.75rem)] font-medium ${
+            light ? 'text-accent' : 'text-white'
+          }`}
+        >
           {eyebrow}
-        </p>
-        <h2 className={`type-h2 mt-4 ${light ? 'text-foreground' : 'text-white'}`}>{title}</h2>
-        <p className={`type-body mt-6 max-w-2xl ${light ? 'text-muted' : 'text-white/72'}`}>
+        </h3>
+        <h2 className={`type-h2 mt-5 ${light ? 'text-foreground' : 'text-white'}`}>{title}</h2>
+        {titleOnlyItems ? (
+          <h4 className={`type-h5 mt-10 ${light ? 'text-foreground' : 'text-white'}`}>
+            What you will get:
+          </h4>
+        ) : null}
+        <div className={`${titleOnlyItems ? 'mt-5 grid gap-x-4 gap-y-7 md:grid-cols-2' : 'mt-10 grid gap-5 md:grid-cols-2'}`}>
+          {items.map((item) => (
+            <div
+              key={item.title}
+              className={
+                titleOnlyItems
+                  ? `flex items-start gap-3 ${
+                      light ? 'text-foreground' : 'text-white'
+                    }`
+                  : `border p-7 ${
+                      light
+                        ? 'border-hairline bg-surface'
+                        : 'border-white/14 bg-white/6 backdrop-blur-sm'
+                    }`
+              }
+            >
+              {titleOnlyItems ? (
+                <>
+                  <span className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
+                    light ? 'bg-accent text-white' : 'bg-white text-[#bf2732]'
+                  }`}>
+                    <CheckIcon />
+                  </span>
+                  <p className={`text-[clamp(1rem,0.95rem+0.25vw,1.125rem)] font-medium ${
+                    light ? 'text-foreground' : 'text-white'
+                  }`}>
+                    {item.title}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h3 className={`type-h5 ${light ? 'text-foreground' : 'text-white'}`}>{item.title}</h3>
+                  <p className={`type-body mt-4 ${light ? 'text-muted' : 'text-white/72'}`}>
+                    {item.description}
+                  </p>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className={`type-body mt-6 max-w-2xl ${light ? 'text-muted' : 'text-white/72'}`}>
           {description}
-        </p>
-      </div>
-      <div className="mt-10 grid gap-5 md:grid-cols-2">
-        {items.map((item) => (
-          <article
-            key={item.title}
-            className={`border p-7 ${
-              light
-                ? 'border-hairline bg-surface'
-                : 'border-white/14 bg-white/6 backdrop-blur-sm'
-            }`}
-          >
-            <h3 className={`type-h5 ${light ? 'text-foreground' : 'text-white'}`}>{item.title}</h3>
-            <p className={`type-body mt-4 ${light ? 'text-muted' : 'text-white/72'}`}>
-              {item.description}
-            </p>
-          </article>
-        ))}
+        </div>
+        {!light ? (
+          <div className="mt-8">
+            <Link
+              href="/apply"
+              className={`inline-flex min-h-12 items-center justify-center bg-white px-6 text-sm font-medium uppercase tracking-[0.12em] transition-colors duration-200 hover:bg-white/90 ${ctaClassName ?? '!text-[#111111] hover:!text-[#111111]'}`}
+            >
+              Register as a Player
+            </Link>
+          </div>
+        ) : null}
       </div>
     </div>
+  )
+}
+
+function CheckIcon() {
+  return (
+    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m5 12 4.2 4.2L19 6.5" />
+    </svg>
   )
 }
