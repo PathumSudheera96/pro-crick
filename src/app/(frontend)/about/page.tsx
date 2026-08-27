@@ -3,18 +3,43 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
+import { RegistrationSplitCta } from '@/components/home/RegistrationSplitCta'
 import { PageHero } from '@/components/marketing/PageHero'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
 import { buildSeoMetadata } from '@/lib/seo/metadata'
 
 const VALUES = [
-  'Trust',
-  'Transparency',
-  'Partnership',
-  'Professionalism',
-  'Passion for Cricket',
-  'Flexibility',
+  {
+    title: 'Trust',
+    description:
+      'Players and clubs should feel confident that conversations, expectations, and introductions are handled with care.',
+  },
+  {
+    title: 'Transparency',
+    description:
+      'We aim to keep decisions, opportunities, and communication clear so neither side is left guessing.',
+  },
+  {
+    title: 'Partnership',
+    description:
+      'The goal is not a quick transaction. It is to help both sides move toward the right long-term fit.',
+  },
+  {
+    title: 'Professionalism',
+    description:
+      'Every profile, discussion, and recommendation should reflect a serious standard worthy of the game.',
+  },
+  {
+    title: 'Passion for Cricket',
+    description:
+      'Cricket understanding sits at the centre of the agency, shaping how players are assessed and presented.',
+  },
+  {
+    title: 'Flexibility',
+    description:
+      'Different players and clubs need different solutions, so the process stays practical rather than rigid.',
+  },
 ]
 
 const PLAYER_BENEFITS = [
@@ -232,27 +257,63 @@ export default function AboutPage() {
 
         <section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[90rem]">
-            <div className="max-w-3xl">
+            <div className="max-w-5xl">
               <p className="type-accent font-medium uppercase text-accent">Values and promise</p>
-              <h2 className="type-h2 mt-4 text-foreground">We do not just connect. We stay accountable.</h2>
+              <h2 className="type-h2 mt-4 text-foreground">
+                The standard behind every introduction, conversation, and placement.
+              </h2>
+              <p className="type-body mt-6 max-w-2xl text-muted">
+                Pro-Crick is built around a few simple principles that shape how we represent players,
+                support clubs, and protect the quality of every cricket partnership we help create.
+              </p>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {VALUES.map((value) => (
-                <div key={value} className="border border-hairline bg-surface p-6">
-                  <p className="type-h5 text-foreground">{value}</p>
+                <div key={value.title} className="border border-hairline bg-surface p-6 lg:p-7">
+                  <p className="type-h5 text-foreground">{value.title}</p>
+                  <p className="type-body mt-4 text-muted">{value.description}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 border border-hairline bg-white p-8 lg:p-10">
-              <p className="type-lead max-w-4xl text-foreground">
-                Our promise is simple: connect talent with opportunity and build partnerships
-                where cricket thrives.
-              </p>
+            <div className="mt-12 grid gap-px overflow-hidden border border-hairline bg-hairline lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="bg-white p-8 lg:p-10">
+                <p className="type-accent font-medium uppercase text-accent">Our promise</p>
+                <h3 className="type-h3 mt-4 text-foreground">
+                  We do not just make introductions. We stay responsible for the quality of the match.
+                </h3>
+                <p className="type-body mt-5 max-w-3xl text-muted">
+                  That means presenting players with proper context, helping clubs shortlist with more
+                  confidence, and treating every opportunity as the start of a relationship rather than
+                  the end of a process.
+                </p>
+              </div>
+              <div className="bg-surface p-8 lg:p-10">
+                <p className="type-small font-medium uppercase tracking-[0.14em] text-foreground/56">
+                  What that means in practice
+                </p>
+                <div className="mt-6 grid gap-5">
+                  {[
+                    'Clearer player presentation',
+                    'More credible club conversations',
+                    'Better alignment around fit and timing',
+                    'Longer-term cricket partnerships',
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-3 text-foreground">
+                      <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-white">
+                        <CheckIcon />
+                      </span>
+                      <p className="text-[clamp(1rem,0.95rem+0.25vw,1.125rem)] font-medium">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
+
+        <RegistrationSplitCta />
       </main>
       <Footer />
     </>
