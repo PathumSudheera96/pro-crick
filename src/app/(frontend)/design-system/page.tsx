@@ -43,6 +43,54 @@ const iconBoxes = [
   },
 ]
 
+const founderCards = [
+  {
+    name: 'Dilan Perera',
+    role: 'Commercial and partnership lead',
+    image: '/images/1_founder.jpg',
+    summary:
+      'Sport, coaching, athlete development, business, and marketing experience brought into one practical partnership role.',
+  },
+  {
+    name: 'Nisala Tharaka',
+    role: 'Cricket strategy and player pathway lead',
+    image: '/images/2_founder.jpg',
+    summary:
+      'Senior domestic and overseas cricket experience applied to player evaluation, role fit, and opportunity judgment.',
+  },
+]
+
+const serviceCards = [
+  {
+    title: 'Player representation',
+    body:
+      'Profiles framed around role, readiness, strengths, and the type of club environment where the player can genuinely perform.',
+  },
+  {
+    title: 'Club shortlisting',
+    body:
+      'Clubs receive more than a one-line stat summary, with enough context to move into a confident shortlist.',
+  },
+  {
+    title: 'Opportunity matching',
+    body:
+      'The process stays clear from first outreach through next-stage conversation for both players and clubs.',
+  },
+]
+
+const approachBoxes = [
+  {
+    title: 'Start With Fit, Not Just Availability',
+    body:
+      'Every conversation begins with role, standard, readiness, and the kind of club environment where a player can actually contribute.',
+  },
+  {
+    title: 'Present Players With Useful Context',
+    body:
+      'Profiles help clubs assess more than raw statistics, including pathway, experience, and practical recruitment signals.',
+  },
+]
+
 export default function DesignSystemPage() {
   return (
     <main className="bg-background text-foreground">
@@ -55,8 +103,9 @@ export default function DesignSystemPage() {
             Pro-Crick interface foundations.
           </h1>
           <p className="type-lead mt-7 max-w-3xl text-muted">
-            The approved direction is modern scouting: mostly white and light gray pages,
-            with black sections and leather red accents used for contrast, hierarchy, and action.
+            The approved direction is the live homepage direction: mostly white and light gray
+            pages, deep navy contrast sections, cricket red accents, structured cards, and
+            typography that keeps natural casing instead of forced uppercase headings.
           </p>
         </div>
       </section>
@@ -90,16 +139,16 @@ export default function DesignSystemPage() {
             </TypeRow>
             <TypeRow label="H2">
               <h2 className="type-h2">
-                Player directory
+                Where cricket talent meets the right opportunity.
               </h2>
             </TypeRow>
             <TypeRow label="H3">
               <h3 className="type-h3">
-                Featured players
+                Structured cricket partnerships
               </h3>
             </TypeRow>
             <TypeRow label="H4">
-              <h4 className="type-h4">Verified profile summary</h4>
+              <h4 className="type-h4">Cricket understanding shapes every opportunity</h4>
             </TypeRow>
             <TypeRow label="H5">
               <h5 className="type-h5">Availability window</h5>
@@ -131,18 +180,17 @@ export default function DesignSystemPage() {
 
       <DesignSection title="Buttons">
         <div className="flex flex-wrap gap-4">
-          <Link href="/players" className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium !text-white transition-colors duration-200 hover:bg-accent-hover">
+          <Link href="/players" className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors duration-200 hover:bg-accent-hover">
             Primary Button
           </Link>
-          <Link href="/contact" className="inline-flex min-h-12 items-center justify-center border border-foreground px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-foreground hover:!text-white">
+          <Link href="/contact" className="inline-flex min-h-12 items-center justify-center border border-foreground/14 px-6 text-sm font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-200 hover:border-foreground/30 hover:bg-foreground hover:!text-white">
             Secondary Button
           </Link>
-          <Link href="/apply" className="inline-flex min-h-12 items-center justify-center bg-panel px-6 text-sm font-medium !text-white transition-colors duration-200 hover:bg-black">
-            Dark Button
-          </Link>
-          <button className="inline-flex min-h-12 cursor-not-allowed items-center justify-center border border-hairline bg-surface px-6 text-sm font-medium text-muted" type="button">
-            Disabled
-          </button>
+          <div className="bg-[#081423] p-4">
+            <Link href="/about" className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground">
+              White Outline
+            </Link>
+          </div>
         </div>
       </DesignSection>
 
@@ -210,6 +258,78 @@ export default function DesignSystemPage() {
             <FactBox title="Light fact box" value="91" body="Scouting index sample" />
             <FactBox title="Dark fact box" value="Available" body="Player status sample" dark />
           </div>
+        </div>
+      </DesignSection>
+
+      <DesignSection title="Homepage Patterns">
+        <div className="grid gap-6">
+          <section className="grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+            <article className="relative min-h-[20rem] overflow-hidden border border-black/10 bg-black/8 lg:min-h-[28rem]">
+              <Image
+                src="https://images.pexels.com/photos/29463867/pexels-photo-29463867/free-photo-of-cricket-batsman-playing-powerful-shot-on-field.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                alt="Cricket batsman"
+                fill
+                sizes="(min-width: 1024px) 32vw, 100vw"
+                className="object-cover object-top"
+              />
+            </article>
+
+            <div className="flex flex-col">
+              <p className="type-accent uppercase text-muted">Services</p>
+              <h3 className="type-h3 mt-4 max-w-4xl text-foreground">
+                Built to support players, clubs, and better cricket recruitment outcomes.
+              </h3>
+              <div className="mt-10 grid gap-5 lg:grid-cols-3">
+                {serviceCards.map((card) => (
+                  <ServiceMiniCard key={card.title} title={card.title} body={card.body} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="grid gap-5 lg:grid-cols-2">
+            {founderCards.map((founder) => (
+              <FounderMiniCard
+                key={founder.name}
+                image={founder.image}
+                name={founder.name}
+                role={founder.role}
+                summary={founder.summary}
+              />
+            ))}
+          </section>
+
+          <section className="bg-[#081423] text-white">
+            <div className="grid gap-10 px-6 py-10 lg:grid-cols-[1fr_0.8fr]">
+              <div>
+                <p className="type-accent uppercase text-white/45">Approach</p>
+                <h3 className="type-h2 mt-5 max-w-4xl text-white">Structured cricket partnerships.</h3>
+                <h4 className="type-h4 mt-5 max-w-3xl text-white">
+                  Cricket understanding and clear communication
+                  <br />
+                  shape every opportunity.
+                </h4>
+                <p className="type-body mt-8 max-w-2xl text-white/72">
+                  The process is built around role fit, readiness, expectations, and the
+                  practical conditions that make player-club relationships work over time.
+                </p>
+                <div className="mt-9">
+                  <Link
+                    href="/about"
+                    className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground"
+                  >
+                    See How Pro-Crick Works
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10">
+                {approachBoxes.map((item, index) => (
+                  <ApproachMiniBox key={item.title} title={item.title} body={item.body} iconIndex={index} />
+                ))}
+              </div>
+            </div>
+          </section>
         </div>
       </DesignSection>
 
@@ -450,5 +570,103 @@ function CtaBlock({
         </Link>
       </div>
     </section>
+  )
+}
+
+function FounderMiniCard({
+  image,
+  name,
+  role,
+  summary,
+}: {
+  image: string
+  name: string
+  role: string
+  summary: string
+}) {
+  return (
+    <article className="overflow-hidden border border-hairline bg-white lg:grid lg:grid-cols-[13rem_minmax(0,1fr)]">
+      <div className="relative aspect-[1.08] bg-muted/10 lg:aspect-auto lg:min-h-full">
+        <Image src={image} alt={name} fill sizes="(min-width: 1024px) 208px, 100vw" className="object-cover object-top" />
+      </div>
+      <div className="p-6">
+        <h3 className="text-[clamp(1rem,1.55vw,1.75rem)] font-medium leading-[1.08] text-foreground">
+          {name}
+        </h3>
+        <p className="type-accent mt-3 font-medium uppercase text-accent">{role}</p>
+        <p className="type-body mt-4 text-muted">{summary}</p>
+        <div className="mt-5 flex items-center gap-3">
+          <SocialDot />
+          <SocialDot />
+          <SocialDot />
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function ServiceMiniCard({ title, body }: { title: string; body: string }) {
+  return (
+    <article className="flex min-h-[16rem] flex-col justify-between border border-black/10 bg-surface p-6 transition-colors duration-200 hover:bg-[#eef0f3]">
+      <h4 className="type-h4 text-foreground">{title}</h4>
+      <p className="type-small mt-6 text-muted">{body}</p>
+    </article>
+  )
+}
+
+function ApproachMiniBox({
+  title,
+  body,
+  iconIndex,
+}: {
+  title: string
+  body: string
+  iconIndex: number
+}) {
+  return (
+    <article className="grid grid-cols-[auto_1fr] gap-4 bg-black/25 px-6 py-6 transition-colors duration-200 hover:bg-white/10">
+      <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/16 bg-white/8 text-white">
+        <ApproachMiniIcon index={iconIndex} />
+      </div>
+      <div>
+        <p className="text-[clamp(0.95rem,0.9rem+0.2vw,1.05rem)] font-medium text-white/88">{title}</p>
+        <p className="type-small mt-4 text-white/66">{body}</p>
+      </div>
+    </article>
+  )
+}
+
+function SocialDot() {
+  return <span className="inline-flex h-10 w-10 rounded-full border border-hairline bg-white/40" />
+}
+
+function ApproachMiniIcon({ index }: { index: number }) {
+  const commonProps = {
+    'aria-hidden': true,
+    width: 20,
+    height: 20,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.8,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+  }
+
+  if (index === 0) {
+    return (
+      <svg {...commonProps}>
+        <path d="M4 12h5l2-5 2 10 2-5h5" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg {...commonProps}>
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <path d="M8 9h8" />
+      <path d="M8 13h8" />
+      <path d="M8 17h5" />
+    </svg>
   )
 }

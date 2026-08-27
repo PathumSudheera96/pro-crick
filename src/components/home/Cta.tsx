@@ -10,7 +10,7 @@ export function Cta() {
       <div className="grid overflow-hidden border border-hairline bg-surface lg:grid-cols-[1.05fr_0.95fr]">
         <div className="p-7 sm:p-10 lg:p-14">
           <p data-gsap-item className="type-accent uppercase text-muted">Next step</p>
-          <h2 data-gsap-item data-gsap-title className="type-h2 mt-4 max-w-2xl text-foreground">
+          <h2 data-gsap-item data-gsap-title className="type-h2 mt-4 max-w-4xl text-foreground">
             Ready to move from interest to a real cricket conversation?
           </h2>
           <p data-gsap-item className="type-body mt-5 max-w-xl text-muted">
@@ -20,7 +20,7 @@ export function Cta() {
           <div data-gsap-item className="mt-9 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-accent-foreground transition-colors hover:bg-accent-hover"
+              className="inline-flex items-center justify-center gap-2 bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] !text-white transition-colors hover:bg-accent-hover"
             >
               Enquire Now
               <ArrowIcon />

@@ -14,6 +14,8 @@ export function PageHero({
   actions = [],
   aside,
   tone = 'light',
+  titleClassName = '',
+  backgroundImage,
 }: {
   eyebrow: string
   title: string
@@ -21,19 +23,38 @@ export function PageHero({
   actions?: PageHeroAction[]
   aside?: ReactNode
   tone?: 'dark' | 'light'
+  titleClassName?: string
+  backgroundImage?: string
 }) {
   const isDark = tone === 'dark'
+  const hasBackgroundImage = Boolean(backgroundImage)
 
   return (
     <section
       data-gsap-section
       className={
-        isDark
-          ? 'bg-panel px-5 pb-16 pt-36 text-white sm:px-8 lg:px-10'
-          : 'bg-surface px-5 pb-16 pt-36 text-foreground sm:px-8 lg:px-10'
+        `relative overflow-hidden px-5 pb-16 pt-36 sm:px-8 lg:px-10 ${
+          isDark ? 'bg-panel text-white' : 'bg-surface text-foreground'
+        }`
       }
     >
-      <div className="mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+      {hasBackgroundImage ? (
+        <>
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${backgroundImage})` }}
+          />
+          <div
+            aria-hidden="true"
+            className={`absolute inset-0 ${
+              isDark ? 'bg-[#04101c]/72' : 'bg-white/62'
+            }`}
+          />
+        </>
+      ) : null}
+
+      <div className="relative z-10 mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
         <div className="max-w-4xl">
           <p
             data-gsap-item
@@ -44,7 +65,7 @@ export function PageHero({
           <h1
             data-gsap-item
             data-gsap-title
-            className={`mt-5 text-[clamp(2.8rem,6vw,6rem)] font-medium leading-[0.92] tracking-[-0.06em] ${isDark ? 'text-white' : 'text-foreground'}`}
+            className={`mt-5 text-[clamp(2.8rem,6vw,6rem)] font-semibold leading-[0.92] tracking-[-0.06em] ${isDark ? 'text-white' : 'text-foreground'} ${titleClassName}`}
           >
             {title}
           </h1>
