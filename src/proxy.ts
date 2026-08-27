@@ -7,8 +7,9 @@ const PUBLIC_FILE_PATTERN = /\.[^/]+$/
 
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
-  const internalPort = process.env.PORT || request.nextUrl.port || '3000'
-  const internalOrigin = process.env.INTERNAL_APP_ORIGIN || `http://127.0.0.1:${internalPort}`
+  const internalOrigin =
+    process.env.INTERNAL_APP_ORIGIN ||
+    `${request.nextUrl.protocol}//${request.headers.get('host') || request.nextUrl.host}`
 
   if (PUBLIC_FILE_PATTERN.test(pathname) || isProtectedRedirectPath(pathname)) {
     return NextResponse.next()

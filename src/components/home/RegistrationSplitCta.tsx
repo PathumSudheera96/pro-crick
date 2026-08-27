@@ -19,14 +19,14 @@ export function RegistrationSplitCta() {
 
       <div className="mx-auto grid max-w-[90rem] grid-cols-2">
         <RegistrationPanel
-          title="Seeking playing opportunities home or abroad?"
+          title="Ready for the right playing opportunity?"
           description="Register now, and we’ll help you secure the right opportunity."
           buttonLabel="Register as a Player"
           href="/apply"
         />
 
         <RegistrationPanel
-          title="Looking to recruit local or overseas cricketers?"
+          title="Ready to recruit the right cricketer?"
           description="Register now, and we’ll help you find your ideal player."
           buttonLabel="Register as a Club"
           href="/contact"
