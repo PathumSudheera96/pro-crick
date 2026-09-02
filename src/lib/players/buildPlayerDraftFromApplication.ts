@@ -6,6 +6,7 @@ type PlayerDraftData = Pick<
   | 'biography'
   | 'currentClub'
   | 'nationality'
+  | 'playerCategory'
   | 'playingExperience'
   | 'playerStatus'
   | 'primaryRole'
@@ -57,6 +58,7 @@ export const buildPlayerDraftFromApplication = (application: Pick<
     biography: application.biography,
     currentClub: toRelationID(application.currentClub),
     nationality,
+    playerCategory: 'professional-player',
     playerStatus: 'available',
     playingExperience: application.teamsExperience || undefined,
     primaryRole,

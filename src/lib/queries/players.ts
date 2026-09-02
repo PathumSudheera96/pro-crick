@@ -12,9 +12,13 @@ import {
 } from '@/lib/players/staticPlayers'
 import { getPayloadClient } from './payload'
 export {
+  buildPlayersSearch,
   buildPlayerDirectoryWhere,
+  hasActiveDirectoryCriteria,
+  parseDirectoryFilters,
   resolvePlayerDirectorySort,
   sanitizeDirectoryFilters,
+  type NormalizedPlayerDirectoryFilters,
   type PlayerDirectoryFilters,
   type PlayerDirectorySort,
 } from './playerDirectory'
@@ -22,13 +26,14 @@ import {
   buildPlayerDirectoryWhere,
   resolvePlayerDirectorySort,
   sanitizeDirectoryFilters,
+  type NormalizedPlayerDirectoryFilters,
   type PlayerDirectoryFilters,
 } from './playerDirectory'
 
 export const getPublishedPlayers = async (
   filters: PlayerDirectoryFilters,
 ): Promise<PaginatedDocs<Player>> => {
-  const normalized = sanitizeDirectoryFilters(filters)
+  const normalized: NormalizedPlayerDirectoryFilters = sanitizeDirectoryFilters(filters)
 
   try {
     const payload = await getPayloadClient()

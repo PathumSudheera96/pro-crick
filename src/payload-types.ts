@@ -305,6 +305,10 @@ export interface Player {
   nationality: number | Country;
   gender?: ('male' | 'female' | 'other') | null;
   currentLocation?: string | null;
+  /**
+   * Classify each player for directory management and editorial grouping.
+   */
+  playerCategory: 'professional-player' | 'amateur-player' | 'local-player';
   primaryRole: number | PlayingRole;
   battingStyle?: ('right-hand-bat' | 'left-hand-bat') | null;
   bowlingStyle?:
@@ -958,6 +962,7 @@ export interface PlayersSelect<T extends boolean = true> {
   nationality?: T;
   gender?: T;
   currentLocation?: T;
+  playerCategory?: T;
   primaryRole?: T;
   battingStyle?: T;
   bowlingStyle?: T;

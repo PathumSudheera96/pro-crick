@@ -55,6 +55,7 @@ test('buildPlayerDraftFromApplication converts approved application data into a 
       biography: 'Long-form biography for the player application.',
       currentClub: 20,
       nationality: 30,
+      playerCategory: 'professional-player',
       playerStatus: 'available',
       playingExperience: 'Colombo CC, UK league cricket',
       primaryRole: 10,

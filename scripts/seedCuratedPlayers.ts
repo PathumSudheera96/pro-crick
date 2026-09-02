@@ -273,6 +273,7 @@ const run = async () => {
       featured: index < 7,
       fullName: record.name,
       nationality: nationalityId,
+      playerCategory: 'professional-player' as const,
       playerStatus: mapStatus(record.status),
       playingExperience: record.majorTeams || null,
       previousClubs: teamIds.length > 1 ? teamIds.slice(1) : null,
@@ -295,12 +296,14 @@ const run = async () => {
         id: existing.id,
         collection: 'players',
         data: playerData,
+        draft: false,
         overrideAccess: true,
       })
     } else {
       await payload.create({
         collection: 'players',
         data: playerData,
+        draft: false,
         overrideAccess: true,
       })
     }

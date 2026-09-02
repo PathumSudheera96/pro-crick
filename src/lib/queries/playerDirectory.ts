@@ -1,32 +1,20 @@
 import type { Sort, Where } from 'payload'
 
-export type PlayerDirectorySort = 'featured' | 'alphabetical' | 'recent'
+import {
+  sanitizeDirectoryFilters,
+  type PlayerDirectoryFilters,
+  type PlayerDirectorySort,
+} from './playerDirectoryShared'
 
-export type PlayerDirectoryFilters = {
-  availability?: string | null
-  eligibleCountry?: string | null
-  limit?: number
-  nationality?: string | null
-  page?: number
-  query?: string | null
-  role?: string | null
-  sort?: PlayerDirectorySort | null
-}
-
-const DEFAULT_LIMIT = 12
-
-export const sanitizeDirectoryFilters = (filters: PlayerDirectoryFilters): Required<PlayerDirectoryFilters> => {
-  return {
-    availability: filters.availability ?? '',
-    eligibleCountry: filters.eligibleCountry ?? '',
-    limit: Math.max(1, Math.min(filters.limit ?? DEFAULT_LIMIT, 48)),
-    nationality: filters.nationality ?? '',
-    page: Math.max(1, filters.page ?? 1),
-    query: filters.query?.trim() ?? '',
-    role: filters.role ?? '',
-    sort: filters.sort ?? 'featured',
-  }
-}
+export {
+  buildPlayersSearch,
+  hasActiveDirectoryCriteria,
+  parseDirectoryFilters,
+  sanitizeDirectoryFilters,
+  type NormalizedPlayerDirectoryFilters,
+  type PlayerDirectoryFilters,
+  type PlayerDirectorySort,
+} from './playerDirectoryShared'
 
 export const resolvePlayerDirectorySort = (sort: PlayerDirectorySort): Sort => {
   switch (sort) {

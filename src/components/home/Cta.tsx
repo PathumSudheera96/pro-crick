@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CTA_IMAGE =
-  'https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg?auto=compress&cs=tinysrgb&w=1400'
+const CTA_IMAGE = '/images/stock/pexels-cricketer-bat-training.jpeg'
 
 export function Cta() {
   return (
