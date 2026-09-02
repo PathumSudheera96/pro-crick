@@ -89,7 +89,7 @@ export default function AboutPage() {
           title="Built to connect cricket talent with the right clubs."
           titleClassName="font-[600]"
           tone="dark"
-          backgroundImage="/player_data/akila-samarasinghe.png"
+          backgroundImage="/images/players/akila-samarasinghe.png"
           description="Pro-Crick was created to bridge talented cricketers and serious clubs through transparent, long-term partnerships. Our starting focus is Sri Lankan talent and UK club opportunities, with the ambition to grow into a global cricket network."
           actions={[
             { href: '/players', label: 'Browse players' },
@@ -227,7 +227,7 @@ export default function AboutPage() {
         <section className="relative overflow-hidden bg-panel px-5 py-24 text-white sm:px-8 lg:px-10">
           <div className="absolute inset-y-0 left-0 right-1/2 hidden lg:block">
             <Image
-              src="/player_data/jarrod-mckay.png"
+              src="/images/players/jarrod-mckay.png"
               alt="Cricket player ready during a match"
               fill
               sizes="50vw"

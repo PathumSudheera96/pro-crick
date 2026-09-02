@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ChatWidget } from '@/components/site/ChatWidget'
 import { SiteAnimations } from '@/components/site/SiteAnimations'
+import { getSiteSettings } from '@/lib/queries/content'
 import { buildSeoMetadata, getSiteUrl } from '@/lib/seo/metadata'
 import './styles.css'
 
@@ -20,16 +21,18 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const siteSettings = await getSiteSettings().catch(() => null)
+
   return (
     <html lang="en">
       <body>
         {children}
-        <ChatWidget />
+        <ChatWidget whatsAppNumber={siteSettings?.whatsApp} />
         <SiteAnimations />
       </body>
     </html>

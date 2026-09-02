@@ -1,4 +1,5 @@
 import type { Club, Country, Media, Player, PlayingRole } from '@/payload-types'
+import { getStaticPlayerImageUrl } from '@/lib/players/staticPlayers'
 
 const getNamedRelationship = (
   value: number | Club | Country | PlayingRole | null | undefined,
@@ -26,6 +27,10 @@ const getMediaUrl = (value: number | Media | null | undefined): string | null =>
   }
 
   return null
+}
+
+const resolvePlayerImageUrl = (player: Player): string | null => {
+  return getStaticPlayerImageUrl(player.slug) || getMediaUrl(player.profileImage)
 }
 
 const formatPlayerStatus = (status: Player['playerStatus']) => {
@@ -104,7 +109,7 @@ export const mapPlayerToProfileViewModel = (player: Player): PlayerProfileViewMo
     bowlingStyle: player.bowlingStyle || 'Available on request',
     currentRole: currentRoleName,
     dateOfBirth: formatDateOfBirth(player.dateOfBirth),
-    imageUrl: getMediaUrl(player.profileImage),
+    imageUrl: resolvePlayerImageUrl(player),
     majorTeams: teams.length > 0 ? Array.from(new Set(teams)).join(', ') : 'Available on request',
     name: player.fullName,
     nationality: nationalityName,

@@ -187,6 +187,7 @@ PY
 )"
 
 export PATH="\${NODEVENV_BIN}:\${PATH}"
+export NODE_OPTIONS="\${NODE_OPTIONS:---max-old-space-size=768}"
 
 corepack pnpm install --frozen-lockfile
 rm -rf .next

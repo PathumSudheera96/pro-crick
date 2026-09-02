@@ -299,8 +299,6 @@ export interface Player {
   slug: string;
   profileImage?: (number | null) | Media;
   heroImage?: (number | null) | Media;
-  shortIntroduction?: string | null;
-  biography?: string | null;
   dateOfBirth?: string | null;
   nationality: number | Country;
   gender?: ('male' | 'female' | 'other') | null;
@@ -322,6 +320,12 @@ export interface Player {
   currentClub?: (number | null) | Club;
   previousClubs?: (number | Club)[] | null;
   teamsRepresented?: (number | Club)[] | null;
+  playingExperience?: string | null;
+  playerStatus: 'available' | 'contracted' | 'unavailable';
+  availabilityDate?: string | null;
+  eligibleCountries?: (number | Country)[] | null;
+  shortIntroduction?: string | null;
+  biography?: string | null;
   careerHighlights?:
     | {
         highlight: string;
@@ -334,10 +338,6 @@ export interface Player {
         id?: string | null;
       }[]
     | null;
-  playingExperience?: string | null;
-  playerStatus: 'available' | 'contracted' | 'unavailable';
-  availabilityDate?: string | null;
-  eligibleCountries?: (number | Country)[] | null;
   statisticsByFormat?:
     | {
         format: 'test' | 'odi' | 't20' | 'list-a' | 'first-class';
@@ -899,8 +899,6 @@ export interface PlayersSelect<T extends boolean = true> {
   slug?: T;
   profileImage?: T;
   heroImage?: T;
-  shortIntroduction?: T;
-  biography?: T;
   dateOfBirth?: T;
   nationality?: T;
   gender?: T;
@@ -911,6 +909,12 @@ export interface PlayersSelect<T extends boolean = true> {
   currentClub?: T;
   previousClubs?: T;
   teamsRepresented?: T;
+  playingExperience?: T;
+  playerStatus?: T;
+  availabilityDate?: T;
+  eligibleCountries?: T;
+  shortIntroduction?: T;
+  biography?: T;
   careerHighlights?:
     | T
     | {
@@ -923,10 +927,6 @@ export interface PlayersSelect<T extends boolean = true> {
         achievement?: T;
         id?: T;
       };
-  playingExperience?: T;
-  playerStatus?: T;
-  availabilityDate?: T;
-  eligibleCountries?: T;
   statisticsByFormat?:
     | T
     | {
