@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+import { TurnstileWidget } from './TurnstileWidget'
+
 const INITIAL_FORM = {
   clubOrOrganization: '',
   country: '',
@@ -14,7 +16,13 @@ const INITIAL_FORM = {
 
 type FormState = typeof INITIAL_FORM
 
-export function ContactEnquiryForm({ playerSlug }: { playerSlug?: string }) {
+export function ContactEnquiryForm({
+  playerSlug,
+  turnstileSiteKey,
+}: {
+  playerSlug?: string
+  turnstileSiteKey?: string | null
+}) {
   const [form, setForm] = useState<FormState>(INITIAL_FORM)
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -46,6 +54,9 @@ export function ContactEnquiryForm({ playerSlug }: { playerSlug?: string }) {
         body: JSON.stringify({
           ...form,
           playerSlug,
+          turnstileToken: new FormData(event.currentTarget)
+            .get('cf-turnstile-response')
+            ?.toString(),
         }),
       })
 
@@ -69,6 +80,8 @@ export function ContactEnquiryForm({ playerSlug }: { playerSlug?: string }) {
     } catch {
       setError('Unable to submit your enquiry right now.')
     } finally {
+      const turnstile = (globalThis as { turnstile?: { reset: () => void } }).turnstile
+      turnstile?.reset()
       setIsSubmitting(false)
     }
   }
@@ -132,6 +145,8 @@ export function ContactEnquiryForm({ playerSlug }: { playerSlug?: string }) {
           placeholder="Tell us what role, timing, and level of player support you need."
         />
       </label>
+
+      <TurnstileWidget siteKey={turnstileSiteKey} />
 
       {error ? <p className="type-small text-accent">{error}</p> : null}
       {successMessage ? <p className="type-small text-foreground">{successMessage}</p> : null}

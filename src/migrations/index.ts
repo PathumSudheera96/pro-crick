@@ -11,6 +11,7 @@ import * as migration_20260824_022439 from './20260824_022439';
 import * as migration_20260824_042449 from './20260824_042449';
 import * as migration_20260824_042759 from './20260824_042759';
 import * as migration_20260824_043547 from './20260824_043547';
+import * as migration_20260902_142000_add_turnstile_to_site_settings from './20260902_142000_add_turnstile_to_site_settings';
 
 export const migrations = [
   {
@@ -77,5 +78,10 @@ export const migrations = [
     up: migration_20260824_043547.up,
     down: migration_20260824_043547.down,
     name: '20260824_043547'
+  },
+  {
+    up: migration_20260902_142000_add_turnstile_to_site_settings.up,
+    down: migration_20260902_142000_add_turnstile_to_site_settings.down,
+    name: '20260902_142000_add_turnstile_to_site_settings',
   },
 ];

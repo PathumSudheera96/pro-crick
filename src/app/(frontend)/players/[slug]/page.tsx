@@ -7,7 +7,7 @@ import { ChatOpenButton } from '@/components/site/ChatOpenButton'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
 import { mapPlayerToProfileViewModel } from '@/lib/players/playerProfile'
-import { getSiteSettings } from '@/lib/queries/content'
+import { getIntegrationsSettings, getSiteSettings } from '@/lib/queries/content'
 import { getPublishedPlayerBySlug } from '@/lib/queries/players'
 import { buildSeoMetadata } from '@/lib/seo/metadata'
 import type { Media } from '@/payload-types'
@@ -45,7 +45,10 @@ export async function generateMetadata({ params }: PlayerPageProps): Promise<Met
 
 export default async function PlayerProfilePage({ params }: PlayerPageProps) {
   const { slug } = await params
-  const player = await getPublishedPlayerBySlug(slug)
+  const [player, integrations] = await Promise.all([
+    getPublishedPlayerBySlug(slug),
+    getIntegrationsSettings(),
+  ])
 
   if (!player) {
     notFound()
@@ -339,7 +342,10 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
             </div>
 
             <div data-gsap-item className="border border-hairline bg-white p-7 sm:p-9">
-              <ContactEnquiryForm playerSlug={player.slug} />
+              <ContactEnquiryForm
+                playerSlug={player.slug}
+                turnstileSiteKey={integrations.cloudflareTurnstileSiteKey}
+              />
             </div>
           </div>
         </section>

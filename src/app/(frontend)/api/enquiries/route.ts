@@ -2,7 +2,9 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 
 import { generateEnquiryReferenceNumber } from '@/collections/Enquiries'
+import { getIntegrationsSettings } from '@/lib/queries/content'
 import { consumeRateLimit } from '@/lib/security/rateLimit'
+import { verifyTurnstileToken } from '@/lib/security/turnstile'
 import { validateEnquirySubmission } from '@/lib/validation/enquiries'
 
 export const dynamic = 'force-dynamic'
@@ -32,6 +34,17 @@ export async function POST(request: Request) {
 
   if (!validation.ok) {
     return Response.json({ error: validation.error }, { status: validation.status })
+  }
+
+  const integrations = await getIntegrationsSettings()
+  const turnstile = await verifyTurnstileToken({
+    remoteIp: rateLimitKey,
+    secretKey: integrations.cloudflareTurnstileSecretKey,
+    token: body.turnstileToken,
+  })
+
+  if (!turnstile.ok) {
+    return Response.json({ error: turnstile.error }, { status: turnstile.status })
   }
 
   const payload = await getPayload({ config })

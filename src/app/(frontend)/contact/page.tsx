@@ -4,6 +4,7 @@ import { PageHero } from '@/components/marketing/PageHero'
 import { ContactEnquiryForm } from '@/components/site/ContactEnquiryForm'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
+import { getIntegrationsSettings } from '@/lib/queries/content'
 import { buildSeoMetadata } from '@/lib/seo/metadata'
 
 export const metadata: Metadata = buildSeoMetadata({
@@ -13,7 +14,11 @@ export const metadata: Metadata = buildSeoMetadata({
     'Contact Pro-Crick for player enquiries, club recruitment discussions, and partnership conversations.',
 })
 
-export default function ContactPage() {
+export const dynamic = 'force-dynamic'
+
+export default async function ContactPage() {
+  const integrations = await getIntegrationsSettings()
+
   return (
     <>
       <NavBar variant="light" />
@@ -60,7 +65,9 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-8">
-                <ContactEnquiryForm />
+                <ContactEnquiryForm
+                  turnstileSiteKey={integrations.cloudflareTurnstileSiteKey}
+                />
               </div>
             </div>
           </div>
