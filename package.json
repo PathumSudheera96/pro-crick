@@ -12,6 +12,8 @@
     "start": "next start",
     "lint": "eslint .",
     "seed:players": "payload run scripts/seedPlayers.ts",
+    "seed:curated-players": "payload run scripts/seedCuratedPlayers.ts",
+    "seed:news": "payload run scripts/seedNews.ts",
     "test": "node --test --experimental-strip-types tests/**/*.test.mjs",
     "typecheck": "pnpm prepare:next-env && tsc --noEmit",
     "payload": "payload",

@@ -2,6 +2,7 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 
 import { generateEnquiryReferenceNumber } from '@/collections/Enquiries'
+import { BACKEND_UNAVAILABLE_MESSAGE, isBackendUnavailableError } from '@/lib/backendAvailability'
 import { getIntegrationsSettings } from '@/lib/queries/content'
 import { consumeRateLimit } from '@/lib/security/rateLimit'
 import { verifyTurnstileToken } from '@/lib/security/turnstile'
@@ -36,59 +37,67 @@ export async function POST(request: Request) {
     return Response.json({ error: validation.error }, { status: validation.status })
   }
 
-  const integrations = await getIntegrationsSettings()
-  const turnstile = await verifyTurnstileToken({
-    remoteIp: rateLimitKey,
-    secretKey: integrations.cloudflareTurnstileSecretKey,
-    token: body.turnstileToken,
-  })
-
-  if (!turnstile.ok) {
-    return Response.json({ error: turnstile.error }, { status: turnstile.status })
-  }
-
-  const payload = await getPayload({ config })
-  let relatedPlayer: number | undefined
-
-  if (validation.data.playerSlug) {
-    const player = await payload.find({
-      collection: 'players',
-      depth: 0,
-      limit: 1,
-      overrideAccess: true,
-      pagination: false,
-      where: {
-        slug: {
-          equals: validation.data.playerSlug,
-        },
-      },
+  try {
+    const integrations = await getIntegrationsSettings()
+    const turnstile = await verifyTurnstileToken({
+      remoteIp: rateLimitKey,
+      secretKey: integrations.cloudflareTurnstileSecretKey,
+      token: body.turnstileToken,
     })
 
-    relatedPlayer = player.docs[0]?.id
+    if (!turnstile.ok) {
+      return Response.json({ error: turnstile.error }, { status: turnstile.status })
+    }
+
+    const payload = await getPayload({ config })
+    let relatedPlayer: number | undefined
+
+    if (validation.data.playerSlug) {
+      const player = await payload.find({
+        collection: 'players',
+        depth: 0,
+        limit: 1,
+        overrideAccess: true,
+        pagination: false,
+        where: {
+          slug: {
+            equals: validation.data.playerSlug,
+          },
+        },
+      })
+
+      relatedPlayer = player.docs[0]?.id
+    }
+
+    const enquiry = await payload.create({
+      collection: 'enquiries',
+      data: {
+        clubOrOrganization: validation.data.clubOrOrganization,
+        country: validation.data.country,
+        email: validation.data.email,
+        message: validation.data.message,
+        name: validation.data.name,
+        phone: validation.data.phone,
+        relatedPlayer,
+        referenceNumber: generateEnquiryReferenceNumber(),
+        status: 'new',
+      },
+      draft: false,
+      overrideAccess: true,
+    })
+
+    return Response.json(
+      {
+        message: 'Enquiry submitted successfully.',
+        referenceNumber: enquiry.referenceNumber,
+      },
+      { status: 201 },
+    )
+  } catch (error) {
+    if (isBackendUnavailableError(error)) {
+      return Response.json({ error: BACKEND_UNAVAILABLE_MESSAGE }, { status: 503 })
+    }
+
+    throw error
   }
-
-  const enquiry = await payload.create({
-    collection: 'enquiries',
-    data: {
-      clubOrOrganization: validation.data.clubOrOrganization,
-      country: validation.data.country,
-      email: validation.data.email,
-      message: validation.data.message,
-      name: validation.data.name,
-      phone: validation.data.phone,
-      relatedPlayer,
-      referenceNumber: generateEnquiryReferenceNumber(),
-      status: 'new',
-    },
-    draft: false,
-    overrideAccess: true,
-  })
-
-  return Response.json(
-    {
-      message: 'Enquiry submitted successfully.',
-      referenceNumber: enquiry.referenceNumber,
-    },
-    { status: 201 },
-  )
 }

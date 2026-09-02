@@ -2,15 +2,18 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ContactEnquiryForm } from '@/components/site/ContactEnquiryForm'
+import { RegistrationSplitCta } from '@/components/home/RegistrationSplitCta'
+import { PlayerCard } from '@/components/players/PlayerCard'
+import { PlayerProfileTabs } from '@/components/players/PlayerProfileTabs'
 import { ChatOpenButton } from '@/components/site/ChatOpenButton'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
 import { mapPlayerToProfileViewModel } from '@/lib/players/playerProfile'
-import { getIntegrationsSettings, getSiteSettings } from '@/lib/queries/content'
-import { getPublishedPlayerBySlug } from '@/lib/queries/players'
+import { getStaticPlayerImageUrl } from '@/lib/players/staticPlayers'
+import { getSiteSettings } from '@/lib/queries/content'
+import { getPublishedPlayerBySlug, getRelatedPublishedPlayers } from '@/lib/queries/players'
 import { buildSeoMetadata } from '@/lib/seo/metadata'
-import type { Media } from '@/payload-types'
+import type { Club, Country, Media, Player, PlayingRole } from '@/payload-types'
 
 type PlayerPageProps = {
   params: Promise<{
@@ -22,7 +25,10 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: PlayerPageProps): Promise<Metadata> {
   const { slug } = await params
-  const [player, siteSettings] = await Promise.all([getPublishedPlayerBySlug(slug), getSiteSettings()])
+  const [player, siteSettings] = await Promise.all([
+    getPublishedPlayerBySlug(slug),
+    getSiteSettings().catch(() => null),
+  ])
 
   if (!player) {
     return {
@@ -45,35 +51,110 @@ export async function generateMetadata({ params }: PlayerPageProps): Promise<Met
 
 export default async function PlayerProfilePage({ params }: PlayerPageProps) {
   const { slug } = await params
-  const [player, integrations] = await Promise.all([
-    getPublishedPlayerBySlug(slug),
-    getIntegrationsSettings(),
-  ])
+  const player = await getPublishedPlayerBySlug(slug)
 
   if (!player) {
     notFound()
   }
 
   const profile = mapPlayerToProfileViewModel(player)
-
-  const detailItems = [
+  const relatedPlayers = (await getRelatedPublishedPlayers(player, 4)).map(mapPlayerToCardData)
+  const overviewItems = [
     ['Status', profile.status],
     ['Age', profile.age],
     ['Date of Birth', profile.dateOfBirth],
+    ['Country', profile.nationality],
+    ['Position', profile.currentRole],
+    ['Availability', player.availabilityDate ? profile.status : 'Available on request'],
+  ]
+  const cricketProfileItems = [
     ['Batting Style', formatBattingStyle(player.battingStyle)],
     ['Bowling Style', formatBowlingStyle(player.bowlingStyle)],
-    ['Availability', player.availabilityDate ? profile.status : 'Available on request'],
+    ['Current Club', getNamedRelationship(player.currentClub) || 'Available on request'],
+    ['Player Status', formatPlayerStatus(player.playerStatus)],
+    ['Eligible Countries', getRelationshipNames(player.eligibleCountries).join(', ') || 'Available on request'],
   ]
   const highlights = player.careerHighlights?.map((item) => item.highlight).filter(Boolean) || []
   const achievements = player.achievements?.map((item) => item.achievement).filter(Boolean) || []
-  const videos = [
-    ...(player.youtubeVideos?.map((item) => ({ label: 'YouTube', url: item.url })) || []),
-    ...(player.vimeoVideos?.map((item) => ({ label: 'Vimeo', url: item.url })) || []),
-  ]
+  const mediaLinks = [
+    ...(player.playerCv && typeof player.playerCv === 'object' && player.playerCv.url
+      ? [{ label: 'Download player CV', url: player.playerCv.url }]
+      : []),
+    ...(player.youtubeVideos?.map((item) => ({ label: 'YouTube profile', url: item.url })) || []),
+    ...(player.vimeoVideos?.map((item) => ({ label: 'Vimeo profile', url: item.url })) || []),
+    ...(player.instagramUrl ? [{ label: 'Instagram profile', url: player.instagramUrl }] : []),
+    ...(player.espnCricinfoUrl ? [{ label: 'ESPN Cricinfo profile', url: player.espnCricinfoUrl }] : []),
+    ...(player.cricbuzzUrl ? [{ label: 'Cricbuzz profile', url: player.cricbuzzUrl }] : []),
+  ].filter((item) => item.url)
   const statistics = player.statisticsByFormat?.filter((stat) => stat.format) || []
   const gallery = (player.gallery || []).filter(
-    (item): item is Media => Boolean(item) && typeof item === 'object' && 'url' in item,
+    (item): item is Media & { url: string } =>
+      Boolean(item) && typeof item === 'object' && 'url' in item && typeof item.url === 'string',
   )
+  const tabData = {
+    overview: {
+      details: overviewItems.map(([label, value]) => ({ label, value })),
+      majorTeams: profile.majorTeams,
+    },
+    cricketProfile: {
+      details: cricketProfileItems.map(([label, value]) => ({ label, value })),
+      notes: [player.playingExperience || '', profile.profileLine].filter(Boolean),
+    },
+    biography: {
+      achievements,
+      content: profile.biography,
+      highlights,
+    },
+    statistics: {
+      formats: statistics.map((stat) => ({
+        format: formatCricketFormat(stat.format),
+        values: [
+          { label: 'Matches', value: stat.matches },
+          { label: 'Runs', value: stat.runs },
+          { label: 'Bat Avg', value: stat.battingAverage },
+          { label: 'Highest', value: stat.highestScore },
+          { label: '100s', value: stat.hundreds },
+          { label: '50s', value: stat.fifties },
+          { label: 'Wickets', value: stat.wickets },
+          { label: 'Bowl Avg', value: stat.bowlingAverage },
+          { label: 'Best Bowl', value: stat.bestBowling },
+          { label: 'Economy', value: stat.economyRate },
+        ]
+          .filter((item) => item.value !== null && item.value !== undefined && item.value !== '')
+          .map((item) => ({ label: item.label, value: String(item.value) })),
+      })),
+    },
+    media: {
+      gallery: gallery.map((image) => ({
+        alt: image.alt || profile.name,
+        id: String(image.id),
+        url: image.url,
+      })),
+      links: mediaLinks,
+    },
+  }
+  const howItWorksSteps = [
+    {
+      description:
+        'We review player role, readiness, availability, and the club environment that best matches the profile.',
+      title: 'Profile review and positioning',
+    },
+    {
+      description:
+        'Clubs receive a clear summary with the practical cricket context needed for faster shortlisting.',
+      title: 'Shortlist presentation',
+    },
+    {
+      description:
+        'Once interest is confirmed, we help coordinate the next conversation around role fit, timing, and expectations.',
+      title: 'Club-player introductions',
+    },
+    {
+      description:
+        'The process stays structured through follow-up, helping both sides move toward the right long-term opportunity.',
+      title: 'Decision and next steps',
+    },
+  ]
 
   return (
     <>
@@ -157,202 +238,122 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
           </div>
         </section>
 
-        <section data-gsap-section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
-          <div className="mx-auto grid max-w-[90rem] gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p data-gsap-item className="type-accent font-medium uppercase text-accent">Profile summary</p>
-              <h2 data-gsap-item data-gsap-title className="type-h3 mt-4 max-w-xl text-foreground">
-                Built for club review.
-              </h2>
-            </div>
-
-            <div>
-              <div className="grid gap-px overflow-hidden border border-hairline bg-hairline sm:grid-cols-2">
-                {detailItems.map(([label, value]) => (
-                  <div data-gsap-item key={label} className="bg-white p-6">
-                    <p className="type-accent font-medium uppercase text-muted">{label}</p>
-                    <p className="type-h5 mt-3 font-medium text-foreground">{value}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10 grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
-                <div data-gsap-item>
-                  <p className="type-accent font-medium uppercase text-muted">Major teams</p>
-                  <p className="type-body mt-3 text-foreground">{profile.majorTeams}</p>
-                </div>
-                <div data-gsap-item>
-                  <p className="type-accent font-medium uppercase text-muted">Biography</p>
-                  <p className="type-body mt-3 text-muted">{profile.biography}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {statistics.length > 0 ? (
-          <section data-gsap-section className="bg-surface px-5 py-24 sm:px-8 lg:px-10">
-            <div className="mx-auto max-w-[90rem]">
-              <p data-gsap-item className="type-accent font-medium uppercase text-accent">
-                Playing record
-              </p>
-              <h2 data-gsap-item data-gsap-title className="type-h3 mt-4 text-foreground">
-                Structured format-by-format statistics.
-              </h2>
-
-              <div className="mt-10 grid gap-5 xl:grid-cols-2">
-                {statistics.map((stat) => (
-                  <article key={stat.id || stat.format} data-gsap-item className="border border-hairline bg-white p-6">
-                    <p className="type-accent font-medium uppercase text-accent">
-                      {formatCricketFormat(stat.format)}
-                    </p>
-                    <div className="mt-5 grid gap-px overflow-hidden border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-3">
-                      {[
-                        ['Matches', stat.matches],
-                        ['Runs', stat.runs],
-                        ['Bat Avg', stat.battingAverage],
-                        ['Highest', stat.highestScore],
-                        ['100s', stat.hundreds],
-                        ['50s', stat.fifties],
-                        ['Wickets', stat.wickets],
-                        ['Bowl Avg', stat.bowlingAverage],
-                        ['Best Bowl', stat.bestBowling],
-                        ['Economy', stat.economyRate],
-                      ]
-                        .filter(([, value]) => value !== null && value !== undefined && value !== '')
-                        .map(([label, value]) => (
-                          <div key={`${stat.format}-${label}`} className="bg-white p-4">
-                            <p className="type-accent font-medium uppercase text-muted">{label}</p>
-                            <p className="type-body mt-2 font-medium text-foreground">{String(value)}</p>
-                          </div>
-                        ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {highlights.length > 0 || achievements.length > 0 ? (
-          <section data-gsap-section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
-            <div className="mx-auto grid max-w-[90rem] gap-5 lg:grid-cols-2">
-              {highlights.length > 0 ? (
-                <div data-gsap-item className="border border-hairline bg-surface p-7">
-                  <p className="type-accent font-medium uppercase text-accent">Career highlights</p>
-                  <ul className="mt-5 grid gap-3">
-                    {highlights.map((item) => (
-                      <li key={item} className="type-body flex gap-3 text-muted">
-                        <span className="mt-2 h-2 w-2 shrink-0 bg-accent" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-
-              {achievements.length > 0 ? (
-                <div data-gsap-item className="border border-hairline bg-surface p-7">
-                  <p className="type-accent font-medium uppercase text-accent">Achievements</p>
-                  <ul className="mt-5 grid gap-3">
-                    {achievements.map((item) => (
-                      <li key={item} className="type-body flex gap-3 text-muted">
-                        <span className="mt-2 h-2 w-2 shrink-0 bg-accent" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </div>
-          </section>
-        ) : null}
-
-        {videos.length > 0 || gallery.length > 0 ? (
-          <section data-gsap-section className="bg-panel px-5 py-24 text-white sm:px-8 lg:px-10">
-            <div className="mx-auto max-w-[90rem]">
-              <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-                <div>
-                  <p data-gsap-item className="type-accent font-medium uppercase text-white/48">
-                    Media and profile links
-                  </p>
-                  <h2 data-gsap-item data-gsap-title className="type-h3 mt-4 text-white">
-                    Extra material for club review and due diligence.
-                  </h2>
-                </div>
-
-                <div className="grid gap-5">
-                  {videos.length > 0 ? (
-                    <div data-gsap-item className="border border-white/12 bg-black/20 p-6">
-                      <p className="type-accent font-medium uppercase text-white/48">Video links</p>
-                      <ul className="mt-5 grid gap-3">
-                        {videos.map((video) => (
-                          <li key={video.url}>
-                            <a
-                              href={video.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="type-body inline-flex items-center gap-2 text-white/74 transition-colors hover:text-white"
-                            >
-                              {video.label} profile
-                              <span aria-hidden="true">↗</span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-
-                  {gallery.length > 0 ? (
-                    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                      {gallery.map((image) => (
-                        <div key={image.id} data-gsap-item className="overflow-hidden border border-white/12 bg-black/20">
-                          {image.url ? (
-                            <Image
-                              src={image.url}
-                              alt={image.alt || profile.name}
-                              width={1200}
-                              height={900}
-                              className="aspect-[1.1] w-full object-cover"
-                            />
-                          ) : null}
-                        </div>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : null}
+        <PlayerProfileTabs data={tabData} />
 
         <section data-gsap-section className="bg-surface px-5 py-24 sm:px-8 lg:px-10">
-          <div className="mx-auto grid max-w-[90rem] gap-8 lg:grid-cols-[0.72fr_1.28fr]">
-            <div>
+          <div className="mx-auto max-w-[90rem]">
+            <div className="max-w-3xl">
               <p data-gsap-item className="type-accent font-medium uppercase text-accent">
-                Player enquiry
+                How it works
               </p>
               <h2 data-gsap-item data-gsap-title className="type-h3 mt-4 text-foreground">
-                Ask about availability, role fit, or next-stage discussions.
+                A clear four-step route from profile review to the right cricket conversation.
               </h2>
-              <p data-gsap-item className="type-body mt-4 max-w-lg text-muted">
-                Reference this player directly and include the timing, format, or club context
-                you are recruiting for. The enquiry will be routed into the Pro-Crick CMS.
+              <p data-gsap-item className="type-body mt-4 text-muted">
+                Pro-Crick keeps the process structured for both players and clubs, with role
+                clarity, practical shortlisting, and guided introductions.
               </p>
             </div>
 
-            <div data-gsap-item className="border border-hairline bg-white p-7 sm:p-9">
-              <ContactEnquiryForm
-                playerSlug={player.slug}
-                turnstileSiteKey={integrations.cloudflareTurnstileSiteKey}
-              />
+            <div className="mt-10 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+              {howItWorksSteps.map((step, index) => (
+                <article
+                  key={step.title}
+                  data-gsap-item
+                  className="border border-hairline bg-white p-7"
+                >
+                  <div className="flex h-16 w-16 items-center justify-center bg-accent text-white">
+                    <span className="text-xl font-medium">{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                  <h3 className="type-h4 mt-7 text-foreground">{step.title}</h3>
+                  <p className="type-body mt-4 text-muted">{step.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
+
+        {relatedPlayers.length > 0 ? (
+          <section data-gsap-section className="bg-background px-5 py-24 sm:px-8 lg:px-10">
+            <div className="mx-auto max-w-[90rem]">
+              <div className="max-w-3xl border-b border-hairline pb-6">
+                <p data-gsap-item className="type-accent font-medium uppercase text-accent">
+                  Related players
+                </p>
+                <h2 data-gsap-item data-gsap-title className="type-h3 mt-3 text-foreground">
+                  More profiles with comparable role or nationality context.
+                </h2>
+                <p data-gsap-item className="type-body mt-4 text-muted">
+                  Useful for clubs building a shortlist around similar role fit, availability,
+                  or player background.
+                </p>
+              </div>
+
+              <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                {relatedPlayers.map((relatedPlayer) => (
+                  <PlayerCard key={relatedPlayer.slug} player={relatedPlayer} />
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        <RegistrationSplitCta />
       </main>
       <Footer />
     </>
   )
+}
+
+function mapPlayerToCardData(player: Player) {
+  return {
+    club: getNamedRelationship(player.currentClub),
+    imageUrl: getStaticPlayerImageUrl(player.slug) || getMediaUrl(player.profileImage),
+    introduction: player.shortIntroduction,
+    nationality: getNamedRelationship(player.nationality) || 'Nationality on request',
+    role: getNamedRelationship(player.primaryRole) || 'Cricket player',
+    slug: player.slug,
+    status: formatPlayerStatus(player.playerStatus),
+    title: player.fullName,
+  }
+}
+
+function getNamedRelationship(
+  value: number | Club | Country | PlayingRole | null | undefined,
+): string | null {
+  if (value && typeof value === 'object' && 'name' in value && typeof value.name === 'string') {
+    return value.name
+  }
+
+  return null
+}
+
+function getRelationshipNames(values: (number | Club | Country | PlayingRole)[] | null | undefined) {
+  if (!values) {
+    return []
+  }
+
+  return values.map((value) => getNamedRelationship(value)).filter((value): value is string => Boolean(value))
+}
+
+function getMediaUrl(value: number | Media | null | undefined) {
+  if (value && typeof value === 'object' && 'url' in value && typeof value.url === 'string') {
+    return value.url
+  }
+
+  return null
+}
+
+function formatPlayerStatus(status: Player['playerStatus']) {
+  switch (status) {
+    case 'contracted':
+      return 'Contracted'
+    case 'unavailable':
+      return 'Unavailable'
+    case 'available':
+    default:
+      return 'Available'
+  }
 }
 
 function formatBattingStyle(value: string | null | undefined) {

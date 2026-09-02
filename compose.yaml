@@ -7,6 +7,8 @@ services:
       - .env
     environment:
       CI: "true"
+      # Keep Docker on the internal service hostname even if host-side .env uses localhost.
+      DATABASE_URI: postgresql://${POSTGRES_USER:-procric}:${POSTGRES_PASSWORD:-procric_dev_password}@db:5432/${POSTGRES_DB:-procric}
       HOSTNAME: 0.0.0.0
       PORT: 3000
     ports:

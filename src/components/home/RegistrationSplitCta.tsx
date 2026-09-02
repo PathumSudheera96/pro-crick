@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const REGISTRATION_IMAGE =
-  'https://images.pexels.com/photos/18084233/pexels-photo-18084233.jpeg?auto=compress&cs=tinysrgb&w=1800'
+const REGISTRATION_IMAGE = '/images/stock/pexels-cricket-training-net.jpeg'
 
 export function RegistrationSplitCta() {
   return (
@@ -29,7 +28,7 @@ export function RegistrationSplitCta() {
           title="Ready to recruit the right cricketer?"
           description="Register now, and we’ll help you find your ideal player."
           buttonLabel="Register as a Club"
-          href="/contact"
+          href="/contact-us"
           withDivider
         />
       </div>
@@ -63,7 +62,7 @@ function RegistrationPanel({
       <Link
         href={href}
         data-gsap-item
-        className="mt-9 inline-flex min-h-14 items-center justify-center bg-accent px-5 text-center text-xs font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:bg-accent-hover sm:min-w-80 sm:px-8 sm:text-sm"
+        className="mt-9 inline-flex min-h-14 items-center justify-center bg-accent px-5 text-center text-xs font-medium uppercase tracking-[0.12em] !text-white transition-colors duration-200 hover:bg-accent-hover sm:min-w-80 sm:px-8 sm:text-sm"
       >
         {buttonLabel}
       </Link>

@@ -13,24 +13,21 @@ const monoPlayers = [
     role: 'Top order',
     status: 'Available',
     rating: '91',
-    image:
-      'https://images.pexels.com/photos/30497236/pexels-photo-30497236.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricket-player-silhouette.jpeg',
   },
   {
     name: 'I. Rehman',
     role: 'Seam all-rounder',
     status: 'Shortlist',
     rating: '87',
-    image:
-      'https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricketer-bat-training.jpeg',
   },
   {
     name: 'J. Kapoor',
     role: 'Keeper batter',
     status: 'Reviewing',
     rating: '84',
-    image:
-      'https://images.pexels.com/photos/18084233/pexels-photo-18084233.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricket-training-net.jpeg',
   },
 ]
 
@@ -39,15 +36,13 @@ const signalPlayers = [
     name: 'Noah Hayes',
     role: 'Left arm spin',
     format: 'T20 / ODI',
-    image:
-      'https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricketer-bat-training.jpeg',
   },
   {
     name: 'Ravi Perera',
     role: 'Finisher',
     format: 'T20',
-    image:
-      'https://images.pexels.com/photos/30497236/pexels-photo-30497236.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricket-player-silhouette.jpeg',
   },
 ]
 
@@ -135,7 +130,7 @@ function MonochromePerformance() {
                   Search Players
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center justify-center border border-white/18 px-7 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white"
                 >
                   Club Enquiry
@@ -329,7 +324,7 @@ function CricketSignal() {
               </h3>
             </div>
             <Link
-              href="/contact"
+              href="/contact-us"
               className="flex items-center justify-center bg-[#C51622] px-8 py-6 text-sm font-bold uppercase tracking-[0.2em]"
             >
               Test this route

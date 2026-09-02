@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import type { File as PayloadFile } from 'payload'
 
 import { generatePlayerApplicationReferenceNumber } from '@/collections/PlayerApplications'
+import { BACKEND_UNAVAILABLE_MESSAGE, isBackendUnavailableError } from '@/lib/backendAvailability'
 import { getIntegrationsSettings } from '@/lib/queries/content'
 import { consumeRateLimit } from '@/lib/security/rateLimit'
 import { verifyTurnstileToken } from '@/lib/security/turnstile'
@@ -118,95 +119,103 @@ export async function POST(request: Request) {
     return Response.json({ error: cvValidation.error }, { status: 400 })
   }
 
-  const payload = await getPayload({ config })
+  try {
+    const payload = await getPayload({ config })
 
-  const [nationality, role, currentClub] = await Promise.all([
-    validation.data.nationalitySlug
-      ? payload.find({
-          collection: 'countries',
-          depth: 0,
-          limit: 1,
-          overrideAccess: true,
-          pagination: false,
-          where: { slug: { equals: validation.data.nationalitySlug } },
-        })
-      : Promise.resolve({ docs: [] }),
-    validation.data.cricketRoleSlug
-      ? payload.find({
-          collection: 'playing-roles',
-          depth: 0,
-          limit: 1,
-          overrideAccess: true,
-          pagination: false,
-          where: { slug: { equals: validation.data.cricketRoleSlug } },
-        })
-      : Promise.resolve({ docs: [] }),
-    validation.data.currentClubSlug
-      ? payload.find({
-          collection: 'clubs',
-          depth: 0,
-          limit: 1,
-          overrideAccess: true,
-          pagination: false,
-          where: { slug: { equals: validation.data.currentClubSlug } },
-        })
-      : Promise.resolve({ docs: [] }),
-  ])
+    const [nationality, role, currentClub] = await Promise.all([
+      validation.data.nationalitySlug
+        ? payload.find({
+            collection: 'countries',
+            depth: 0,
+            limit: 1,
+            overrideAccess: true,
+            pagination: false,
+            where: { slug: { equals: validation.data.nationalitySlug } },
+          })
+        : Promise.resolve({ docs: [] }),
+      validation.data.cricketRoleSlug
+        ? payload.find({
+            collection: 'playing-roles',
+            depth: 0,
+            limit: 1,
+            overrideAccess: true,
+            pagination: false,
+            where: { slug: { equals: validation.data.cricketRoleSlug } },
+          })
+        : Promise.resolve({ docs: [] }),
+      validation.data.currentClubSlug
+        ? payload.find({
+            collection: 'clubs',
+            depth: 0,
+            limit: 1,
+            overrideAccess: true,
+            pagination: false,
+            where: { slug: { equals: validation.data.currentClubSlug } },
+          })
+        : Promise.resolve({ docs: [] }),
+    ])
 
-  const uploadedProfilePhoto =
-    profilePhoto instanceof File
-      ? await payload.create({
-          collection: 'application-uploads',
-          data: {
-            label: `${validation.data.applicantName} profile photo`,
-          },
-          draft: false,
-          file: await toPayloadFile(profilePhoto),
-          overrideAccess: true,
-        })
-      : null
+    const uploadedProfilePhoto =
+      profilePhoto instanceof File
+        ? await payload.create({
+            collection: 'application-uploads',
+            data: {
+              label: `${validation.data.applicantName} profile photo`,
+            },
+            draft: false,
+            file: await toPayloadFile(profilePhoto),
+            overrideAccess: true,
+          })
+        : null
 
-  const uploadedCv =
-    playerCv instanceof File
-      ? await payload.create({
-          collection: 'application-uploads',
-          data: {
-            label: `${validation.data.applicantName} CV`,
-          },
-          draft: false,
-          file: await toPayloadFile(playerCv),
-          overrideAccess: true,
-        })
-      : null
+    const uploadedCv =
+      playerCv instanceof File
+        ? await payload.create({
+            collection: 'application-uploads',
+            data: {
+              label: `${validation.data.applicantName} CV`,
+            },
+            draft: false,
+            file: await toPayloadFile(playerCv),
+            overrideAccess: true,
+          })
+        : null
 
-  const application = await payload.create({
-    collection: 'player-applications',
-    data: {
-      applicantName: validation.data.applicantName,
-      applicationStatus: 'new',
-      biography: validation.data.biography,
-      cricketRole: role.docs[0]?.id,
-      currentClub: currentClub.docs[0]?.id,
-      email: validation.data.email,
-      nationality: nationality.docs[0]?.id,
-      phone: validation.data.phone,
-      playerCv: uploadedCv?.id,
-      profilePhoto: uploadedProfilePhoto?.id,
-      referenceNumber: generatePlayerApplicationReferenceNumber(),
-      statistics: validation.data.statistics,
-      teamsExperience: validation.data.teamsExperience,
-      vimeoVideos: validation.data.vimeoVideos,
-      youtubeVideos: validation.data.youtubeVideos,
-    },
-    draft: false,
-    overrideAccess: true,
-  })
+    const application = await payload.create({
+      collection: 'player-applications',
+      data: {
+        applicantName: validation.data.applicantName,
+        applicationStatus: 'new',
+        biography: validation.data.biography,
+        cricketRole: role.docs[0]?.id,
+        currentClub: currentClub.docs[0]?.id,
+        email: validation.data.email,
+        nationality: nationality.docs[0]?.id,
+        phone: validation.data.phone,
+        playerCv: uploadedCv?.id,
+        profilePhoto: uploadedProfilePhoto?.id,
+        referenceNumber: generatePlayerApplicationReferenceNumber(),
+        statistics: validation.data.statistics,
+        teamsExperience: validation.data.teamsExperience,
+        vimeoVideos: validation.data.vimeoVideos,
+        youtubeVideos: validation.data.youtubeVideos,
+      },
+      draft: false,
+      overrideAccess: true,
+    })
 
-  return Response.json(
-    {
-      message: 'Player application submitted successfully.',
-      referenceNumber: application.referenceNumber,
-    },
-    { status: 201 },
-  )
+    return Response.json(
+      {
+        message: 'Player application submitted successfully.',
+        referenceNumber: application.referenceNumber,
+      },
+      { status: 201 },
+    )
+  } catch (error) {
+    if (isBackendUnavailableError(error)) {
+      return Response.json({ error: BACKEND_UNAVAILABLE_MESSAGE }, { status: 503 })
+    }
+
+    throw error
+  }
 }

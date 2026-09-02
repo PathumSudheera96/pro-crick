@@ -268,6 +268,7 @@ const run = async () => {
       featured: player.featured,
       fullName: player.fullName,
       nationality: nationality?.id,
+      playerCategory: 'professional-player' as const,
       playerStatus: player.playerStatus,
       previousClubs: previousClubs.filter(Boolean),
       primaryRole: primaryRole?.id,

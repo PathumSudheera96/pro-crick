@@ -9,22 +9,19 @@ const playerCards = [
     name: 'Dominic Shaw',
     role: 'Top-order batter',
     meta: 'England / Available',
-    image:
-      'https://images.pexels.com/photos/30497236/pexels-photo-30497236.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricket-player-silhouette.jpeg',
   },
   {
     name: 'Isaac Rehman',
     role: 'Seam all-rounder',
     meta: 'South Africa / Shortlist',
-    image:
-      'https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricketer-bat-training.jpeg',
   },
   {
     name: 'James Kapoor',
     role: 'Wicketkeeper batter',
     meta: 'India / Reviewing',
-    image:
-      'https://images.pexels.com/photos/18084233/pexels-photo-18084233.jpeg?auto=compress&cs=tinysrgb&w=900',
+    image: '/images/stock/pexels-cricket-training-net.jpeg',
   },
 ]
 
@@ -47,14 +44,14 @@ const founderCards = [
   {
     name: 'Dilan Perera',
     role: 'Commercial and partnership lead',
-    image: '/images/1_founder.jpg',
+    image: '/images/dilan-perera.jpg',
     summary:
       'Sport, coaching, athlete development, business, and marketing experience brought into one practical partnership role.',
   },
   {
     name: 'Nisala Tharaka',
     role: 'Cricket strategy and player pathway lead',
-    image: '/images/2_founder.jpg',
+    image: '/images/nisala-tharaka.jpg',
     summary:
       'Senior domestic and overseas cricket experience applied to player evaluation, role fit, and opportunity judgment.',
   },
@@ -183,11 +180,11 @@ export default function DesignSystemPage() {
           <Link href="/players" className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors duration-200 hover:bg-accent-hover">
             Primary Button
           </Link>
-          <Link href="/contact" className="inline-flex min-h-12 items-center justify-center border border-foreground/14 px-6 text-sm font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-200 hover:border-foreground/30 hover:bg-foreground hover:!text-white">
+          <Link href="/contact-us" className="inline-flex min-h-12 items-center justify-center border border-foreground/14 px-6 text-sm font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-200 hover:border-foreground/30 hover:bg-foreground hover:!text-white">
             Secondary Button
           </Link>
           <div className="bg-[#081423] p-4">
-            <Link href="/about" className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground">
+            <Link href="/about-us" className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground">
               White Outline
             </Link>
           </div>
@@ -266,7 +263,7 @@ export default function DesignSystemPage() {
           <section className="grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
             <article className="relative min-h-[20rem] overflow-hidden border border-black/10 bg-black/8 lg:min-h-[28rem]">
               <Image
-                src="https://images.pexels.com/photos/29463867/pexels-photo-29463867/free-photo-of-cricket-batsman-playing-powerful-shot-on-field.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                src="/images/stock/pexels-cricket-batsman-shot.jpeg"
                 alt="Cricket batsman"
                 fill
                 sizes="(min-width: 1024px) 32vw, 100vw"
@@ -315,7 +312,7 @@ export default function DesignSystemPage() {
                 </p>
                 <div className="mt-9">
                   <Link
-                    href="/about"
+                    href="/about-us"
                     className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground"
                   >
                     See How Pro-Crick Works
@@ -344,7 +341,7 @@ export default function DesignSystemPage() {
           <CtaBlock
             title="Start a serious club enquiry."
             body="Use this dark CTA to break long light pages and create a high-contrast conversion moment."
-            href="/contact"
+            href="/contact-us"
             label="Submit Enquiry"
             dark
           />
@@ -434,7 +431,7 @@ function NavPreview({
       <p className="type-accent mb-3 font-semibold uppercase text-muted">{label}</p>
       <div className="relative isolate overflow-hidden border border-hairline">
         <Image
-          src="https://images.pexels.com/photos/17628715/pexels-photo-17628715.jpeg?auto=compress&cs=tinysrgb&w=1400"
+          src="/images/stock/pexels-cricket-celebration.jpeg"
           alt=""
           fill
           sizes="(max-width: 1024px) 100vw, 1536px"
@@ -483,7 +480,7 @@ function ImageBox() {
   return (
     <article className="group overflow-hidden border border-hairline bg-white transition-colors duration-200 hover:border-foreground/20 hover:bg-surface">
       <Image
-        src="https://images.pexels.com/photos/30497236/pexels-photo-30497236.jpeg?auto=compress&cs=tinysrgb&w=1100"
+        src="/images/stock/pexels-cricket-player-silhouette.jpeg"
         alt="Cricket player"
         width={1100}
         height={700}
