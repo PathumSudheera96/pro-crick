@@ -32,7 +32,7 @@ export const Players: CollectionConfig = {
     update: isAdminOrEditor,
   },
   admin: {
-    defaultColumns: ['fullName', 'primaryRole', 'playerStatus', 'status', 'updatedAt'],
+    defaultColumns: ['fullName', 'playerCategory', 'primaryRole', 'playerStatus', 'status', 'updatedAt'],
     group: 'Players',
     useAsTitle: 'fullName',
   },
@@ -111,6 +111,31 @@ export const Players: CollectionConfig = {
         {
           label: 'Cricket',
           fields: [
+            {
+              name: 'playerCategory',
+              type: 'select',
+              admin: {
+                description:
+                  'Classify each player for directory management and editorial grouping.',
+              },
+              defaultValue: 'professional-player',
+              index: true,
+              options: [
+                {
+                  label: 'Professional Player',
+                  value: 'professional-player',
+                },
+                {
+                  label: 'Amateur Players',
+                  value: 'amateur-player',
+                },
+                {
+                  label: 'Local Players',
+                  value: 'local-player',
+                },
+              ],
+              required: true,
+            },
             {
               name: 'primaryRole',
               type: 'relationship',

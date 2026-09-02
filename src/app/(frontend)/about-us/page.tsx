@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { RegistrationSplitCta } from '@/components/home/RegistrationSplitCta'
+import { FounderProfiles } from '@/components/marketing/FounderProfiles'
 import { PageHero } from '@/components/marketing/PageHero'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
@@ -71,6 +72,48 @@ const CLUB_BENEFITS = [
     title: 'Partnerships built for fit and reliability',
   },
 ]
+
+const FOUNDERS = [
+  {
+    email: 'connect@pro-crick.com',
+    facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',
+    fullBiography: [
+      'Dilan Perera represents the connection between sport, business and people that forms the foundation of Pro-Crick. With a diverse background across multiple sports, education, coaching and business environments, Dilan brings a unique perspective to developing opportunities for athletes and building meaningful partnerships within the cricket community.',
+      'From an early stage, Dilan demonstrated excellence across multiple sporting disciplines while maintaining a strong focus on education and personal development. His journey through different sports environments has given him a broad understanding of athlete commitment, performance, teamwork and the challenges faced by individuals striving to progress in competitive fields.',
+      'Beyond sport, Dilan has gained valuable experience across multiple industries, developing strong skills in business development, marketing, communication and relationship management. His ability to understand people, identify opportunities and create connections has become a key strength in building the Pro-Crick platform.',
+      'As a qualified coach, Dilan understands the importance of player development, guidance and creating environments where individuals can reach their potential. His coaching background, combined with his business knowledge, allows him to approach cricket opportunities from both a sporting and professional perspective.',
+      'Within Pro-Crick, Dilan is the driving force behind partnerships, communication and building relationships between players, clubs and communities. Known for his energetic personality, creativity and positive approach, he brings a people-first mindset to every connection made through the agency.',
+      'Dilan believes that successful opportunities are created when talent, trust and the right platform come together. His vision is to help build a cricket network where players are recognised, clubs find the right individuals, and relationships continue to grow beyond the initial opportunity.',
+    ],
+    image: '/images/dilan-perera.jpg',
+    linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
+    name: 'Dilan Perera',
+    preview:
+      'Dilan connects sport, business, coaching, and relationships across the Pro-Crick model. He leads the partnership side of the agency with a people-first approach focused on trust, communication, and long-term cricket opportunities.',
+    quote: 'Great opportunities happen when the right talent meets the right platform.',
+    role: 'Co-Founder - Pro-Crick',
+  },
+  {
+    email: 'connect@pro-crick.com',
+    facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',
+    fullBiography: [
+      'Nisala Tharaka brings professional cricket experience, technical knowledge and a deep understanding of player development to Pro-Crick. As a Sri Lankan cricketer with extensive domestic experience, representation at Sri Lanka A level and years competing in high-level cricket environments, Nisala provides the cricket expertise required to identify talent and create the right connections between players and clubs.',
+      'A right-arm fast-medium bowling all-rounder, Nisala has built his career through dedication, discipline and consistent performance across domestic cricket. Throughout his playing journey, he has represented several leading Sri Lankan cricket teams and competed at a high level across multiple formats, gaining valuable experience of professional cricket standards, team environments and the demands required to succeed.',
+      'His experience extends beyond playing alone. Having competed in overseas league cricket, Nisala understands the journey of international players from adapting to new conditions and cultures to finding the right club environment where they can contribute and continue developing. This personal understanding allows him to provide genuine insight into the needs of both players and clubs.',
+      'Alongside his playing career, Nisala has developed his coaching knowledge through formal qualifications, including UKCC Level 2 coaching accreditation, strengthening his ability to support player growth and development.',
+      'Within Pro-Crick, Nisala represents the cricket mind behind the organisation. His role focuses on evaluating talent, understanding player capabilities, advising clubs and ensuring that every connection is built on cricketing knowledge, honesty and long-term value.',
+      'Known for his dedication, professionalism and deep passion for the game, Nisala brings the experience of a player who understands both the challenges and opportunities within modern cricket.',
+      'His belief is simple: the right opportunity can transform a player’s journey, and the right player can make a lasting impact on a club.',
+    ],
+    image: '/images/nisala-tharaka.jpg',
+    linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
+    name: 'Nisala Tharaka',
+    preview:
+      'Nisala brings professional cricket insight, Sri Lanka A representation, and overseas league experience to the agency. He leads the cricket evaluation side, helping match player ability, discipline, and club fit with real cricket context.',
+    quote: 'Where cricket knowledge meets opportunity.',
+    role: 'Co-Founder - Pro-Crick',
+  },
+] as const
 
 export const metadata: Metadata = buildSeoMetadata({
   contentTitle: 'About Pro-Crick',
@@ -146,28 +189,7 @@ export default function AboutPage() {
               <h2 className="type-h2 mt-4 text-foreground">Two different lenses. One shared cricket standard.</h2>
             </div>
 
-            <div className="mt-12 grid gap-5 lg:grid-cols-2">
-              <FounderCard
-                email="connect@pro-crick.com"
-                facebook="https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr"
-                name="Dilan Perera"
-                image="/images/dilan-perera.jpg"
-                linkedin="https://www.linkedin.com/company/pro-crick-where-cricket-connects/"
-                role="Commercial and partnership lead"
-                summary="Dilan brings experience across sport, event management, coaching, athlete development, business, and marketing. His strength is turning cricket knowledge into productive partnerships and positive player experiences."
-                quote="Great opportunities happen when the right talent meets the right platform."
-              />
-              <FounderCard
-                email="connect@pro-crick.com"
-                facebook="https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr"
-                name="Nisala Tharaka"
-                image="/images/nisala-tharaka.jpg"
-                linkedin="https://www.linkedin.com/company/pro-crick-where-cricket-connects/"
-                role="Cricket strategy and player pathway lead"
-                summary="Nisala brings high-level domestic and overseas cricket experience, including Sri Lanka A representation. He contributes the serious cricket eye behind player evaluation, discipline, and role fit."
-                quote="Where cricket knowledge meets opportunity."
-              />
-            </div>
+            <FounderProfiles founders={[...FOUNDERS]} />
           </div>
         </section>
 
@@ -194,7 +216,7 @@ export default function AboutPage() {
         <section className="relative overflow-hidden bg-[linear-gradient(135deg,#e24a4f_0%,#bf2732_42%,#7f111b_100%)] px-5 py-24 text-white sm:px-8 lg:px-10">
           <div className="absolute inset-y-0 left-1/2 right-0 hidden lg:block">
             <Image
-              src="https://images.pexels.com/photos/29463867/pexels-photo-29463867/free-photo-of-cricket-batsman-playing-powerful-shot-on-field.jpeg?auto=compress&cs=tinysrgb&w=1800"
+              src="/images/stock/pexels-cricket-batsman-shot.jpeg"
               alt="Cricket player batting during a match"
               fill
               unoptimized
@@ -317,110 +339,6 @@ export default function AboutPage() {
       </main>
       <Footer />
     </>
-  )
-}
-
-function FounderCard({
-  email,
-  facebook,
-  image,
-  linkedin,
-  name,
-  quote,
-  role,
-  summary,
-}: {
-  email: string
-  facebook: string
-  image: string
-  linkedin: string
-  name: string
-  quote: string
-  role: string
-  summary: string
-}) {
-  return (
-    <article className="overflow-hidden border border-hairline bg-white">
-      <div className="relative aspect-[1.02] bg-muted/10">
-        <Image
-          src={image}
-          alt={name}
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover object-top"
-        />
-      </div>
-      <div className="p-7 lg:p-8">
-        <h3 className="text-[clamp(1rem,1.55vw,1.75rem)] font-medium leading-[1.08] text-foreground">
-          {name}
-        </h3>
-        <p className="type-accent mt-3 font-medium uppercase text-accent">{role}</p>
-        <p className="type-body mt-5 text-muted">{summary}</p>
-        <div className="mt-5 flex items-center gap-3">
-          <SocialLink href={`mailto:${email}`} label={`Email ${name}`}>
-            <EmailIcon />
-          </SocialLink>
-          <SocialLink href={linkedin} label={`${name} on LinkedIn`}>
-            <LinkedinIcon />
-          </SocialLink>
-          <SocialLink href={facebook} label={`${name} on Facebook`}>
-            <FacebookIcon />
-          </SocialLink>
-        </div>
-        <p className="type-small mt-8 border-t border-hairline pt-5 font-medium uppercase tracking-[0.14em] text-foreground/72">
-          {quote}
-        </p>
-      </div>
-    </article>
-  )
-}
-
-function SocialLink({
-  children,
-  href,
-  label,
-}: {
-  children: ReactNode
-  href: string
-  label: string
-}) {
-  const external = !href.startsWith('mailto:')
-
-  return (
-    <Link
-      href={href}
-      aria-label={label}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-foreground transition-colors hover:border-foreground/24 hover:bg-surface hover:text-accent"
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noreferrer' : undefined}
-    >
-      {children}
-    </Link>
-  )
-}
-
-function EmailIcon() {
-  return (
-    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m4 7 8 6 8-6" />
-    </svg>
-  )
-}
-
-function LinkedinIcon() {
-  return (
-    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A2.03 2.03 0 0 0 3.2 5.02c0 1.1.9 2 2.02 2a2.01 2.01 0 1 0 .03-4.02ZM20.8 12.85c0-3.47-1.85-5.08-4.32-5.08-1.99 0-2.88 1.1-3.38 1.87V8.5H9.72c.04.76 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.68.12-.92.27-.68.88-1.39 1.9-1.39 1.34 0 1.88 1.02 1.88 2.53V20H20.8v-7.15Z" />
-    </svg>
-  )
-}
-
-function FacebookIcon() {
-  return (
-    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13.5 21v-7h2.35l.35-2.73H13.5V9.54c0-.8.22-1.34 1.37-1.34h1.46V5.74c-.25-.03-1.11-.1-2.1-.1-2.08 0-3.5 1.27-3.5 3.6v2.03H8.36V14h2.37v7h2.77Z" />
-    </svg>
   )
 }
 

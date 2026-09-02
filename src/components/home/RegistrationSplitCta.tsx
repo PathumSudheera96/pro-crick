@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const REGISTRATION_IMAGE =
-  'https://images.pexels.com/photos/18084233/pexels-photo-18084233.jpeg?auto=compress&cs=tinysrgb&w=1800'
+const REGISTRATION_IMAGE = '/images/stock/pexels-cricket-training-net.jpeg'
 
 export function RegistrationSplitCta() {
   return (

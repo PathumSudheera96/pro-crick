@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
+import { ServiceUnavailableNotice } from '@/components/site/ServiceUnavailableNotice'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
+import { isBackendUnavailableError } from '@/lib/backendAvailability'
 import { getSiteSettings } from '@/lib/queries/content'
 import { getPublishedNewsBySlug } from '@/lib/queries/news'
 import { buildSeoMetadata } from '@/lib/seo/metadata'
@@ -46,7 +48,13 @@ const resolveFeaturedImage = (news: News): (Media & { url: string }) | null => {
 export async function generateMetadata({ params }: NewsPageProps): Promise<Metadata> {
   const { slug } = await params
   const [news, siteSettings] = await Promise.all([
-    getPublishedNewsBySlug(slug),
+    getPublishedNewsBySlug(slug).catch((error) => {
+      if (isBackendUnavailableError(error)) {
+        return null
+      }
+
+      throw error
+    }),
     getSiteSettings().catch(() => null),
   ])
 
@@ -71,7 +79,35 @@ export async function generateMetadata({ params }: NewsPageProps): Promise<Metad
 
 export default async function NewsArticlePage({ params }: NewsPageProps) {
   const { slug } = await params
-  const news = await getPublishedNewsBySlug(slug)
+  let news: News | null = null
+  let isUnavailable = false
+
+  try {
+    news = await getPublishedNewsBySlug(slug)
+  } catch (error) {
+    if (isBackendUnavailableError(error)) {
+      isUnavailable = true
+    } else {
+      throw error
+    }
+  }
+
+  if (isUnavailable) {
+    return (
+      <>
+        <NavBar variant="light" />
+        <main className="bg-background px-5 py-24 sm:px-8 lg:px-10">
+          <div className="mx-auto max-w-4xl pt-20">
+            <ServiceUnavailableNotice
+              message="This news article is not available at the moment because the content service is temporarily offline."
+              title="News service unavailable"
+            />
+          </div>
+        </main>
+        <Footer />
+      </>
+    )
+  }
 
   if (!news) {
     notFound()

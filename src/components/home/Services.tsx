@@ -1,7 +1,6 @@
 import Image from 'next/image'
 
-const SERVICES_IMAGE =
-  'https://images.pexels.com/photos/29463867/pexels-photo-29463867/free-photo-of-cricket-batsman-playing-powerful-shot-on-field.jpeg?auto=compress&cs=tinysrgb&w=1400'
+const SERVICES_IMAGE = '/images/stock/pexels-cricket-batsman-shot.jpeg'
 
 const SERVICES = [
   {

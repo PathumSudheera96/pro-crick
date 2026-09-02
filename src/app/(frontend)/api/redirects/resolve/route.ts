@@ -1,4 +1,5 @@
 import { findRedirectForPath } from '@/lib/redirects/runtime'
+import { BACKEND_UNAVAILABLE_MESSAGE, isBackendUnavailableError } from '@/lib/backendAvailability'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,7 +17,17 @@ export async function GET(request: Request) {
     return Response.json({ error: 'Missing path' }, { status: 400 })
   }
 
-  const redirect = await findRedirectForPath(path)
+  let redirect = null
+
+  try {
+    redirect = await findRedirectForPath(path)
+  } catch (error) {
+    if (isBackendUnavailableError(error)) {
+      return Response.json({ error: BACKEND_UNAVAILABLE_MESSAGE, redirect: null }, { status: 503 })
+    }
+
+    throw error
+  }
 
   if (!redirect) {
     return Response.json({ redirect: null }, { status: 404 })

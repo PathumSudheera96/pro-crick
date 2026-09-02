@@ -205,6 +205,7 @@ const STATIC_PLAYERS: Player[] = (staticPlayersData as StaticPlayerRecord[]).map
     dateOfBirth: parseStaticDate(record.dateOfBirth),
     nationality,
     currentLocation: 'Sri Lanka',
+    playerCategory: 'professional-player',
     primaryRole,
     battingStyle: mapStaticBattingStyle(record.battingStyle),
     bowlingStyle: mapStaticBowlingStyle(record.bowlingStyle),

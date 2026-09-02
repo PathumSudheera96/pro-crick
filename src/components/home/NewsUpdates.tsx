@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { ServiceUnavailableNotice } from '@/components/site/ServiceUnavailableNotice'
+import { isBackendUnavailableError } from '@/lib/backendAvailability'
 import { getLatestPublishedNews } from '@/lib/queries/news'
 import type { Media, News } from '@/payload-types'
 
@@ -21,7 +23,19 @@ const resolveFeaturedImage = (item: News): (Media & { url: string }) | null => {
 }
 
 export async function NewsUpdates() {
-  const items = await getLatestPublishedNews(3)
+  let items: News[] = []
+  let isUnavailable = false
+
+  try {
+    items = await getLatestPublishedNews(3)
+  } catch (error) {
+    if (isBackendUnavailableError(error)) {
+      isUnavailable = true
+    } else {
+      throw error
+    }
+  }
+
   const isEmpty = items.length === 0
 
   return (
@@ -42,7 +56,13 @@ export async function NewsUpdates() {
           </p>
         </div>
 
-        {isEmpty ? (
+        {isUnavailable ? (
+          <ServiceUnavailableNotice
+            className="mt-12"
+            message="Latest news service not available at the moment. Please try again shortly."
+            title="Latest news unavailable"
+          />
+        ) : isEmpty ? (
           <div
             data-gsap-item
             className="mt-12 border border-black/8 bg-white px-6 py-16 text-center sm:py-20"
