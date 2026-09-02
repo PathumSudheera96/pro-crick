@@ -5,6 +5,7 @@ import { PageHero } from '@/components/marketing/PageHero'
 import { PlayerCard } from '@/components/players/PlayerCard'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
+import { getStaticPlayerImageUrl } from '@/lib/players/staticPlayers'
 import {
   getPlayerDirectoryFilterOptions,
   getPublishedPlayers,
@@ -282,7 +283,7 @@ function buildPlayersHref(filters: Required<PlayerDirectoryFilters>, page: numbe
 function mapPlayerToCardData(player: Player) {
   return {
     club: getNamedRelationship(player.currentClub),
-    imageUrl: getMediaUrl(player.profileImage),
+    imageUrl: getStaticPlayerImageUrl(player.slug) || getMediaUrl(player.profileImage),
     introduction: player.shortIntroduction,
     nationality: getNamedRelationship(player.nationality) || 'Nationality on request',
     role: getNamedRelationship(player.primaryRole) || 'Cricket player',

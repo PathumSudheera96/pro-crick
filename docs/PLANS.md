@@ -56,11 +56,11 @@ Planned stack:
 
 # 2. Current Project Phase
 
-**Current Phase:** Phase 9-12 Backend Foundations
+**Current Phase:** Phase 8-13 Frontend Completion and Launch Hardening
 
-**Current Status:** Core CMS schemas, player/content query helpers, public lead endpoints, redirect runtime, and technical SEO foundations are implemented. Remaining work is now mostly frontend rendering, UX completion, and launch hardening.
+**Current Status:** Core CMS schemas, query helpers, public lead endpoints, redirect runtime, technical SEO foundations, and the main handcrafted marketing pages are implemented. The player directory and profile experiences are substantially built, but still need completion work around related profiles, deeper UX polish, Payload-managed marketing content, and staging/launch hardening.
 
-**Next Main Task:** Build the frontend player directory/profile experiences and connect the marketing shell to Payload-managed content
+**Next Main Task:** Move into staging verification, launch hardening, and the remaining Payload-managed content work
 
 ---
 
@@ -195,14 +195,14 @@ Legend:
 
 - [ ] Create generic CMS page renderer
 - [ ] Create page block renderers
-- [ ] Build Homepage
-- [ ] Add approved agency background / "Where Cricket Connects" content
-- [ ] Add founder profile content for Dilan Perera and Nisala Tharaka
-- [ ] Add mission, vision, values, player benefits, and club benefits content sections
-- [ ] Build Partners/Sponsors homepage section
-- [ ] Build About page capability
-- [ ] Build Services page capability
-- [ ] Build Contact page capability
+- [x] Build Homepage
+- [x] Add approved agency background / "Where Cricket Connects" content
+- [x] Add founder profile content for Dilan Perera and Nisala Tharaka
+- [x] Add mission, vision, values, player benefits, and club benefits content sections
+- [x] Build Partners/Sponsors homepage section
+- [x] Build About page capability
+- [x] Build Services page capability
+- [x] Build Contact page capability
 - [ ] Build Privacy page capability
 - [ ] Build Terms page capability
 
@@ -216,44 +216,44 @@ Legend:
 - [x] Add Eligible Country filter
 - [x] Add pagination
 - [x] Add sorting
-- [ ] Build player card
-- [ ] Build `/players`
-- [ ] Add URL-aware filter state
-- [ ] Add empty states
+- [x] Build player card
+- [x] Build `/players`
+- [x] Add URL-aware filter state
+- [x] Add empty states
 
 ## Phase 9 — Player Profiles
 
 - [x] Build player-by-slug query
-- [ ] Build `/players/[slug]`
-- [ ] Build player hero
-- [ ] Build biography
-- [ ] Build cricket details
-- [ ] Build statistics
-- [ ] Build clubs/teams
-- [ ] Build video section
-- [ ] Build gallery
-- [ ] Build CV download
-- [ ] Build enquiry CTA
-- [ ] Build related players
-- [ ] Handle unpublished/missing players
+- [x] Build `/players/[slug]`
+- [x] Build player hero
+- [x] Build biography
+- [x] Build cricket details
+- [x] Build statistics
+- [x] Build clubs/teams
+- [x] Build video section
+- [x] Build gallery
+- [x] Build CV download
+- [x] Build enquiry CTA
+- [x] Build related players
+- [x] Handle unpublished/missing players
 
 ## Phase 10 — Enquiries
 
 - [x] Create Enquiries collection
 - [x] Add statuses
 - [x] Add player relationship
-- [ ] Build general enquiry form
-- [ ] Build player-specific enquiry form
+- [x] Build general enquiry form
+- [x] Build player-specific enquiry form
 - [x] Add server-side validation
 - [x] Add spam protection
-- [ ] Add success/error states
+- [x] Add success/error states
 - [ ] Optional: email notifications
 
 ## Phase 11 — Player Applications
 
 - [x] Create Player Applications collection
 - [x] Add application statuses
-- [ ] Build `/apply`
+- [x] Build `/apply`
 - [x] Add profile photo upload
 - [x] Add CV upload
 - [x] Add video links

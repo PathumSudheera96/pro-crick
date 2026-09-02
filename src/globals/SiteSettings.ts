@@ -56,6 +56,7 @@ export const SiteSettings: GlobalConfig = {
     {
       name: 'whatsApp',
       type: 'text',
+      defaultValue: '+447424116701',
     },
     {
       name: 'address',

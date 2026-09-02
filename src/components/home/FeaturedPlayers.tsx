@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+import { PlayerCard } from '@/components/players/PlayerCard'
 
 export type FeaturedPlayer = {
   slug: string
@@ -22,7 +23,7 @@ export type FeaturedPlayer = {
   profileBio?: string
 }
 
-const playerImage = (slug: string) => `/player_data/${slug}.png`
+const playerImage = (slug: string) => `/images/players/${slug}.png`
 
 const FEATURED_PLAYERS: FeaturedPlayer[] = [
   {
@@ -318,36 +319,16 @@ export function FeaturedPlayers() {
             <ul ref={trackRef} className="featured-player-track flex items-stretch gap-5">
               {HOMEPAGE_PLAYERS.map((player) => (
                 <li data-gsap-item key={player.slug} className="featured-player-slide h-auto">
-                  <Link
-                    href={`/players/${player.slug}`}
-                    className="group flex h-full flex-col overflow-hidden bg-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] transition-colors duration-200 hover:bg-surface"
-                  >
-                    <div className="overflow-hidden">
-                      <Image
-                        src={player.imageUrl}
-                        alt={player.name}
-                        width={900}
-                        height={900}
-                        className="aspect-square w-full object-cover object-top grayscale transition duration-300 group-hover:scale-[1.015] group-hover:grayscale-0"
-                      />
-                    </div>
-
-                    <div className="flex flex-1 flex-col p-5">
-                      <p className="type-accent font-semibold uppercase text-accent">
-                        {player.role}
-                      </p>
-                      <h4 className="mt-2 text-[clamp(1.125rem,1.9vw,1.95rem)] font-medium leading-[1.08] text-foreground">
-                        {player.name}
-                      </h4>
-                      <p className="type-small mt-3 text-muted">
-                        {player.nationality}
-                      </p>
-                      <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold uppercase text-accent transition-colors duration-200 group-hover:text-accent-hover">
-                        View Profile
-                        <ArrowIcon />
-                      </span>
-                    </div>
-                  </Link>
+                  <PlayerCard
+                    player={{
+                      imageUrl: player.imageUrl,
+                      nationality: player.nationality,
+                      role: player.role,
+                      slug: player.slug,
+                      status: player.status,
+                      title: player.name,
+                    }}
+                  />
                 </li>
               ))}
             </ul>

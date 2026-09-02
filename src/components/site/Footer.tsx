@@ -80,7 +80,14 @@ export function Footer() {
         </div>
 
         <div className="type-small mt-12 flex flex-col gap-3 border-t border-white/12 pt-6 text-white/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>Built by Ovix Global.</p>
+          <a
+            href="https://ovixglobal.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="transition-colors duration-200 hover:text-white"
+          >
+            Development and Maintenance
+          </a>
           <p>
             Copyright {year} Pro-Crick. All rights reserved.
           </p>
