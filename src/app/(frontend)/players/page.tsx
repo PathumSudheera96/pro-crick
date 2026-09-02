@@ -5,7 +5,7 @@ import { PageHero } from '@/components/marketing/PageHero'
 import { PlayerCard } from '@/components/players/PlayerCard'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
-import { getStaticPlayerImageUrl } from '@/lib/players/staticPlayers'
+import { mapPlayerToCardData } from '@/lib/players/playerCards'
 import {
   getPlayerDirectoryFilterOptions,
   getPublishedPlayers,
@@ -13,7 +13,6 @@ import {
   type PlayerDirectoryFilters,
 } from '@/lib/queries/players'
 import { buildSeoMetadata } from '@/lib/seo/metadata'
-import type { Club, Country, Media, Player, PlayingRole } from '@/payload-types'
 
 type PlayersPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>
@@ -56,7 +55,7 @@ export default async function PlayersPage({ searchParams }: PlayersPageProps) {
           title="Search players with role clarity, availability, and real scouting context."
           description="This directory is built for clubs, recruiters, and serious cricket conversations. Filter the published player pool by role, nationality, availability, and eligible country to build a faster shortlist."
           actions={[
-            { href: '/contact', label: 'Start a club enquiry' },
+            { href: '/contact-us', label: 'Start a club enquiry' },
             { href: '/apply', label: 'Apply as a player', variant: 'secondary' },
           ]}
           aside={
@@ -145,7 +144,7 @@ export default async function PlayersPage({ searchParams }: PlayersPageProps) {
                   ]}
                 />
 
-                <button className="inline-flex min-h-13 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-accent-hover">
+                <button className="inline-flex min-h-13 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors hover:bg-accent-hover">
                   Apply filters
                 </button>
               </form>
@@ -192,7 +191,7 @@ export default async function PlayersPage({ searchParams }: PlayersPageProps) {
                         href={href}
                         className={
                           page === results.page
-                            ? 'inline-flex min-h-11 min-w-11 items-center justify-center bg-accent px-4 text-sm font-medium text-white'
+                            ? 'inline-flex min-h-11 min-w-11 items-center justify-center bg-accent px-4 text-sm font-medium !text-white'
                             : 'inline-flex min-h-11 min-w-11 items-center justify-center border border-hairline px-4 text-sm font-medium text-foreground transition-colors hover:border-foreground/25 hover:bg-surface'
                         }
                       >
@@ -278,47 +277,4 @@ function buildPlayersHref(filters: Required<PlayerDirectoryFilters>, page: numbe
 
   const search = params.toString()
   return search ? `/players?${search}` : '/players'
-}
-
-function mapPlayerToCardData(player: Player) {
-  return {
-    club: getNamedRelationship(player.currentClub),
-    imageUrl: getStaticPlayerImageUrl(player.slug) || getMediaUrl(player.profileImage),
-    introduction: player.shortIntroduction,
-    nationality: getNamedRelationship(player.nationality) || 'Nationality on request',
-    role: getNamedRelationship(player.primaryRole) || 'Cricket player',
-    slug: player.slug,
-    status: formatPlayerStatus(player.playerStatus),
-    title: player.fullName,
-  }
-}
-
-function getNamedRelationship(
-  value: number | Club | Country | PlayingRole | null | undefined,
-): string | null {
-  if (value && typeof value === 'object' && 'name' in value && typeof value.name === 'string') {
-    return value.name
-  }
-
-  return null
-}
-
-function getMediaUrl(value: number | Media | null | undefined) {
-  if (value && typeof value === 'object' && 'url' in value && typeof value.url === 'string') {
-    return value.url
-  }
-
-  return null
-}
-
-function formatPlayerStatus(status: Player['playerStatus']) {
-  switch (status) {
-    case 'contracted':
-      return 'Contracted'
-    case 'unavailable':
-      return 'Unavailable'
-    case 'available':
-    default:
-      return 'Available'
-  }
 }
