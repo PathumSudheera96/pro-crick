@@ -14,6 +14,7 @@ export function PageHero({
   actions = [],
   aside,
   tone = 'light',
+  centered = false,
   titleClassName = '',
   backgroundImage,
 }: {
@@ -23,6 +24,7 @@ export function PageHero({
   actions?: PageHeroAction[]
   aside?: ReactNode
   tone?: 'dark' | 'light'
+  centered?: boolean
   titleClassName?: string
   backgroundImage?: string
 }) {
@@ -57,8 +59,14 @@ export function PageHero({
         </>
       ) : null}
 
-      <div className="relative z-10 mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-        <div className="max-w-4xl">
+      <div
+        className={`relative z-10 mx-auto max-w-[90rem] ${
+          centered
+            ? 'flex w-full flex-col items-center text-center'
+            : 'grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end'
+        }`}
+      >
+        <div className={centered ? 'flex w-full max-w-4xl flex-col items-center' : 'max-w-4xl'}>
           <p
             data-gsap-item
             className={`type-accent font-medium uppercase ${isDark ? 'text-white/50' : 'text-accent'}`}
@@ -74,13 +82,20 @@ export function PageHero({
           </h1>
           <p
             data-gsap-item
-            className={`type-lead mt-7 max-w-2xl ${isDark ? 'text-white/72' : 'text-muted'}`}
+            className={`type-lead mt-7 max-w-2xl ${centered ? 'mx-auto' : ''} ${
+              isDark ? 'text-white/72' : 'text-muted'
+            }`}
           >
             {description}
           </p>
 
           {actions.length > 0 ? (
-            <div data-gsap-item className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div
+              data-gsap-item
+              className={`mt-10 flex flex-col gap-4 ${
+                centered ? 'items-center justify-center sm:flex-row' : 'sm:flex-row'
+              }`}
+            >
               {actions.map((action) => (
                 <Link
                   key={`${action.href}-${action.label}`}
@@ -92,7 +107,7 @@ export function PageHero({
                             ? 'border-white/20 text-white hover:border-white hover:bg-white/8'
                             : 'border-foreground/14 text-foreground hover:border-foreground/30'
                         }`
-                      : 'inline-flex min-h-14 items-center justify-center bg-accent px-8 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-accent-hover'
+                      : 'inline-flex min-h-14 items-center justify-center bg-accent px-8 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors hover:bg-accent-hover'
                   }
                 >
                   {action.label}

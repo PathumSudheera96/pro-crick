@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 type HeroSlide = {
   image: string
   imageAlt: string
-  eyebrow: string
   title: string
   description: string
   primaryAction: {
@@ -25,17 +24,15 @@ const HERO_SLIDES: HeroSlide[] = [
     image:
       'https://images.pexels.com/photos/17628715/pexels-photo-17628715.jpeg?auto=compress&cs=tinysrgb&w=1800',
     imageAlt: 'Cricket players celebrating together on the field',
-    eyebrow:
-      'Where Cricket Connects. Sri Lankan talent, UK club opportunity, long-term partnerships.',
     title: 'Connect the right cricket talent with the right club environment.',
     description:
-      'Pro-Crick helps clubs review structured player profiles and helps players find the right platform. The process starts with clarity: role, readiness, availability, and a direct route to serious enquiry.',
+      'Pro-Crick helps clubs and players connect through structured profiles built around role, readiness, and availability.',
     primaryAction: {
       href: '/players',
       label: 'Search Players',
     },
     secondaryAction: {
-      href: '/contact',
+      href: '/contact-us',
       label: 'Club Enquiry',
     },
   },
@@ -43,17 +40,15 @@ const HERO_SLIDES: HeroSlide[] = [
     image:
       'https://images.pexels.com/photos/29463867/pexels-photo-29463867/free-photo-of-cricket-batsman-playing-powerful-shot-on-field.jpeg?auto=compress&cs=tinysrgb&w=1800',
     imageAlt: 'Cricket batsman playing an attacking shot on the field',
-    eyebrow:
-      'Player-first representation for ambitious cricketers looking for the right overseas club fit.',
     title: 'Present players with more than just stats and availability.',
     description:
-      'Every Pro-Crick profile is designed to show playing role, pathway, readiness, and environment fit so clubs can assess the person behind the numbers and players can be represented with proper context.',
+      'Profiles show role, readiness, and environment fit so clubs can assess the person behind the numbers.',
     primaryAction: {
       href: '/players',
       label: 'Browse Profiles',
     },
     secondaryAction: {
-      href: '/about',
+      href: '/about-us',
       label: 'How We Work',
     },
   },
@@ -61,17 +56,15 @@ const HERO_SLIDES: HeroSlide[] = [
     image:
       'https://images.pexels.com/photos/31625371/pexels-photo-31625371.jpeg?auto=compress&cs=tinysrgb&w=1800',
     imageAlt: 'Cricketer holding a bat during training',
-    eyebrow:
-      'Structured player-club introductions built for trust, clarity, and long-term cricket value.',
     title: 'Move from first interest to a serious cricket conversation.',
     description:
-      'Pro-Crick supports clubs, players, and cricket communities through a clearer recruitment process. The goal is not just exposure, but introductions that can lead to stronger partnerships on and off the field.',
+      'Pro-Crick supports clubs and players through clearer recruitment, with introductions built for stronger partnerships.',
     primaryAction: {
-      href: '/contact',
+      href: '/contact-us',
       label: 'Start Enquiry',
     },
     secondaryAction: {
-      href: '/services',
+      href: '/our-services',
       label: 'View Services',
     },
   },
@@ -123,27 +116,31 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[96rem] flex-col px-5 sm:px-8 lg:px-10">
         <div className="flex flex-1 items-center pb-16 pt-24 sm:pb-20 sm:pt-28">
-          <div className="max-w-5xl">
-            <p className="type-accent max-w-xl font-semibold uppercase text-[#c9cdd3]">
-              {HERO_SLIDES[activeSlide]?.eyebrow}
-            </p>
-            <h1 className="type-h1 home-hero-title mt-6 max-w-5xl text-white">
+          <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
+            <Image
+              src="/images/pro-crick-SVG-light.svg"
+              alt="Pro-Crick"
+              width={220}
+              height={115}
+              className="h-[11.25rem] w-auto sm:h-[13.125rem]"
+            />
+            <h1 className="type-h1 home-hero-title mt-8 max-w-5xl text-white">
               {HERO_SLIDES[activeSlide]?.title}
             </h1>
             <p className="type-lead mt-7 max-w-2xl text-white/70">
               {HERO_SLIDES[activeSlide]?.description}
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href={HERO_SLIDES[activeSlide]?.primaryAction.href ?? '/players'}
-                className="inline-flex min-h-14 items-center justify-center gap-3 bg-accent px-8 text-sm font-medium uppercase text-white transition-colors hover:bg-accent-hover"
+                className="inline-flex min-h-14 items-center justify-center gap-3 bg-accent px-8 text-sm font-medium uppercase !text-white transition-colors hover:bg-accent-hover"
               >
                 {HERO_SLIDES[activeSlide]?.primaryAction.label}
                 <ArrowIcon />
               </Link>
               <Link
-                href={HERO_SLIDES[activeSlide]?.secondaryAction.href ?? '/contact'}
+                href={HERO_SLIDES[activeSlide]?.secondaryAction.href ?? '/contact-us'}
                 className="inline-flex min-h-14 items-center justify-center gap-3 border border-white/24 px-8 text-sm font-medium uppercase text-white transition-colors hover:border-white hover:bg-white/8"
               >
                 {HERO_SLIDES[activeSlide]?.secondaryAction.label}

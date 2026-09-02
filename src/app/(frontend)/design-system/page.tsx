@@ -47,14 +47,14 @@ const founderCards = [
   {
     name: 'Dilan Perera',
     role: 'Commercial and partnership lead',
-    image: '/images/1_founder.jpg',
+    image: '/images/dilan-perera.jpg',
     summary:
       'Sport, coaching, athlete development, business, and marketing experience brought into one practical partnership role.',
   },
   {
     name: 'Nisala Tharaka',
     role: 'Cricket strategy and player pathway lead',
-    image: '/images/2_founder.jpg',
+    image: '/images/nisala-tharaka.jpg',
     summary:
       'Senior domestic and overseas cricket experience applied to player evaluation, role fit, and opportunity judgment.',
   },
@@ -183,11 +183,11 @@ export default function DesignSystemPage() {
           <Link href="/players" className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors duration-200 hover:bg-accent-hover">
             Primary Button
           </Link>
-          <Link href="/contact" className="inline-flex min-h-12 items-center justify-center border border-foreground/14 px-6 text-sm font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-200 hover:border-foreground/30 hover:bg-foreground hover:!text-white">
+          <Link href="/contact-us" className="inline-flex min-h-12 items-center justify-center border border-foreground/14 px-6 text-sm font-medium uppercase tracking-[0.12em] text-foreground transition-colors duration-200 hover:border-foreground/30 hover:bg-foreground hover:!text-white">
             Secondary Button
           </Link>
           <div className="bg-[#081423] p-4">
-            <Link href="/about" className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground">
+            <Link href="/about-us" className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground">
               White Outline
             </Link>
           </div>
@@ -315,7 +315,7 @@ export default function DesignSystemPage() {
                 </p>
                 <div className="mt-9">
                   <Link
-                    href="/about"
+                    href="/about-us"
                     className="inline-flex min-h-12 items-center justify-center border border-white/24 px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground"
                   >
                     See How Pro-Crick Works
@@ -344,7 +344,7 @@ export default function DesignSystemPage() {
           <CtaBlock
             title="Start a serious club enquiry."
             body="Use this dark CTA to break long light pages and create a high-contrast conversion moment."
-            href="/contact"
+            href="/contact-us"
             label="Submit Enquiry"
             dark
           />
