@@ -28,6 +28,9 @@ export function PageHero({
 }) {
   const isDark = tone === 'dark'
   const hasBackgroundImage = Boolean(backgroundImage)
+  const backgroundImageStyle = backgroundImage
+    ? `url("${encodeURI(backgroundImage)}")`
+    : undefined
 
   return (
     <section
@@ -43,7 +46,7 @@ export function PageHero({
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+            style={{ backgroundImage: backgroundImageStyle }}
           />
           <div
             aria-hidden="true"
@@ -65,7 +68,7 @@ export function PageHero({
           <h1
             data-gsap-item
             data-gsap-title
-            className={`mt-5 text-[clamp(2.8rem,6vw,6rem)] font-semibold leading-[0.92] tracking-[-0.06em] ${isDark ? 'text-white' : 'text-foreground'} ${titleClassName}`}
+            className={`mt-5 text-[clamp(2.25rem,11vw,6rem)] font-semibold leading-[0.98] tracking-0 sm:text-[clamp(2.8rem,6vw,6rem)] sm:leading-[0.92] sm:tracking-[-0.04em] ${isDark ? 'text-white' : 'text-foreground'} ${titleClassName}`}
           >
             {title}
           </h1>
