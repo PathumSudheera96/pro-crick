@@ -51,7 +51,7 @@ export function Testimonials() {
           </p>
           <div data-gsap-item className="mt-9">
             <Link
-              href="/about"
+              href="/about-us"
               className="inline-flex min-h-14 items-center justify-center border border-white/24 px-8 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors duration-200 hover:border-white hover:bg-white hover:!text-foreground"
             >
               See How Pro-Crick Works

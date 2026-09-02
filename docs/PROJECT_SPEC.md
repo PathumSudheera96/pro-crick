@@ -129,9 +129,9 @@ Required V1 public routes/capabilities:
 - `/`
 - `/players`
 - `/players/[slug]`
-- `/about`
-- `/services`
-- `/contact`
+- `/about-us`
+- `/our-services`
+- `/contact-us`
 - `/apply`
 - `/privacy-policy`
 - `/terms`
@@ -140,7 +140,7 @@ Additional CMS-managed pages may be added without code changes where compatible 
 
 ## 5.1 Required About / Agency Content
 
-The `/about` page and relevant homepage introduction sections should be able to present:
+The `/about-us` page and relevant homepage introduction sections should be able to present:
 
 - agency background and purpose
 - Sri Lanka-to-UK initial market focus

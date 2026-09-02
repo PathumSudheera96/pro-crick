@@ -29,7 +29,7 @@ export default async function ApplyPage() {
           description="Use this form to share your playing role, background, profile summary, and supporting material. Pro-Crick will review the application before deciding the next step."
           actions={[
             { href: '/players', label: 'Browse players' },
-            { href: '/contact', label: 'Contact Pro-Crick', variant: 'secondary' },
+            { href: '/contact-us', label: 'Contact Pro-Crick', variant: 'secondary' },
           ]}
           aside={
             <div className="grid gap-px overflow-hidden border border-hairline bg-hairline">

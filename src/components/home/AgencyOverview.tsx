@@ -39,7 +39,7 @@ export function AgencyOverview() {
 
           <div data-gsap-item className="mt-10">
             <Link
-              href="/about"
+              href="/about-us"
               className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-foreground transition-colors hover:text-accent"
             >
               Learn more about the agency

@@ -19,7 +19,7 @@ export function Cta() {
           </p>
           <div data-gsap-item className="mt-9 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center justify-center gap-2 bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] !text-white transition-colors hover:bg-accent-hover"
             >
               Enquire Now

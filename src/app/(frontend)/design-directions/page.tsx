@@ -135,7 +135,7 @@ function MonochromePerformance() {
                   Search Players
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center justify-center border border-white/18 px-7 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white"
                 >
                   Club Enquiry
@@ -329,7 +329,7 @@ function CricketSignal() {
               </h3>
             </div>
             <Link
-              href="/contact"
+              href="/contact-us"
               className="flex items-center justify-center bg-[#C51622] px-8 py-6 text-sm font-bold uppercase tracking-[0.2em]"
             >
               Test this route

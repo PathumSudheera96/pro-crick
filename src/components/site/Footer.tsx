@@ -5,10 +5,10 @@ const FOOTER_COLUMNS = [
   {
     title: 'Company',
     links: [
-      { label: 'About Pro-Crick', href: '/about' },
-      { label: 'Services', href: '/services' },
+      { label: 'About Pro-Crick', href: '/about-us' },
+      { label: 'Services', href: '/our-services' },
       { label: 'Partners', href: '/#partners' },
-      { label: 'Contact', href: '/contact' },
+      { label: 'Contact', href: '/contact-us' },
     ],
   },
   {
@@ -24,7 +24,7 @@ const FOOTER_COLUMNS = [
     title: 'For Clubs',
     links: [
       { label: 'Find a Player', href: '/players' },
-      { label: 'Submit Enquiry', href: '/contact' },
+      { label: 'Submit Enquiry', href: '/contact-us' },
       { label: 'Availability', href: '/players?status=available' },
       { label: 'Overseas Talent', href: '/players' },
     ],
@@ -34,7 +34,7 @@ const FOOTER_COLUMNS = [
     links: [
       { label: 'Privacy Policy', href: '/privacy-policy' },
       { label: 'Terms', href: '/terms' },
-      { label: 'Contact Pro-Crick', href: '/contact' },
+      { label: 'Contact Pro-Crick', href: '/contact-us' },
       { label: 'Admin', href: '/admin' },
     ],
   },
