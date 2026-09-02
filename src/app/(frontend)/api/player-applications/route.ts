@@ -4,7 +4,9 @@ import type { File as PayloadFile } from 'payload'
 
 import { generatePlayerApplicationReferenceNumber } from '@/collections/PlayerApplications'
 import { BACKEND_UNAVAILABLE_MESSAGE, isBackendUnavailableError } from '@/lib/backendAvailability'
+import { getIntegrationsSettings } from '@/lib/queries/content'
 import { consumeRateLimit } from '@/lib/security/rateLimit'
+import { verifyTurnstileToken } from '@/lib/security/turnstile'
 import { validatePlayerApplicationSubmission } from '@/lib/validation/playerApplications'
 
 export const dynamic = 'force-dynamic'
@@ -84,6 +86,17 @@ export async function POST(request: Request) {
 
   if (!validation.ok) {
     return Response.json({ error: validation.error }, { status: validation.status })
+  }
+
+  const integrations = await getIntegrationsSettings()
+  const turnstile = await verifyTurnstileToken({
+    remoteIp: rateLimitKey,
+    secretKey: integrations.cloudflareTurnstileSecretKey,
+    token: formData.get('cf-turnstile-response')?.toString(),
+  })
+
+  if (!turnstile.ok) {
+    return Response.json({ error: turnstile.error }, { status: turnstile.status })
   }
 
   const photoValidation = validateUpload(

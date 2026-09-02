@@ -1374,6 +1374,14 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Public site key rendered on enquiry and application forms.
+   */
+  cloudflareTurnstileSiteKey?: string | null;
+  /**
+   * Private key used only by the server to verify form submissions with Cloudflare.
+   */
+  cloudflareTurnstileSecretKey?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1448,6 +1456,8 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  cloudflareTurnstileSiteKey?: T;
+  cloudflareTurnstileSecretKey?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -32,6 +32,15 @@ export const getFooterContent = cache(async (): Promise<Footer> => {
   })
 })
 
+export const getIntegrationsSettings = cache(async (): Promise<SiteSetting> => {
+  const payload = await getPayloadClient()
+
+  return payload.findGlobal({
+    slug: 'site-settings',
+    overrideAccess: true,
+  })
+})
+
 export const getPublishedPageBySlug = cache(async (slug: string): Promise<Page | null> => {
   try {
     const payload = await getPayloadClient()

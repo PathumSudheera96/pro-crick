@@ -4,6 +4,7 @@ import { PageHero } from '@/components/marketing/PageHero'
 import { PlayerApplicationForm } from '@/components/site/PlayerApplicationForm'
 import { Footer } from '@/components/site/Footer'
 import { NavBar } from '@/components/site/NavBar'
+import { getSiteSettings } from '@/lib/queries/content'
 import { getPlayerApplicationFormOptions } from '@/lib/queries/players'
 import { buildSeoMetadata } from '@/lib/seo/metadata'
 
@@ -17,7 +18,10 @@ export const metadata: Metadata = buildSeoMetadata({
 export const dynamic = 'force-dynamic'
 
 export default async function ApplyPage() {
-  const options = await getPlayerApplicationFormOptions()
+  const [options, siteSettings] = await Promise.all([
+    getPlayerApplicationFormOptions(),
+    getSiteSettings().catch(() => null),
+  ])
 
   return (
     <>
@@ -95,6 +99,7 @@ export default async function ApplyPage() {
                   clubs={options.clubs}
                   countries={options.countries}
                   roles={options.roles}
+                  turnstileSiteKey={siteSettings?.cloudflareTurnstileSiteKey}
                 />
               </div>
             </div>

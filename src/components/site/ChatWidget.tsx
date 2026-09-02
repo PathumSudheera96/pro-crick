@@ -19,7 +19,13 @@ const buildWhatsAppUrl = (value?: string | null) => {
   return `https://wa.me/${normalizedNumber}`
 }
 
-export function ChatWidget({ whatsAppNumber }: { whatsAppNumber?: string | null }) {
+export function ChatWidget({
+  turnstileSiteKey,
+  whatsAppNumber,
+}: {
+  turnstileSiteKey?: string | null
+  whatsAppNumber?: string | null
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [playerSlug, setPlayerSlug] = useState<string | undefined>(undefined)
   const [view, setView] = useState<ChatView>('chooser')
@@ -241,7 +247,10 @@ export function ChatWidget({ whatsAppNumber }: { whatsAppNumber?: string | null 
                   </div>
 
                   <div className="pt-5">
-                    <ContactEnquiryForm playerSlug={playerSlug} />
+                    <ContactEnquiryForm
+                      playerSlug={playerSlug}
+                      turnstileSiteKey={turnstileSiteKey}
+                    />
                   </div>
                 </>
               )}

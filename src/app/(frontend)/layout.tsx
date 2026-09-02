@@ -32,7 +32,10 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <ChatWidget whatsAppNumber={siteSettings?.whatsApp} />
+        <ChatWidget
+          whatsAppNumber={siteSettings?.whatsApp}
+          turnstileSiteKey={siteSettings?.cloudflareTurnstileSiteKey}
+        />
         <SiteAnimations />
       </body>
     </html>

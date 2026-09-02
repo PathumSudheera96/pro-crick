@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+import { TurnstileWidget } from './TurnstileWidget'
+
 type SelectOption = {
   label: string
   value: string
@@ -11,6 +13,7 @@ type PlayerApplicationFormProps = {
   clubs: SelectOption[]
   countries: SelectOption[]
   roles: SelectOption[]
+  turnstileSiteKey?: string | null
 }
 
 type FormState = {
@@ -65,6 +68,7 @@ export function PlayerApplicationForm({
   clubs,
   countries,
   roles,
+  turnstileSiteKey,
 }: PlayerApplicationFormProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [error, setError] = useState<string | null>(null)
@@ -174,6 +178,13 @@ export function PlayerApplicationForm({
 
       if (profilePhoto) payload.set('profilePhoto', profilePhoto)
       if (playerCv) payload.set('playerCv', playerCv)
+      const turnstileToken = new FormData(event.currentTarget)
+        .get('cf-turnstile-response')
+        ?.toString()
+
+      if (turnstileToken) {
+        payload.set('cf-turnstile-response', turnstileToken)
+      }
 
       const response = await fetch('/api/player-applications', {
         body: payload,
@@ -203,6 +214,8 @@ export function PlayerApplicationForm({
     } catch {
       setError('Unable to submit your application right now.')
     } finally {
+      const turnstile = (globalThis as { turnstile?: { reset: () => void } }).turnstile
+      turnstile?.reset()
       setIsSubmitting(false)
     }
   }
@@ -371,6 +384,8 @@ export function PlayerApplicationForm({
           />
         </div>
       ) : null}
+
+      <TurnstileWidget siteKey={turnstileSiteKey} />
 
       {error ? <p className="type-small text-accent">{error}</p> : null}
       {successMessage ? <p className="type-small text-foreground">{successMessage}</p> : null}
