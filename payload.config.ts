@@ -9,6 +9,7 @@ import { Countries } from './src/collections/Countries'
 import { Clubs } from './src/collections/Clubs'
 import { ApplicationUploads } from './src/collections/ApplicationUploads'
 import { Media } from './src/collections/Media'
+import { News } from './src/collections/News'
 import { Enquiries } from './src/collections/Enquiries'
 import { Partners } from './src/collections/Partners'
 import { Pages } from './src/collections/Pages'
@@ -42,6 +43,7 @@ export default buildConfig({
     Countries,
     Clubs,
     Players,
+    News,
     Testimonials,
     Partners,
     Pages,
