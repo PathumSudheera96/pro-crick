@@ -252,3 +252,26 @@ export const getRelatedPublishedPlayers = cache(
     }
   },
 )
+
+export const getHomepageFeaturedPlayers = async (limit = 7): Promise<Player[]> => {
+  try {
+    const payload = await getPayloadClient()
+
+    const result = await payload.find({
+      collection: 'players',
+      depth: 2,
+      limit,
+      pagination: false,
+      sort: ['-featured', 'sortOrder', 'fullName'],
+      where: {
+        status: {
+          equals: 'published',
+        },
+      },
+    })
+
+    return result.docs
+  } catch {
+    return getStaticPublishedPlayers({}).docs.slice(0, limit)
+  }
+}

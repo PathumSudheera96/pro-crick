@@ -6,7 +6,7 @@ const FOUNDERS = [
   {
     name: 'Dilan Perera',
     role: 'Commercial and partnership lead',
-    image: '/images/1_founder.jpg',
+    image: '/images/dilan-perera.jpg',
     email: 'connect@pro-crick.com',
     linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
     facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',
@@ -16,7 +16,7 @@ const FOUNDERS = [
   {
     name: 'Nisala Tharaka',
     role: 'Cricket strategy and player pathway lead',
-    image: '/images/2_founder.jpg',
+    image: '/images/nisala-tharaka.jpg',
     email: 'connect@pro-crick.com',
     linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
     facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',

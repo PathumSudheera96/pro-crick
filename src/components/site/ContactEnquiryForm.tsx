@@ -139,7 +139,7 @@ export function ContactEnquiryForm({ playerSlug }: { playerSlug?: string }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex min-h-14 items-center justify-center bg-accent px-8 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-accent/65"
+        className="inline-flex min-h-14 items-center justify-center bg-accent px-8 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-accent/65"
       >
         {isSubmitting ? 'Submitting…' : 'Send enquiry'}
       </button>

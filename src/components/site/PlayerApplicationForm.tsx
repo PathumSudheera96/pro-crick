@@ -396,7 +396,7 @@ export function PlayerApplicationForm({
             <button
               type="button"
               onClick={goToNextStep}
-              className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-accent-hover"
+              className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors hover:bg-accent-hover"
             >
               Next step
             </button>
@@ -404,7 +404,7 @@ export function PlayerApplicationForm({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-accent/65"
+              className="inline-flex min-h-12 items-center justify-center bg-accent px-6 text-sm font-medium uppercase tracking-[0.12em] !text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:bg-accent/65"
             >
               {isSubmitting ? 'Submitting…' : 'Submit application'}
             </button>

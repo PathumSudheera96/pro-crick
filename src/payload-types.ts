@@ -74,6 +74,7 @@ export interface Config {
     countries: Country;
     clubs: Club;
     players: Player;
+    news: News;
     testimonials: Testimonial;
     partners: Partner;
     pages: Page;
@@ -94,6 +95,7 @@ export interface Config {
     countries: CountriesSelect<false> | CountriesSelect<true>;
     clubs: ClubsSelect<false> | ClubsSelect<true>;
     players: PlayersSelect<false> | PlayersSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
@@ -375,6 +377,55 @@ export interface Player {
   sortOrder: number;
   status: 'draft' | 'published' | 'archived';
   publishedAt?: string | null;
+  /**
+   * Reusable SEO metadata for public content. Leave fields empty to allow application-level fallbacks.
+   */
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    canonicalUrl?: string | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    index?: boolean | null;
+    follow?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: number;
+  title: string;
+  slug: string;
+  status: 'draft' | 'published' | 'archived';
+  publishedAt?: string | null;
+  /**
+   * Lead image shown on the homepage news card and the news article page.
+   */
+  featuredImage?: (number | null) | Media;
+  /**
+   * Short summary used on the news card. Keep to roughly three lines.
+   */
+  excerpt?: string | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
    * Reusable SEO metadata for public content. Leave fields empty to allow application-level fallbacks.
    */
@@ -698,6 +749,10 @@ export interface PayloadLockedDocument {
         value: number | Player;
       } | null)
     | ({
+        relationTo: 'news';
+        value: number | News;
+      } | null)
+    | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
       } | null)
@@ -964,6 +1019,33 @@ export interface PlayersSelect<T extends boolean = true> {
   sortOrder?: T;
   status?: T;
   publishedAt?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        canonicalUrl?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        index?: T;
+        follow?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  status?: T;
+  publishedAt?: T;
+  featuredImage?: T;
+  excerpt?: T;
+  content?: T;
   seo?:
     | T
     | {

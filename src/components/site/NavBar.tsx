@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react'
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Players', href: '/players' },
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'About', href: '/about-us' },
+  { label: 'Services', href: '/our-services' },
+  { label: 'Contact', href: '/contact-us' },
 ]
 
 const SOCIAL_ITEMS = [
@@ -121,11 +121,15 @@ export function NavBar({
         <div className={`mx-auto flex ${mainRowHeight} max-w-[96rem] items-center gap-8 px-5 transition-[height] duration-300 sm:px-8 lg:px-10`}>
           <Link href="/" aria-label="Pro-Crick home" className="flex items-center">
             <Image
-              src="/images/pro-crick-SVG-cropped.svg"
+              src={
+                isDark
+                  ? '/images/pro-crick-SVG-light.svg'
+                  : '/images/pro-crick-SVG-cropped.svg'
+              }
               alt="Pro-Crick"
               width={170}
               height={120}
-              className={`${logoHeight} w-auto transition-[height] duration-300 ${isDark ? 'invert' : ''}`}
+              className={`${logoHeight} w-auto transition-[height] duration-300`}
               priority
             />
           </Link>

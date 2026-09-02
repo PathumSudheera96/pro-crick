@@ -62,7 +62,7 @@ img {
 }
 
 .home-hero-title {
-  font-size: clamp(2.75rem, 7vw, 6.25rem);
+  font-size: clamp(2.06rem, 5.25vw, 4.69rem);
   line-height: 0.9;
 }
 
@@ -143,3 +143,99 @@ img {
     scroll-behavior: auto !important;
   }
 }
+
+/* Long-form rich text (news articles and similar CMS content) */
+.news-prose {
+  color: var(--color-foreground);
+}
+
+.news-prose p {
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  line-height: 1.85;
+  color: var(--color-muted);
+}
+
+.news-prose p + p,
+.news-prose > * + * {
+  margin-top: 1.5rem;
+}
+
+.news-prose h1,
+.news-prose h2,
+.news-prose h3,
+.news-prose h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-foreground);
+  letter-spacing: -0.02em;
+}
+
+.news-prose h2 {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.news-prose h3 {
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
+  line-height: 1.2;
+}
+
+.news-prose h2:not(:first-child),
+.news-prose h3:not(:first-child),
+.news-prose h4:not(:first-child) {
+  margin-top: 2.5rem;
+}
+
+.news-prose ul,
+.news-prose ol {
+  padding-left: 1.4rem;
+  color: var(--color-muted);
+}
+
+.news-prose ul {
+  list-style: disc;
+}
+
+.news-prose ol {
+  list-style: decimal;
+}
+
+.news-prose li {
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  line-height: 1.75;
+  padding-left: 0.5rem;
+}
+
+.news-prose li + li {
+  margin-top: 0.5rem;
+}
+
+.news-prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.news-prose a:hover {
+  color: var(--color-accent-hover);
+}
+
+.news-prose strong {
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+
+.news-prose blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.6;
+  color: var(--color-foreground);
+}
+
+.news-prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  margin: 2.5rem 0;
+}
+
