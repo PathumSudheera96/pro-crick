@@ -9,7 +9,7 @@ export type Partner = {
 const PARTNERS: Partner[] = [
   {
     name: 'Boundary X',
-    logoUrl: '/images/boundryX.jpg',
+    logoUrl: '/images/boundryX-logo-cropped.jpg',
     linkUrl: 'https://www.boundaryx.store/',
   },
 ]
