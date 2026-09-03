@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const REGISTRATION_IMAGE = '/images/stock/pexels-cricket-training-net.jpeg'
+const REGISTRATION_IMAGE = '/images/slide-4_upscaled.jpg'
 
 export function RegistrationSplitCta() {
   return (
@@ -16,7 +16,7 @@ export function RegistrationSplitCta() {
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,5,5,0.82)_0%,rgba(8,14,24,0.74)_48%,rgba(5,5,5,0.82)_100%)]" />
       <div className="absolute inset-0 -z-10 bg-panel/24 backdrop-blur-[1px]" />
 
-      <div className="mx-auto grid max-w-[90rem] grid-cols-2">
+      <div className="mx-auto grid max-w-[90rem] grid-cols-1 sm:grid-cols-2">
         <RegistrationPanel
           title="Ready for the right playing opportunity?"
           description="Register now, and we’ll help you secure the right opportunity."
@@ -51,8 +51,8 @@ function RegistrationPanel({
 }) {
   return (
     <div
-      className={`flex flex-col items-center px-4 py-4 text-center sm:px-8 lg:px-12 ${
-        withDivider ? 'border-l border-white/42' : ''
+      className={`flex flex-col items-center px-4 py-8 text-center sm:px-8 lg:px-12 ${
+        withDivider ? 'border-t border-white/42 sm:border-l sm:border-t-0' : ''
       }`}
     >
       <h2 data-gsap-item data-gsap-title className="max-w-3xl text-[clamp(1.35rem,3vw,3.25rem)] font-medium leading-[1.02] tracking-[-0.035em] text-white">
