@@ -123,7 +123,7 @@ export function NavBar({
             <Image
               src={
                 isDark
-                  ? '/images/pro-crick-SVG-light.svg'
+                  ? '/images/pro-crick-logo-light.PNG'
                   : '/images/pro-crick-SVG-cropped.svg'
               }
               alt="Pro-Crick"
@@ -202,7 +202,7 @@ export function NavBar({
               onClick={() => setIsMenuOpen(false)}
             >
               <Image
-                src="/images/pro-crick-SVG-cropped.svg"
+                src="/images/pro-crick-logo-light.PNG"
                 alt="Pro-Crick"
                 width={170}
                 height={120}

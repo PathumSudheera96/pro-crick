@@ -115,7 +115,7 @@ export function Hero() {
         <div className="flex flex-1 items-center pb-16 pt-24 sm:pb-20 sm:pt-28">
           <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
             <Image
-              src="/images/pro-crick-SVG-light.svg"
+              src="/images/pro-crick-logo-light.PNG"
               alt="Pro-Crick"
               width={220}
               height={115}

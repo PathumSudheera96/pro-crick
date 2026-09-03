@@ -49,11 +49,11 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1.9fr]">
           <div>
             <Image
-              src="/images/pro-crick-SVG-cropped.svg"
+              src="/images/pro-crick-logo-light.PNG"
               alt="Pro-Crick"
               width={190}
               height={134}
-              className="h-14 w-auto invert"
+              className="h-14 w-auto"
             />
             <p className="type-small mt-6 max-w-sm text-white/62">
               Professional cricket talent connections for players, clubs, and long-term

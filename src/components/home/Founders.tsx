@@ -4,24 +4,26 @@ import type { ReactNode } from 'react'
 
 const FOUNDERS = [
   {
+    cricinfo: undefined,
     name: 'Dilan Perera',
     role: 'Commercial and partnership lead',
     image: '/images/dilan-perera.jpg',
     email: 'connect@pro-crick.com',
-    linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
-    facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',
+    facebook: 'https://www.facebook.com/share/1J6DaRXeiU/?mibextid=wwXIfr',
+    linkedin:
+      'https://www.linkedin.com/in/dilanperera11?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
     summary:
-      'Brings experience across sport, coaching, athlete development, business, and marketing, with a people-first approach to talent opportunity.',
+      'Dilan leads the partnership side of Pro-Crick, combining coaching insight, business experience, and strong relationship-building to create trusted opportunities between players, clubs, and cricket communities.',
   },
   {
+    cricinfo: 'https://www.cricinfo.com/cricketers/nisala-tharaka-465789',
     name: 'Nisala Tharaka',
     role: 'Cricket strategy and player pathway lead',
     image: '/images/nisala-tharaka.jpg',
     email: 'connect@pro-crick.com',
-    linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
-    facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',
+    facebook: 'https://www.facebook.com/share/1Ff1MqwUNd/?mibextid=wwXIfr',
     summary:
-      'Brings senior domestic and overseas cricket experience, adding the serious cricket perspective behind player evaluation and opportunity fit.',
+      'Nisala leads the cricket evaluation side of Pro-Crick, bringing Sri Lanka A experience, domestic and overseas playing knowledge, and a sharp understanding of player quality, readiness, and club fit.',
   },
 ]
 
@@ -66,9 +68,16 @@ export function Founders() {
                   <SocialLink href={`mailto:${founder.email}`} label={`Email ${founder.name}`}>
                     <EmailIcon />
                   </SocialLink>
-                  <SocialLink href={founder.linkedin} label={`${founder.name} on LinkedIn`}>
-                    <LinkedinIcon />
-                  </SocialLink>
+                  {founder.linkedin ? (
+                    <SocialLink href={founder.linkedin} label={`${founder.name} on LinkedIn`}>
+                      <LinkedinIcon />
+                    </SocialLink>
+                  ) : null}
+                  {founder.cricinfo ? (
+                    <SocialLink href={founder.cricinfo} label={`${founder.name} on Cricinfo`}>
+                      <CricinfoIcon />
+                    </SocialLink>
+                  ) : null}
                   <SocialLink href={founder.facebook} label={`${founder.name} on Facebook`}>
                     <FacebookIcon />
                   </SocialLink>
@@ -111,6 +120,18 @@ function EmailIcon() {
     <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="m4 7 8 6 8-6" />
+    </svg>
+  )
+}
+
+function CricinfoIcon() {
+  return (
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 6.5h16" />
+      <path d="M4 12h10" />
+      <path d="M4 17.5h7" />
+      <path d="M17.5 14.5v5" />
+      <path d="M15 17h5" />
     </svg>
   )
 }

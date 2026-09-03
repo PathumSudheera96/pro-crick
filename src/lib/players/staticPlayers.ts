@@ -1,6 +1,6 @@
 import type { PaginatedDocs } from 'payload'
 
-import staticPlayersData from '../../../public/player_data/players.json'
+import staticPlayersData from '../../../public/player_data/players.json' with { type: 'json' }
 
 import type { Club, Country, Player, PlayingRole } from '@/payload-types'
 
