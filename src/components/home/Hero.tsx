@@ -21,7 +21,7 @@ type HeroSlide = {
 
 const HERO_SLIDES: HeroSlide[] = [
   {
-    image: '/images/stock/pexels-cricket-celebration.jpeg',
+    image: '/images/slide-1_upscalled.jpg',
     imageAlt: 'Cricket players celebrating together on the field',
     title: 'Connect the right cricket talent with the right club environment.',
     description:
@@ -36,7 +36,7 @@ const HERO_SLIDES: HeroSlide[] = [
     },
   },
   {
-    image: '/images/stock/pexels-cricket-batsman-shot.jpeg',
+    image: '/images/slide-2_upscaled.jpg',
     imageAlt: 'Cricket batsman playing an attacking shot on the field',
     title: 'Present players with more than just stats and availability.',
     description:
@@ -51,7 +51,7 @@ const HERO_SLIDES: HeroSlide[] = [
     },
   },
   {
-    image: '/images/stock/pexels-cricketer-bat-training.jpeg',
+    image: '/images/slide-3_upscaled.jpg',
     imageAlt: 'Cricketer holding a bat during training',
     title: 'Move from first interest to a serious cricket conversation.',
     description:
