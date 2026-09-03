@@ -75,8 +75,9 @@ const CLUB_BENEFITS = [
 
 const FOUNDERS = [
   {
+    cricinfo: undefined,
     email: 'connect@pro-crick.com',
-    facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',
+    facebook: 'https://www.facebook.com/share/1J6DaRXeiU/?mibextid=wwXIfr',
     fullBiography: [
       'Dilan Perera represents the connection between sport, business and people that forms the foundation of Pro-Crick. With a diverse background across multiple sports, education, coaching and business environments, Dilan brings a unique perspective to developing opportunities for athletes and building meaningful partnerships within the cricket community.',
       'From an early stage, Dilan demonstrated excellence across multiple sporting disciplines while maintaining a strong focus on education and personal development. His journey through different sports environments has given him a broad understanding of athlete commitment, performance, teamwork and the challenges faced by individuals striving to progress in competitive fields.',
@@ -86,16 +87,18 @@ const FOUNDERS = [
       'Dilan believes that successful opportunities are created when talent, trust and the right platform come together. His vision is to help build a cricket network where players are recognised, clubs find the right individuals, and relationships continue to grow beyond the initial opportunity.',
     ],
     image: '/images/dilan-perera.jpg',
-    linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
+    linkedin:
+      'https://www.linkedin.com/in/dilanperera11?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
     name: 'Dilan Perera',
     preview:
-      'Dilan connects sport, business, coaching, and relationships across the Pro-Crick model. He leads the partnership side of the agency with a people-first approach focused on trust, communication, and long-term cricket opportunities.',
+      'Dilan leads the partnership side of Pro-Crick, combining coaching insight, business experience, and strong relationship-building to create trusted opportunities between players, clubs, and cricket communities.',
     quote: 'Great opportunities happen when the right talent meets the right platform.',
     role: 'Co-Founder - Pro-Crick',
   },
   {
+    cricinfo: 'https://www.cricinfo.com/cricketers/nisala-tharaka-465789',
     email: 'connect@pro-crick.com',
-    facebook: 'https://www.facebook.com/share/1HmFr8qYGB/?mibextid=wwXIfr',
+    facebook: 'https://www.facebook.com/share/1Ff1MqwUNd/?mibextid=wwXIfr',
     fullBiography: [
       'Nisala Tharaka brings professional cricket experience, technical knowledge and a deep understanding of player development to Pro-Crick. As a Sri Lankan cricketer with extensive domestic experience, representation at Sri Lanka A level and years competing in high-level cricket environments, Nisala provides the cricket expertise required to identify talent and create the right connections between players and clubs.',
       'A right-arm fast-medium bowling all-rounder, Nisala has built his career through dedication, discipline and consistent performance across domestic cricket. Throughout his playing journey, he has represented several leading Sri Lankan cricket teams and competed at a high level across multiple formats, gaining valuable experience of professional cricket standards, team environments and the demands required to succeed.',
@@ -106,10 +109,9 @@ const FOUNDERS = [
       'His belief is simple: the right opportunity can transform a player’s journey, and the right player can make a lasting impact on a club.',
     ],
     image: '/images/nisala-tharaka.jpg',
-    linkedin: 'https://www.linkedin.com/company/pro-crick-where-cricket-connects/',
     name: 'Nisala Tharaka',
     preview:
-      'Nisala brings professional cricket insight, Sri Lanka A representation, and overseas league experience to the agency. He leads the cricket evaluation side, helping match player ability, discipline, and club fit with real cricket context.',
+      'Nisala leads the cricket evaluation side of Pro-Crick, bringing Sri Lanka A experience, domestic and overseas playing knowledge, and a sharp understanding of player quality, readiness, and club fit.',
     quote: 'Where cricket knowledge meets opportunity.',
     role: 'Co-Founder - Pro-Crick',
   },

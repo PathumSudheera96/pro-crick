@@ -4,7 +4,7 @@ import {
   sanitizeDirectoryFilters,
   type PlayerDirectoryFilters,
   type PlayerDirectorySort,
-} from './playerDirectoryShared'
+} from './playerDirectoryShared.ts'
 
 export {
   buildPlayersSearch,
@@ -14,7 +14,7 @@ export {
   type NormalizedPlayerDirectoryFilters,
   type PlayerDirectoryFilters,
   type PlayerDirectorySort,
-} from './playerDirectoryShared'
+} from './playerDirectoryShared.ts'
 
 export const resolvePlayerDirectorySort = (sort: PlayerDirectorySort): Sort => {
   switch (sort) {

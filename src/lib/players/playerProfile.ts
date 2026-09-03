@@ -1,5 +1,5 @@
 import type { Club, Country, Media, Player, PlayingRole } from '@/payload-types'
-import { getStaticPlayerImageUrl } from '@/lib/players/staticPlayers'
+import { getStaticPlayerImageUrl } from './staticPlayers.ts'
 
 const getNamedRelationship = (
   value: number | Club | Country | PlayingRole | null | undefined,
