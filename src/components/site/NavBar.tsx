@@ -202,7 +202,7 @@ export function NavBar({
               onClick={() => setIsMenuOpen(false)}
             >
               <Image
-                src="/images/pro-crick-mobile-dark.png"
+                src="/images/pro-crick-logo-dark.png"
                 alt="Pro-Crick"
                 width={170}
                 height={120}
