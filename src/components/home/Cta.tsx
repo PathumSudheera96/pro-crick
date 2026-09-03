@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CTA_IMAGE = '/images/stock/pexels-cricketer-bat-training.jpeg'
+const CTA_IMAGE = '/images/happy-action-2.jpg'
 
 export function Cta() {
   return (
     <section data-gsap-section className="mx-auto max-w-[90rem] px-5 pb-10 pt-24 sm:px-8 lg:px-10">
       <div className="grid overflow-hidden border border-hairline bg-surface lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="p-7 sm:p-10 lg:p-14">
+        <div className="order-2 p-7 sm:p-10 lg:order-1 lg:p-14">
           <p data-gsap-item className="type-accent uppercase text-muted">Next step</p>
           <h2 data-gsap-item data-gsap-title className="type-h2 mt-4 max-w-4xl text-foreground">
             Ready to move from interest to a real cricket conversation?
@@ -34,7 +34,7 @@ export function Cta() {
           </div>
         </div>
 
-        <div data-gsap-item className="relative min-h-[20rem]">
+        <div data-gsap-item className="order-1 relative min-h-[20rem] lg:order-2">
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-surface/20" />
           <Image
             src={CTA_IMAGE}

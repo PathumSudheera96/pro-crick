@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-const SERVICES_IMAGE = '/images/stock/pexels-cricket-batsman-shot.jpeg'
+const SERVICES_IMAGE = '/images/home-services-img.jpg'
 
 const SERVICES = [
   {

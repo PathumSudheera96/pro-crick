@@ -137,7 +137,7 @@ export default async function NewsArticlePage({ params }: NewsPageProps) {
 
         {image ? (
           <section className="bg-background px-5 sm:px-8 lg:px-10">
-            <div className="relative mx-auto aspect-[16/7] max-w-6xl overflow-hidden border border-black/10 bg-black/8">
+            <div className="relative mx-auto aspect-video max-w-6xl overflow-hidden border border-black/10 bg-black/8">
               <Image
                 src={image.url}
                 alt={image.alt || news.title}

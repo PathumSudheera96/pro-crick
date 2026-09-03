@@ -202,11 +202,11 @@ export function NavBar({
               onClick={() => setIsMenuOpen(false)}
             >
               <Image
-                src="/images/pro-crick-logo-dark.png"
+                src="/images/pro-crick-SVG-cropped.svg"
                 alt="Pro-Crick"
                 width={170}
                 height={120}
-                className="h-11 w-auto"
+                className="h-14 w-auto"
                 priority
               />
             </Link>
